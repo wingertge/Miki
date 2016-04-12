@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MikiBot", "Mikibot\MikiBot.csproj", "{CFBAE8A8-52B3-4AF0-8B73-CBDC243DBCD7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Clean|Any CPU = Clean|Any CPU
+		Clean|x64 = Clean|x64
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CFBAE8A8-52B3-4AF0-8B73-CBDC243DBCD7}.Clean|Any CPU.ActiveCfg = Clean|Any CPU
+		{CFBAE8A8-52B3-4AF0-8B73-CBDC243DBCD7}.Clean|Any CPU.Build.0 = Clean|Any CPU
+		{CFBAE8A8-52B3-4AF0-8B73-CBDC243DBCD7}.Clean|x64.ActiveCfg = Clean|x64
+		{CFBAE8A8-52B3-4AF0-8B73-CBDC243DBCD7}.Clean|x64.Build.0 = Clean|x64
+		{CFBAE8A8-52B3-4AF0-8B73-CBDC243DBCD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFBAE8A8-52B3-4AF0-8B73-CBDC243DBCD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFBAE8A8-52B3-4AF0-8B73-CBDC243DBCD7}.Debug|x64.ActiveCfg = Debug|x64
+		{CFBAE8A8-52B3-4AF0-8B73-CBDC243DBCD7}.Debug|x64.Build.0 = Debug|x64
+		{CFBAE8A8-52B3-4AF0-8B73-CBDC243DBCD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFBAE8A8-52B3-4AF0-8B73-CBDC243DBCD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFBAE8A8-52B3-4AF0-8B73-CBDC243DBCD7}.Release|x64.ActiveCfg = Release|x64
+		{CFBAE8A8-52B3-4AF0-8B73-CBDC243DBCD7}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

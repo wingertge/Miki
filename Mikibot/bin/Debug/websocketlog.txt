@@ -1,0 +1,139 @@
+3/20/2016 7:19:11 PM|Fatal|WebSocket.processException|System.NullReferenceException: Object reference not set to an instance of an object.
+                              at MikiBot.Discord.OnMessage(DiscordMessageEventArgs e) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Discord\Discord.cs:line 102
+                              at MikiBot.Discord.<Start>b__4_3(Object sender, DiscordMessageEventArgs e) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Discord\Discord.cs:line 29
+                              at DiscordSharp.DiscordClient.MessageCreateEvents(JObject message) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 1243
+                              at DiscordSharp.DiscordClient.<Connect>b__233_0(Object sender, MessageEventArgs e) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 1600
+                              at WebSocketSharp.Ext.Emit[TEventArgs](EventHandler`1 eventHandler, Object sender, TEventArgs e)
+                              at WebSocketSharp.WebSocket.<>c__DisplayClass15.<startReceiving>b__13(WebSocketFrame frame)
+3/20/2016 7:19:11 PM|Fatal|WebSocket.processException|WebSocketSharp.WebSocketException: The header part of a frame cannot be read from the data source.
+                              at WebSocketSharp.WebSocketFrame.<>c__DisplayClass7.<ReadAsync>b__6(Byte[] header)
+                              at WebSocketSharp.Ext.<>c__DisplayClass6.<ReadBytesAsync>b__5(IAsyncResult ar)
+3/20/2016 7:19:47 PM|Fatal|WebSocket.processException|System.NullReferenceException: Object reference not set to an instance of an object.
+                              at MikiBot.Discord.OnMessage(DiscordMessageEventArgs e) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Discord\Discord.cs:line 95
+                              at MikiBot.Discord.<Start>b__4_3(Object sender, DiscordMessageEventArgs e) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Discord\Discord.cs:line 29
+                              at DiscordSharp.DiscordClient.MessageCreateEvents(JObject message) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 1243
+                              at DiscordSharp.DiscordClient.<Connect>b__233_0(Object sender, MessageEventArgs e) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 1600
+                              at WebSocketSharp.Ext.Emit[TEventArgs](EventHandler`1 eventHandler, Object sender, TEventArgs e)
+                              at WebSocketSharp.WebSocket.<>c__DisplayClass15.<startReceiving>b__13(WebSocketFrame frame)
+3/20/2016 7:19:47 PM|Fatal|WebSocket.processException|WebSocketSharp.WebSocketException: The header part of a frame cannot be read from the data source.
+                              at WebSocketSharp.WebSocketFrame.<>c__DisplayClass7.<ReadAsync>b__6(Byte[] header)
+                              at WebSocketSharp.Ext.<>c__DisplayClass6.<ReadBytesAsync>b__5(IAsyncResult ar)
+3/20/2016 7:21:39 PM|Fatal|WebSocket.processException|System.NullReferenceException: Object reference not set to an instance of an object.
+                              at MikiBot.Discord.OnMessage(DiscordMessageEventArgs e) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Discord\Discord.cs:line 95
+                              at MikiBot.Discord.<Start>b__4_3(Object sender, DiscordMessageEventArgs e) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Discord\Discord.cs:line 29
+                              at DiscordSharp.DiscordClient.MessageCreateEvents(JObject message) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 1243
+                              at DiscordSharp.DiscordClient.<Connect>b__233_0(Object sender, MessageEventArgs e) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 1600
+                              at WebSocketSharp.Ext.Emit[TEventArgs](EventHandler`1 eventHandler, Object sender, TEventArgs e)
+                              at WebSocketSharp.WebSocket.<>c__DisplayClass15.<startReceiving>b__13(WebSocketFrame frame)
+3/20/2016 7:21:39 PM|Fatal|WebSocket.processException|WebSocketSharp.WebSocketException: The header part of a frame cannot be read from the data source.
+                              at WebSocketSharp.WebSocketFrame.<>c__DisplayClass7.<ReadAsync>b__6(Byte[] header)
+                              at WebSocketSharp.Ext.<>c__DisplayClass6.<ReadBytesAsync>b__5(IAsyncResult ar)
+3/20/2016 7:23:12 PM|Fatal|WebSocket.processException|System.NullReferenceException: Object reference not set to an instance of an object.
+                              at MikiBot.Discord.OnMessage(DiscordMessageEventArgs e) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Discord\Discord.cs:line 95
+                              at MikiBot.Discord.<Start>b__4_3(Object sender, DiscordMessageEventArgs e) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Discord\Discord.cs:line 29
+                              at DiscordSharp.DiscordClient.MessageCreateEvents(JObject message) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 1243
+                              at DiscordSharp.DiscordClient.<Connect>b__233_0(Object sender, MessageEventArgs e) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 1600
+                              at WebSocketSharp.Ext.Emit[TEventArgs](EventHandler`1 eventHandler, Object sender, TEventArgs e)
+                              at WebSocketSharp.WebSocket.<>c__DisplayClass15.<startReceiving>b__13(WebSocketFrame frame)
+3/20/2016 7:23:12 PM|Fatal|WebSocket.processException|WebSocketSharp.WebSocketException: The header part of a frame cannot be read from the data source.
+                              at WebSocketSharp.WebSocketFrame.<>c__DisplayClass7.<ReadAsync>b__6(Byte[] header)
+                              at WebSocketSharp.Ext.<>c__DisplayClass6.<ReadBytesAsync>b__5(IAsyncResult ar)
+3/20/2016 7:39:36 PM|Fatal|WebSocket.processException|System.NullReferenceException: Object reference not set to an instance of an object.
+                              at MikiBot.Discord.OnMessage(DiscordMessageEventArgs e) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Discord\Discord.cs:line 74
+                              at MikiBot.Discord.<Start>b__4_3(Object sender, DiscordMessageEventArgs e) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Discord\Discord.cs:line 29
+                              at DiscordSharp.DiscordClient.MessageCreateEvents(JObject message) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 1243
+                              at DiscordSharp.DiscordClient.<Connect>b__233_0(Object sender, MessageEventArgs e) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 1600
+                              at WebSocketSharp.Ext.Emit[TEventArgs](EventHandler`1 eventHandler, Object sender, TEventArgs e)
+                              at WebSocketSharp.WebSocket.<>c__DisplayClass15.<startReceiving>b__13(WebSocketFrame frame)
+3/20/2016 7:39:36 PM|Fatal|WebSocket.processException|WebSocketSharp.WebSocketException: The header part of a frame cannot be read from the data source.
+                              at WebSocketSharp.WebSocketFrame.<>c__DisplayClass7.<ReadAsync>b__6(Byte[] header)
+                              at WebSocketSharp.Ext.<>c__DisplayClass6.<ReadBytesAsync>b__5(IAsyncResult ar)
+3/20/2016 7:44:28 PM|Fatal|WebSocket.processException|System.Net.WebException: The remote server returned an error: (429) TOO MANY REQUESTS.
+                              at DiscordSharp.WebWrapper.Post(String url, String token, String message, Boolean acceptInviteWorkaround) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\WebWrapper.cs:line 182
+                              at DiscordSharp.Objects.DiscordChannel.SendMessage(String message) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\Objects\DiscordChannel.cs:line 66
+                              at MikiBot.Discord.OnMessage(DiscordMessageEventArgs e) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Discord\Discord.cs:line 222
+                              at MikiBot.Discord.<Start>b__4_3(Object sender, DiscordMessageEventArgs e) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Discord\Discord.cs:line 29
+                              at DiscordSharp.DiscordClient.MessageCreateEvents(JObject message) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 1243
+                              at DiscordSharp.DiscordClient.<Connect>b__233_0(Object sender, MessageEventArgs e) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 1600
+                              at WebSocketSharp.Ext.Emit[TEventArgs](EventHandler`1 eventHandler, Object sender, TEventArgs e)
+                              at WebSocketSharp.WebSocket.<>c__DisplayClass15.<startReceiving>b__13(WebSocketFrame frame)
+3/20/2016 7:44:28 PM|Fatal|WebSocket.processException|WebSocketSharp.WebSocketException: The header part of a frame cannot be read from the data source.
+                              at WebSocketSharp.WebSocketFrame.<>c__DisplayClass7.<ReadAsync>b__6(Byte[] header)
+                              at WebSocketSharp.Ext.<>c__DisplayClass6.<ReadBytesAsync>b__5(IAsyncResult ar)
+3/20/2016 8:48:29 PM|Fatal|WebSocket.processException|System.NullReferenceException: Object reference not set to an instance of an object.
+                              at MikiBot.BattleManager.StartBattle(Account[] battlers, DiscordChannel channel) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\BattleManager.cs:line 21
+                              at MikiBot.Discord.OnMessage(DiscordMessageEventArgs e) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Discord\Discord.cs:line 208
+                              at MikiBot.Discord.<Start>b__4_3(Object sender, DiscordMessageEventArgs e) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Discord\Discord.cs:line 29
+                              at DiscordSharp.DiscordClient.MessageCreateEvents(JObject message) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 1243
+                              at DiscordSharp.DiscordClient.<Connect>b__233_0(Object sender, MessageEventArgs e) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 1600
+                              at WebSocketSharp.Ext.Emit[TEventArgs](EventHandler`1 eventHandler, Object sender, TEventArgs e)
+                              at WebSocketSharp.WebSocket.<>c__DisplayClass15.<startReceiving>b__13(WebSocketFrame frame)
+3/20/2016 8:48:29 PM|Fatal|WebSocket.processException|WebSocketSharp.WebSocketException: The header part of a frame cannot be read from the data source.
+                              at WebSocketSharp.WebSocketFrame.<>c__DisplayClass7.<ReadAsync>b__6(Byte[] header)
+                              at WebSocketSharp.Ext.<>c__DisplayClass6.<ReadBytesAsync>b__5(IAsyncResult ar)
+3/26/2016 5:13:02 AM|Fatal|WebSocket.processException|System.NullReferenceException: Object reference not set to an instance of an object.
+                              at MikiBot.BattleManager.StartBattle(Account[] battlers, Boolean allowjoin) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Battle\BattleManager.cs:line 19
+                              at MikiBot.Discord.OnMessage(DiscordMessageEventArgs e) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Discord\Discord.cs:line 234
+                              at MikiBot.Discord.<Start>b__5_3(Object sender, DiscordMessageEventArgs e) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Discord\Discord.cs:line 31
+                              at DiscordSharp.DiscordClient.MessageCreateEvents(JObject message) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 1243
+                              at DiscordSharp.DiscordClient.<Connect>b__233_0(Object sender, MessageEventArgs e) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 1600
+                              at WebSocketSharp.Ext.Emit[TEventArgs](EventHandler`1 eventHandler, Object sender, TEventArgs e)
+                              at WebSocketSharp.WebSocket.<>c__DisplayClass15.<startReceiving>b__13(WebSocketFrame frame)
+3/26/2016 5:13:03 AM|Fatal|WebSocket.processException|WebSocketSharp.WebSocketException: The header part of a frame cannot be read from the data source.
+                              at WebSocketSharp.WebSocketFrame.<>c__DisplayClass7.<ReadAsync>b__6(Byte[] header)
+                              at WebSocketSharp.Ext.<>c__DisplayClass6.<ReadBytesAsync>b__5(IAsyncResult ar)
+3/26/2016 5:41:50 AM|Fatal|WebSocket.processException|System.NotImplementedException: The method or operation is not implemented.
+                              at MikiBot.Discord.OnPrivateMessage(DiscordPrivateMessageEventArgs e) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Discord\Discord.cs:line 51
+                              at MikiBot.Discord.<Start>b__5_2(Object sender, DiscordPrivateMessageEventArgs e) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Discord\Discord.cs:line 30
+                              at DiscordSharp.DiscordClient.MessageCreateEvents(JObject message) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 1186
+                              at DiscordSharp.DiscordClient.<Connect>b__233_0(Object sender, MessageEventArgs e) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 1600
+                              at WebSocketSharp.Ext.Emit[TEventArgs](EventHandler`1 eventHandler, Object sender, TEventArgs e)
+                              at WebSocketSharp.WebSocket.<>c__DisplayClass15.<startReceiving>b__13(WebSocketFrame frame)
+3/26/2016 5:41:50 AM|Fatal|WebSocket.processException|WebSocketSharp.WebSocketException: The header part of a frame cannot be read from the data source.
+                              at WebSocketSharp.WebSocketFrame.<>c__DisplayClass7.<ReadAsync>b__6(Byte[] header)
+                              at WebSocketSharp.Ext.<>c__DisplayClass6.<ReadBytesAsync>b__5(IAsyncResult ar)
+3/26/2016 6:14:11 AM|Fatal|WebSocket.processException|System.NullReferenceException: Object reference not set to an instance of an object.
+                              at MikiBot.Discord.OnMessage(DiscordMessageEventArgs e) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Discord\Discord.cs:line 174
+                              at MikiBot.Discord.<Start>b__5_3(Object sender, DiscordMessageEventArgs e) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Discord\Discord.cs:line 32
+                              at DiscordSharp.DiscordClient.MessageCreateEvents(JObject message) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 1243
+                              at DiscordSharp.DiscordClient.<Connect>b__233_0(Object sender, MessageEventArgs e) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 1600
+                              at WebSocketSharp.Ext.Emit[TEventArgs](EventHandler`1 eventHandler, Object sender, TEventArgs e)
+                              at WebSocketSharp.WebSocket.<>c__DisplayClass15.<startReceiving>b__13(WebSocketFrame frame)
+3/26/2016 6:14:11 AM|Fatal|WebSocket.processException|WebSocketSharp.WebSocketException: The header part of a frame cannot be read from the data source.
+                              at WebSocketSharp.WebSocketFrame.<>c__DisplayClass7.<ReadAsync>b__6(Byte[] header)
+                              at WebSocketSharp.Ext.<>c__DisplayClass6.<ReadBytesAsync>b__5(IAsyncResult ar)
+3/26/2016 6:29:41 AM|Fatal|WebSocket.processException|System.ArgumentNullException: Value cannot be null.
+                           Parameter name: value
+                              at System.Boolean.Parse(String value)
+                              at MikiBot.Account.LoadProfile() in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Account\Account.cs:line 90
+                              at MikiBot.Account.Login(DiscordMember member) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Account\Account.cs:line 39
+                              at MikiBot.Discord.OnMessage(DiscordMessageEventArgs e) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Discord\Discord.cs:line 97
+                              at MikiBot.Discord.<Start>b__5_3(Object sender, DiscordMessageEventArgs e) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Discord\Discord.cs:line 32
+                              at DiscordSharp.DiscordClient.MessageCreateEvents(JObject message) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 1243
+                              at DiscordSharp.DiscordClient.<Connect>b__233_0(Object sender, MessageEventArgs e) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 1600
+                              at WebSocketSharp.Ext.Emit[TEventArgs](EventHandler`1 eventHandler, Object sender, TEventArgs e)
+                              at WebSocketSharp.WebSocket.<>c__DisplayClass15.<startReceiving>b__13(WebSocketFrame frame)
+3/26/2016 6:29:41 AM|Fatal|WebSocket.processException|WebSocketSharp.WebSocketException: The header part of a frame cannot be read from the data source.
+                              at WebSocketSharp.WebSocketFrame.<>c__DisplayClass7.<ReadAsync>b__6(Byte[] header)
+                              at WebSocketSharp.Ext.<>c__DisplayClass6.<ReadBytesAsync>b__5(IAsyncResult ar)
+3/26/2016 7:05:51 AM|Fatal|WebSocket.processException|System.NullReferenceException: Object reference not set to an instance of an object.
+                              at MikiBot.BattleManager.AcceptBattle(Account account) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Battle\BattleManager.cs:line 44
+                              at MikiBot.Discord.OnPrivateMessage(DiscordPrivateMessageEventArgs e) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Discord\Discord.cs:line 63
+                              at MikiBot.Discord.<Start>b__5_2(Object sender, DiscordPrivateMessageEventArgs e) in C:\Users\Veld\Dropbox\Mikibot\Mikibot\Mikibot\Discord\Discord.cs:line 31
+                              at DiscordSharp.DiscordClient.MessageCreateEvents(JObject message) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 1186
+                              at DiscordSharp.DiscordClient.<Connect>b__233_0(Object sender, MessageEventArgs e) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 1600
+                              at WebSocketSharp.Ext.Emit[TEventArgs](EventHandler`1 eventHandler, Object sender, TEventArgs e)
+                              at WebSocketSharp.WebSocket.<>c__DisplayClass15.<startReceiving>b__13(WebSocketFrame frame)
+3/26/2016 7:05:51 AM|Fatal|WebSocket.processException|WebSocketSharp.WebSocketException: The header part of a frame cannot be read from the data source.
+                              at WebSocketSharp.WebSocketFrame.<>c__DisplayClass7.<ReadAsync>b__6(Byte[] header)
+                              at WebSocketSharp.Ext.<>c__DisplayClass6.<ReadBytesAsync>b__5(IAsyncResult ar)
+3/26/2016 8:54:05 PM|Fatal|WebSocket.processException|System.NullReferenceException: Object reference not set to an instance of an object.
+                              at MikiBot.Discord.OnMessage(DiscordMessageEventArgs e) in C:\Users\Veld\Documents\miki\Mikibot\Mikibot\Discord\Discord.cs:line 102
+                              at MikiBot.Discord.<Start>b__5_3(Object sender, DiscordMessageEventArgs e) in C:\Users\Veld\Documents\miki\Mikibot\Mikibot\Discord\Discord.cs:line 32
+                              at DiscordSharp.DiscordClient.MessageCreateEvents(JObject message) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 1243
+                              at DiscordSharp.DiscordClient.<Connect>b__233_0(Object sender, MessageEventArgs e) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 1600
+                              at WebSocketSharp.Ext.Emit[TEventArgs](EventHandler`1 eventHandler, Object sender, TEventArgs e)
+                              at WebSocketSharp.WebSocket.<>c__DisplayClass15.<startReceiving>b__13(WebSocketFrame frame)
+3/26/2016 8:54:05 PM|Fatal|WebSocket.processException|WebSocketSharp.WebSocketException: The header part of a frame cannot be read from the data source.
+                              at WebSocketSharp.WebSocketFrame.<>c__DisplayClass7.<ReadAsync>b__6(Byte[] header)
+                              at WebSocketSharp.Ext.<>c__DisplayClass6.<ReadBytesAsync>b__5(IAsyncResult ar)

@@ -1,0 +1,15 @@
+C:\Users\Veld\Desktop\DiscordSharp_Starter-master\DiscordSharp_Starter\DiscordSharp_Starter\bin\Debug\DiscordSharp_Starter.exe.config
+C:\Users\Veld\Desktop\DiscordSharp_Starter-master\DiscordSharp_Starter\DiscordSharp_Starter\bin\Debug\DiscordSharp_Starter.exe
+C:\Users\Veld\Desktop\DiscordSharp_Starter-master\DiscordSharp_Starter\DiscordSharp_Starter\bin\Debug\DiscordSharp_Starter.pdb
+C:\Users\Veld\Desktop\DiscordSharp_Starter-master\DiscordSharp_Starter\DiscordSharp_Starter\bin\Debug\DiscordSharp.dll
+C:\Users\Veld\Desktop\DiscordSharp_Starter-master\DiscordSharp_Starter\DiscordSharp_Starter\bin\Debug\NAudio.dll
+C:\Users\Veld\Desktop\DiscordSharp_Starter-master\DiscordSharp_Starter\DiscordSharp_Starter\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Veld\Desktop\DiscordSharp_Starter-master\DiscordSharp_Starter\DiscordSharp_Starter\bin\Debug\websocket-sharp.dll
+C:\Users\Veld\Desktop\DiscordSharp_Starter-master\DiscordSharp_Starter\DiscordSharp_Starter\bin\Debug\WebSocket4Net.dll
+C:\Users\Veld\Desktop\DiscordSharp_Starter-master\DiscordSharp_Starter\DiscordSharp_Starter\bin\Debug\DiscordSharp.pdb
+C:\Users\Veld\Desktop\DiscordSharp_Starter-master\DiscordSharp_Starter\DiscordSharp_Starter\bin\Debug\NAudio.xml
+C:\Users\Veld\Desktop\DiscordSharp_Starter-master\DiscordSharp_Starter\DiscordSharp_Starter\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Veld\Desktop\DiscordSharp_Starter-master\DiscordSharp_Starter\DiscordSharp_Starter\bin\Debug\websocket-sharp.xml
+C:\Users\Veld\Desktop\DiscordSharp_Starter-master\DiscordSharp_Starter\DiscordSharp_Starter\obj\Debug\DiscordSharp_Starter.csprojResolveAssemblyReference.cache
+C:\Users\Veld\Desktop\DiscordSharp_Starter-master\DiscordSharp_Starter\DiscordSharp_Starter\obj\Debug\DiscordSharp_Starter.exe
+C:\Users\Veld\Desktop\DiscordSharp_Starter-master\DiscordSharp_Starter\DiscordSharp_Starter\obj\Debug\DiscordSharp_Starter.pdb
