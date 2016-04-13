@@ -3,11 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
-namespace Miki
+namespace Miki.Accounts
 {
-    class AccountManager
+    public class AccountManager
     {
         List<Account> accounts = new List<Account>();
 
@@ -44,6 +45,17 @@ namespace Miki
             }
         }
 
+        public void SaveAllAccounts()
+        {
+            for(int i = 0; i < accounts.Count; i++)
+            {
+                accounts[i].SaveProfile();
+            }
+            Console.WriteLine("Saved all accounts!");
+            Thread.Sleep(300000);
+            SaveAllAccounts();
+        }
+
         public Account GetAccountFromMember(DiscordMember member)
         {
             for(int i = 0; i < accounts.Count; i++)
@@ -74,9 +86,8 @@ namespace Miki
             {
                 string output = "";
                 output += "**" + member.Username + "**\n";
-                output += "**Health**: " + a.profile.Health + "\n";
                 output += "**Level**: " + a.profile.Level + " (exp " + a.profile.Experience + "/" + a.profile.MaxExperience + ")\n";
-                output += "**Account Created on**: " + a.timeOfCreation.ToString();
+                output += "**First appeared on**: " + a.timeOfCreation.ToString();
                 return output;
             }
             return "";

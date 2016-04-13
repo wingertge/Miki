@@ -1,7 +1,8 @@
-﻿using System;
+﻿using DiscordSharp.Objects;
+using System;
 using System.IO;
 
-namespace Miki
+namespace Miki.Accounts.Profiles
 {
     public class Profile
     {
@@ -13,6 +14,8 @@ namespace Miki
         public int Level;
         public int Wins;
 
+        DiscordChannel lastActiveChannel;
+
         public void Initialize(string name)
         {
             this.name = name;
@@ -23,13 +26,9 @@ namespace Miki
             Wins = 0;
         }
 
-        public void AddHealth(int health)
+        public void SetChannel(DiscordChannel c)
         {
-            Health += health;
-        }
-        public void SetHealth(int health)
-        {
-            Health = health;
+            lastActiveChannel = c;
         }
         public void AddExp(int exp)
         {
@@ -38,7 +37,8 @@ namespace Miki
             {
                 Level++;
                 MaxExperience = (int)Math.Round(MaxExperience * 2.5);
-                Discord.channel.SendMessage(name + " has levelled up! (" + (Level - 1) + " -> " + Level + ")\n");
+                Console.WriteLine(name + " has levelled up! (" + (Level - 1) + " -> " + Level + ")");
+                lastActiveChannel.SendMessage(name + " has levelled up! (" + (Level - 1) + " -> " + Level + ")\n");
             }
         }
 

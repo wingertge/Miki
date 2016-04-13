@@ -1,7 +1,7 @@
 ﻿using DiscordSharp.Objects;
 using IMDBNet;
 
-namespace Miki
+namespace Miki.IMDb
 {
     class IMDbNet_Discord
     {

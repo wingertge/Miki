@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using DiscordSharp.Objects;
 using System.IO;
+using Miki.Accounts.Profiles;
+using Miki.Core;
 
-namespace Miki
+namespace Miki.Accounts
 {
     public class Account
     {
@@ -16,6 +18,8 @@ namespace Miki
         public DiscordMember member;
         public Profile profile;
         public WordsSpoken wordsSpoken;
+
+        DateTime lastExpTime;
 
         void Initialize()
         {
@@ -30,40 +34,39 @@ namespace Miki
             Initialize();
             timeOfCreation = DateTime.Now;
             SaveProfile();
-            Discord.instance.account.AddAccount(this);
+            Discord.account.AddAccount(this);
         }
         public void Login(DiscordMember member)
         {
             this.member = member;
             Initialize();
             LoadProfile();
-            Discord.instance.account.AddAccount(this);
-        }
-        public void Logout(DiscordMember member)
-        {
-            if (Discord.instance.account.isLoggedIn(member))
-            {
-                SaveProfile();
-                Discord.instance.account.RemoveAccount(member);
-            }
+            Discord.account.AddAccount(this);
         }
 
         public void AddExp(int exp)
         {
             profile.AddExp(exp);
         }
-        public void AddHealth(int health)
-        {
-            profile.AddHealth(health);
-        }
-        public void SetHealth(int health)
-        {
-            profile.SetHealth(health);
-        }
-
         public int GetLevel()
         {
             return profile.Level;
+        }
+
+        bool canGetXP()
+        {
+            return (lastExpTime.AddSeconds(15) <= DateTime.Now);
+        }
+
+        public void OnMessageRecieved(DiscordChannel c)
+        {
+            if (canGetXP())
+            {
+                profile.AddExp(1);
+                lastExpTime = DateTime.Now;
+            }
+            wordsSpoken.MessagesSent++;
+            profile.SetChannel(c);
         }
 
         public void SaveProfile()
@@ -82,7 +85,7 @@ namespace Miki
         {
             if (!Directory.Exists(GlobalVariables.AccountsFolder + member.ID))
             {
-                profile = null;
+                Create(member);
                 return;
             }
             StreamReader sr = new StreamReader(GlobalVariables.AccountsFolder + member.ID + ".sav");
