@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using DiscordSharp.Objects;
 using System.IO;
 
-namespace MikiBot
+namespace Miki
 {
     public class Account
     {

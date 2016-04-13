@@ -137,3 +137,12 @@
 3/26/2016 8:54:05 PM|Fatal|WebSocket.processException|WebSocketSharp.WebSocketException: The header part of a frame cannot be read from the data source.
                               at WebSocketSharp.WebSocketFrame.<>c__DisplayClass7.<ReadAsync>b__6(Byte[] header)
                               at WebSocketSharp.Ext.<>c__DisplayClass6.<ReadBytesAsync>b__5(IAsyncResult ar)
+4/12/2016 23:09:11|Fatal|WebSocket.processException|System.NullReferenceException: Object reference not set to an instance of an object.
+                            at DiscordSharp.DiscordClient.GetChannelsList(JObject m) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 189
+                            at DiscordSharp.DiscordClient.<Connect>b__233_0(Object sender, MessageEventArgs e) in C:\Users\Mike\Documents\GitHub\DiscordSharp\DiscordSharp\DiscordClient.cs:line 1531
+                            at WebSocketSharp.Ext.Emit[TEventArgs](EventHandler`1 eventHandler, Object sender, TEventArgs e)
+                            at WebSocketSharp.WebSocket.<>c__DisplayClass15.<startReceiving>b__13(WebSocketFrame frame)
+4/12/2016 23:09:11|Fatal|WebSocket.processException|WebSocketSharp.WebSocketException: The 'Payload Data' of a frame cannot be read from the data source.
+                            at WebSocketSharp.WebSocketFrame.read(Byte[] header, Stream stream, Boolean unmask)
+                            at WebSocketSharp.WebSocketFrame.<>c__DisplayClass7.<ReadAsync>b__6(Byte[] header)
+                            at WebSocketSharp.Ext.<>c__DisplayClass6.<ReadBytesAsync>b__5(IAsyncResult ar)

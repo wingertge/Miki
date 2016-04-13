@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace MikiBot
+namespace Miki
 {
     public class Profile
     {

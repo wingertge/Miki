@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using DiscordSharp.Objects;
 
-namespace MikiBot
+namespace Miki
 {
     public class BattleManager
     {
@@ -62,7 +62,6 @@ namespace MikiBot
             if (allowJoin)
             {
                 profiles.Add(account);
-                Discord.client.AssignRoleToMember(account.member.Parent, account.member.Parent.roles[2], account.member);
                 Discord.channel.SendMessage("**" + account.member.Username + " joined the battle.**");
             }
             else
