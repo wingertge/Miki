@@ -1,8 +1,8 @@
 ﻿using DiscordSharp;
-using DiscordSharp.Objects;
 using Miki.Accounts;
+using Miki.Core.Config;
+using Miki.Core.Debug;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 
@@ -15,17 +15,16 @@ namespace Miki.Core
         public static DateTime timeSinceReset;
 
         public static AccountManager account = new AccountManager();
+        public static ConfigManager config = new ConfigManager();
 
         /* Start of program, gets called from Program.Main() */
         public void Start()
         {
-            if(Debugger.IsAttached)
-            {
-                client = new DiscordClient("MTY5OTAwMjc4MTMxMzI2OTc2.CfA3dg.9WhHS-rjbQ0fXAy3Y6C-UnvGad8", true, true);
-            }
-            Console.WriteLine("Starting Mikibot v" + Program.VersionNumber);
+            Console.WriteLine("Starting Mikibot v" + Global.VersionNumber);
+            config.Initialize();
             instance = this;
             client.Connected += (sender, e) => { OnConnect(e); };
+            client.SocketClosed += (sender, e) => { OnDisconnect(e); };
             client.UserAddedToServer += (sender, e) => { OnUserAdded(e); };
             client.MessageReceived += (sender, e) => { OnMessage(e); };
             client.SendLoginRequest();
@@ -43,10 +42,15 @@ namespace Miki.Core
             t.Start();
         }
 
+        public void OnDisconnect(DiscordSocketClosedEventArgs e)
+        {
+            Log.Error(e.Code + " - " + e.Reason);
+        }
+
         /* Event Listener: Gets called whenever a DiscordMember gets added in the server. */
         public void OnUserAdded(DiscordSharp.Events.DiscordGuildMemberAddEventArgs e)
         {
-            e.AddedMember.SendMessage("Welcome to Miki " + Program.VersionNumber +"\nTry '$login' to start!." );
+            e.AddedMember.SendMessage("Welcome to Miki " + Global.VersionNumber +"\nTry '$login' to start!." );
         }
 
         /* Event Listener: Gets called whenever a message gets recieved by Miki */

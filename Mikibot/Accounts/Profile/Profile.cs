@@ -1,4 +1,5 @@
 ﻿using DiscordSharp.Objects;
+using Miki.Core;
 using System;
 using System.IO;
 
@@ -49,11 +50,11 @@ namespace Miki.Accounts.Profiles
 
         public void SaveProfile(string id)
         {
-            if (!Directory.Exists(GlobalVariables.AccountsFolder + id))
+            if (!Directory.Exists(Global.AccountsFolder + id))
             {
-                Directory.CreateDirectory(GlobalVariables.AccountsFolder + id);
+                Directory.CreateDirectory(Global.AccountsFolder + id);
             }
-            StreamWriter sw = new StreamWriter(GlobalVariables.AccountsFolder + id + ".profile");
+            StreamWriter sw = new StreamWriter(Global.AccountsFolder + id + ".profile");
             sw.WriteLine(Health.ToString());
             sw.WriteLine(Experience);
             sw.WriteLine(MaxExperience);
@@ -63,11 +64,11 @@ namespace Miki.Accounts.Profiles
         }
         public void LoadProfile(string id)
         {
-            if (!Directory.Exists(GlobalVariables.AccountsFolder + id))
+            if (!Directory.Exists(Global.AccountsFolder + id))
             {
                 return;
             }
-            StreamReader sr = new StreamReader(GlobalVariables.AccountsFolder + id + ".profile");
+            StreamReader sr = new StreamReader(Global.AccountsFolder + id + ".profile");
             Health = int.Parse(sr.ReadLine());
             Experience = int.Parse(sr.ReadLine());
             MaxExperience = int.Parse(sr.ReadLine());

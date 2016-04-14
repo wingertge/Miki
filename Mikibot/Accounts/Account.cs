@@ -71,11 +71,11 @@ namespace Miki.Accounts
 
         public void SaveProfile()
         {
-            if(!Directory.Exists(GlobalVariables.AccountsFolder + member.ID))
+            if(!Directory.Exists(Global.AccountsFolder + member.ID))
             {
-                Directory.CreateDirectory(GlobalVariables.AccountsFolder + member.ID);
+                Directory.CreateDirectory(Global.AccountsFolder + member.ID);
             }
-            StreamWriter sw = new StreamWriter(GlobalVariables.AccountsFolder + member.ID + ".sav");
+            StreamWriter sw = new StreamWriter(Global.AccountsFolder + member.ID + ".sav");
             sw.WriteLine(timeOfCreation.ToString());
             sw.WriteLine(isDeveloper.ToString());
             sw.Close();
@@ -83,12 +83,12 @@ namespace Miki.Accounts
         }
         public void LoadProfile()
         {
-            if (!Directory.Exists(GlobalVariables.AccountsFolder + member.ID))
+            if (!Directory.Exists(Global.AccountsFolder + member.ID))
             {
                 Create(member);
                 return;
             }
-            StreamReader sr = new StreamReader(GlobalVariables.AccountsFolder + member.ID + ".sav");
+            StreamReader sr = new StreamReader(Global.AccountsFolder + member.ID + ".sav");
             timeOfCreation = DateTime.Parse(sr.ReadLine());
             //isDeveloper = bool.Parse(sr.ReadLine());
             sr.Close();

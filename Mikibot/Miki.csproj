@@ -78,6 +78,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -93,17 +94,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Miki.Accounts\Account.cs" />
-    <Compile Include="Miki.Accounts\AccountManager.cs" />
-    <Compile Include="Miki.Core\ChannelMessage.cs" />
-    <Compile Include="Miki.Core\Discord.cs" />
-    <Compile Include="Miki.Core\DiscordMemberHandler.cs" />
-    <Compile Include="Miki.Core\ImgurNet.cs" />
-    <Compile Include="Miki.Accounts\WordsSpoken.cs" />
-    <Compile Include="GlobalVariables.cs" />
-    <Compile Include="Miki.Accounts\Profile\Profile.cs" />
-    <Compile Include="Miki.IMDb\IMDbNet_Discord.cs" />
-    <Compile Include="Miki.Core\Log.cs" />
+    <Compile Include="Accounts\Account.cs" />
+    <Compile Include="Accounts\AccountManager.cs" />
+    <Compile Include="Core\ChannelMessage.cs" />
+    <Compile Include="Core\Config\ConfigManager.cs" />
+    <Compile Include="Core\Discord.cs" />
+    <Compile Include="Core\DiscordMemberHandler.cs" />
+    <Compile Include="Core\ImgurNet.cs" />
+    <Compile Include="Accounts\WordsSpoken.cs" />
+    <Compile Include="Core\Global.cs" />
+    <Compile Include="Accounts\Profile\Profile.cs" />
+    <Compile Include="IMDb\IMDbNet_Discord.cs" />
+    <Compile Include="Core\Debug\Log.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
