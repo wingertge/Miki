@@ -12,10 +12,12 @@ namespace Miki.Core
         public const string MikiFolder = @"/miki/";
 
         public static string AccountsFolder = MikiFolder + "accounts/";
-        public static string AvatarsFolder = MikiFolder + "avatars/";
-        public static string ConfigFile = MikiFolder + "config.cfg";
+        public static string AvatarsFolder = MikiFolder + "avatars/" + AvatarImage;
+        public static string AvatarImage = "avatar.png";
+        public static string ConfigFile = MikiFolder + "preferences.config";
 
-        public const string VersionNumber = "0.0.9";
+        public static string Status = "'>help' | " + VersionText;
+        public const string VersionNumber = "0.1";
         public static string VersionText = (Debugger.IsAttached) ? VersionNumber + "_beta" : VersionNumber;
     }
 }

@@ -96,16 +96,28 @@
   <ItemGroup>
     <Compile Include="Accounts\Account.cs" />
     <Compile Include="Accounts\AccountManager.cs" />
+    <Compile Include="Accounts\Commands\Profile.cs" />
+    <Compile Include="Core\Commands\BlacklistServer.cs" />
+    <Compile Include="Core\Commands\WhoamiCommand.cs" />
+    <Compile Include="Core\Config\Blacklist.cs" />
     <Compile Include="Core\ChannelMessage.cs" />
+    <Compile Include="Core\Command.cs" />
+    <Compile Include="Core\Commands\FizzbuzzCommand.cs" />
+    <Compile Include="Core\Commands\Help.cs" />
+    <Compile Include="Core\Commands\Info.cs" />
+    <Compile Include="Core\Commands\Uptime.cs" />
     <Compile Include="Core\Config\ConfigManager.cs" />
+    <Compile Include="Core\Commands\Statistics.cs" />
     <Compile Include="Core\Discord.cs" />
     <Compile Include="Core\DiscordMemberHandler.cs" />
-    <Compile Include="Core\ImgurNet.cs" />
+    <Compile Include="Extensions\Danbooru\DanbooruPost.cs" />
+    <Compile Include="Extensions\Danbooru\Danbooru_Discord.cs" />
     <Compile Include="Accounts\WordsSpoken.cs" />
     <Compile Include="Core\Global.cs" />
     <Compile Include="Accounts\Profile\Profile.cs" />
-    <Compile Include="IMDb\IMDbNet_Discord.cs" />
+    <Compile Include="Extensions\IMDb\IMDbNet_Discord.cs" />
     <Compile Include="Core\Debug\Log.cs" />
+    <Compile Include="Extensions\SillyCompliments\SillyCompliments.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

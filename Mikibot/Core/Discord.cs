@@ -3,6 +3,7 @@ using Miki.Accounts;
 using Miki.Core.Config;
 using Miki.Core.Debug;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 
@@ -13,14 +14,14 @@ namespace Miki.Core
         public static DiscordClient client = new DiscordClient("MTYwMTA1OTk0MjE3NTg2Njg5.Ce8QnQ.YoAWdFbFrCZ3-i9bkKIkDrmvFek", true, true);
         public static Discord instance;
         public static DateTime timeSinceReset;
-
         public static AccountManager account = new AccountManager();
+        public static Blacklist blacklist = new Blacklist();
         public static ConfigManager config = new ConfigManager();
 
         /* Start of program, gets called from Program.Main() */
         public void Start()
         {
-            Console.WriteLine("Starting Mikibot v" + Global.VersionNumber);
+            Console.WriteLine("Starting Mikibot v" + Global.VersionText);
             config.Initialize();
             instance = this;
             client.Connected += (sender, e) => { OnConnect(e); };
@@ -36,35 +37,39 @@ namespace Miki.Core
         public void OnConnect(DiscordConnectEventArgs e)
         {
             Console.WriteLine("Connected! User: " + e.User.Username);
-            client.UpdateCurrentGame("'>help' for help");
+            config.OnConnectInitialize();
+            client.UpdateCurrentGame("'>help' | v" + Global.VersionText);
             timeSinceReset = DateTime.Now;
             Thread t = new Thread(account.SaveAllAccounts, 0);
             t.Start();
         }
 
+        /* Event Listener: Gets called when Miki disconnect */
         public void OnDisconnect(DiscordSocketClosedEventArgs e)
         {
             Log.Error(e.Code + " - " + e.Reason);
+            Start();
         }
 
         /* Event Listener: Gets called whenever a DiscordMember gets added in the server. */
         public void OnUserAdded(DiscordSharp.Events.DiscordGuildMemberAddEventArgs e)
-        {
-            e.AddedMember.SendMessage("Welcome to Miki " + Global.VersionNumber +"\nTry '$login' to start!." );
-        }
+        {        }
 
         /* Event Listener: Gets called whenever a message gets recieved by Miki */
         public void OnMessage(DiscordSharp.Events.DiscordMessageEventArgs e)
         {
             ChannelMessage channel = new ChannelMessage(e);
             Thread t = new Thread(channel.RecieveMessage, 0);
-            if(account.GetAccountFromMember(e.Author) == null)
+            if (!blacklist.isBlacklisted(e.Channel.ID))
             {
-                Account a = new Account();
-                a.Login(e.Author);
-                account.AddAccount(a);
+                if (account.GetAccountFromMember(e.Author) == null)
+                {
+                    Account a = new Account();
+                    a.Login(e.Author);
+                    account.AddAccount(a);
+                }
+                account.GetAccountFromID(e.Author.ID).OnMessageRecieved(e.Channel);
             }
-            account.GetAccountFromID(e.Author.ID).OnMessageRecieved(e.Channel);
             t.Start();
         }
     }

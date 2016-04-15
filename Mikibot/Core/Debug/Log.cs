@@ -24,5 +24,11 @@ namespace Miki.Core.Debug
             Console.WriteLine("WARNING: " + message);
             Console.ForegroundColor = ConsoleColor.White;
         }
+        public static void Done(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("DONE: " + message);
+            Console.ForegroundColor = ConsoleColor.White;
+        }
     }
 }
