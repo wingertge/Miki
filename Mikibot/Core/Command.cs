@@ -25,14 +25,28 @@ namespace Miki.Core
             {
                 if (message.StartsWith(id + " "))
                 {
-                    PlayCommand(e);
+                    try
+                    {
+                        PlayCommand(e);
+                    }
+                    catch
+                    {
+                        Log.Error("command: " + id);
+                    }
                 }
             }
             else
             {
                 if (message == id)
                 {
-                    PlayCommand(e);
+                    try
+                    {
+                        PlayCommand(e);
+                    }
+                    catch
+                    {
+                        Log.Error("command: " + id);
+                    }
                 }
             }
         }

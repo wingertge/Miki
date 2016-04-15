@@ -17,7 +17,7 @@ namespace Miki.Core
         public static string ConfigFile = MikiFolder + "preferences.config";
 
         public static string Status = "'>help' | " + VersionText;
-        public const string VersionNumber = "0.1";
+        public const string VersionNumber = "0.1.1";
         public static string VersionText = (Debugger.IsAttached) ? VersionNumber + "_beta" : VersionNumber;
     }
 }

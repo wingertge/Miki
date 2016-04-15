@@ -9,6 +9,7 @@ using System.Net;
 using Newtonsoft.Json;
 using System.Drawing;
 using System.IO;
+using Miki.Core.Debug;
 
 namespace Miki.Extensions.Danbooru
 {
@@ -29,21 +30,32 @@ namespace Miki.Extensions.Danbooru
         {
             WebClient c = new WebClient();
             byte[] b;
+            string[] command = e.MessageText.Split(' ');
+            string tags = "";
+            for(int i = 1; i < command.Length - 1; i++)
+            {
+                tags += command[i] + " ";
+            }
+            tags += (command[command.Length - 1] == "-nsfw") ? "rating:e " : command[command.Length - 1] + " rating:s";
             if (e.MessageText.Split(' ')[1] == "awoo")
             {
                 b = c.DownloadData("http://danbooru.donmai.us/posts.json?tags=" + "inubashiri_momiji");
             }
             else
             {
-                b = c.DownloadData("http://danbooru.donmai.us/posts.json?tags=" + e.MessageText.Split(' ')[1]);
+                b = c.DownloadData("http://danbooru.donmai.us/posts.json?tags=" + tags);
             }
             string result = Encoding.UTF8.GetString(b);
             List<DanbooruPost> d = JsonConvert.DeserializeObject<List<DanbooruPost>>(result);
+            Random r = new Random();
+            int randNumber = r.Next(0, d.Count);
             if (d.Count > 0)
             {
-                Random r = new Random();
-                e.Channel.SendMessage("http://danbooru.donmai.us" + d[r.Next(0, d.Count)].file_url);
+                e.Channel.SendMessage("http://danbooru.donmai.us" + d[randNumber].file_url);
+                Log.Message(d[randNumber].tag_string);
             }
+            Log.Message("tags in command:" + tags);
+            Log.Message("Danbooru command ended");
             base.PlayCommand(e);
         }
     }
