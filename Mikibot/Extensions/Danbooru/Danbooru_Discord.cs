@@ -28,34 +28,25 @@ namespace Miki.Extensions.Danbooru
 
         protected override void PlayCommand(DiscordMessageEventArgs e)
         {
+            Random r = new Random();
             WebClient c = new WebClient();
+
             byte[] b;
             string[] command = e.MessageText.Split(' ');
-            string tags = "";
-            for(int i = 1; i < command.Length - 1; i++)
+            string tag = command[1];
+            string nsfwTag = (command[command.Length - 1] == "-nsfw") ? " rating:e" : " rating:s";
+            if (tag == "awoo")
             {
-                tags += command[i] + " ";
+                tag = "inubashiri_momiji";
             }
-            tags += (command[command.Length - 1] == "-nsfw") ? "rating:e " : command[command.Length - 1] + " rating:s";
-            if (e.MessageText.Split(' ')[1] == "awoo")
-            {
-                b = c.DownloadData("http://danbooru.donmai.us/posts.json?tags=" + "inubashiri_momiji");
-            }
-            else
-            {
-                b = c.DownloadData("http://danbooru.donmai.us/posts.json?tags=" + tags);
-            }
+            b = c.DownloadData("http://danbooru.donmai.us/posts.json?tags=" + tag + nsfwTag);
             string result = Encoding.UTF8.GetString(b);
             List<DanbooruPost> d = JsonConvert.DeserializeObject<List<DanbooruPost>>(result);
-            Random r = new Random();
             int randNumber = r.Next(0, d.Count);
             if (d.Count > 0)
             {
                 e.Channel.SendMessage("http://danbooru.donmai.us" + d[randNumber].file_url);
-                Log.Message(d[randNumber].tag_string);
             }
-            Log.Message("tags in command:" + tags);
-            Log.Message("Danbooru command ended");
             base.PlayCommand(e);
         }
     }

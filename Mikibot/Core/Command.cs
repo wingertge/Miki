@@ -1,4 +1,5 @@
 ﻿using Miki.Core.Debug;
+using System.Diagnostics;
 
 namespace Miki.Core
 {
@@ -25,13 +26,20 @@ namespace Miki.Core
             {
                 if (message.StartsWith(id + " "))
                 {
-                    try
+                    if (Debugger.IsAttached)
                     {
                         PlayCommand(e);
                     }
-                    catch
+                    else
                     {
-                        Log.Error("command: " + id);
+                        try
+                        {
+                            PlayCommand(e);
+                        }
+                        catch
+                        {
+                            Log.Error("command: " + id);
+                        }
                     }
                 }
             }
@@ -39,13 +47,20 @@ namespace Miki.Core
             {
                 if (message == id)
                 {
-                    try
+                    if (Debugger.IsAttached)
                     {
                         PlayCommand(e);
                     }
-                    catch
+                    else
                     {
-                        Log.Error("command: " + id);
+                        try
+                        {
+                            PlayCommand(e);
+                        }
+                        catch
+                        {
+                            Log.Error("command: " + id);
+                        }
                     }
                 }
             }
