@@ -12,7 +12,7 @@ namespace Miki.Core.Commands
         public override void Initialize()
         {
             id = "whoami";
-            isPublic = true;
+            appearInHelp = true;
             description = "shows your userID";
 
             base.Initialize();

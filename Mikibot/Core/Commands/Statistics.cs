@@ -8,7 +8,7 @@ namespace Miki.Core.Commands
         public override void Initialize()
         {
             id = "stats";
-            isPublic = true;
+            appearInHelp = true;
             description = "Returns the bot's debug statistics";
 
             base.Initialize();

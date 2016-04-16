@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Miki.Core
 {
+    /// <summary>
+    /// Global data for folder structures and versioning.
+    /// </summary>
     public class Global
     {
         public const string MikiFolder = @"/miki/";

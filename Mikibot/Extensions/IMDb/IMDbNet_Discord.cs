@@ -20,7 +20,7 @@ namespace Miki.Extensions.IMDb
         public override void Initialize()
         {
             id = "imdb";
-            isPublic = true;
+            appearInHelp = true;
             hasParameters = true;
             description = "get movie data based on the title you add";
 

@@ -8,7 +8,7 @@ namespace Miki.Core.Commands
         public override void Initialize()
         {
             id = "uptime";
-            isPublic = true;
+            appearInHelp = true;
             description = "shows the bot's time without crashing inbetween.";
 
             base.Initialize();

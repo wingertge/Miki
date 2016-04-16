@@ -12,7 +12,7 @@ namespace Miki.Core.Commands
         public override void Initialize()
         {
             id = "info";
-            isPublic = true;
+            appearInHelp = true;
             description = "description about the bot itself.";
 
             base.Initialize();

@@ -19,7 +19,7 @@ namespace Miki.Extensions.Danbooru
         public override void Initialize()
         {
             id = "dan";
-            isPublic = true;
+            appearInHelp = true;
             hasParameters = true;
             description = "get danbooru images";
 

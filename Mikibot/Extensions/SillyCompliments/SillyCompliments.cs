@@ -43,7 +43,7 @@ namespace Miki.Extensions.SillyCompliments
         public override void Initialize()
         {
             id = "compliment";
-            isPublic = true;
+            appearInHelp = true;
             description = "Gives you a compliment :)";
 
             base.Initialize();

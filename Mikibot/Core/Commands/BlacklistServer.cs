@@ -12,7 +12,7 @@ namespace Miki.Core.Commands
         public override void Initialize()
         {
             id = "blacklist";
-            isPublic = false;
+            appearInHelp = false;
             description = "blacklist server";
 
             base.Initialize();

@@ -9,6 +9,9 @@ using System.Threading;
 
 namespace Miki.Core
 {
+    /// <summary>
+    /// This is our main class. It'll run all the core algorithms.
+    /// </summary>
     public class Discord
     {
         public static DiscordClient client = new DiscordClient("MTYwMTA1OTk0MjE3NTg2Njg5.Ce8QnQ.YoAWdFbFrCZ3-i9bkKIkDrmvFek", true, true);
@@ -18,7 +21,9 @@ namespace Miki.Core
         public static Blacklist blacklist = new Blacklist();
         public static ConfigManager config = new ConfigManager();
 
-        /* Start of program, gets called from Program.Main() */
+        /// <summary>
+        /// The program runs all discord services and loads all the data here.
+        /// </summary>
         public void Start()
         {
             Console.WriteLine("Starting Mikibot v" + Global.VersionText);
@@ -33,7 +38,10 @@ namespace Miki.Core
             Console.ReadLine();
         }
 
-        /* Event Listener: Gets called when Miki connects to the server */
+        /// <summary>
+        /// This is a event. It'll run whenever the BOT connects to discord.
+        /// </summary>
+        /// <param name="e">Data recieved from discord when connecting</param>
         public void OnConnect(DiscordConnectEventArgs e)
         {
             Console.WriteLine("Connected! User: " + e.User.Username);
@@ -44,18 +52,27 @@ namespace Miki.Core
             t.Start();
         }
 
-        /* Event Listener: Gets called when Miki disconnect */
+        /// <summary>
+        /// This is an event. It'll run when the BOT either crashes or when the internet gets disconnected.  
+        /// </summary>
+        /// <param name="e">Discord data recieved about error details</param>
         public void OnDisconnect(DiscordSocketClosedEventArgs e)
         {
             Log.Error(e.Code + " - " + e.Reason);
             Start();
         }
 
-        /* Event Listener: Gets called whenever a DiscordMember gets added in the server. */
+        /// <summary>
+        /// Event Listener: Gets called whenever a DiscordMember gets added in the server.
+        /// </summary>
+        /// <param name="e">Data recieved from the DiscordMember that got added.</param>
         public void OnUserAdded(DiscordSharp.Events.DiscordGuildMemberAddEventArgs e)
         {        }
 
-        /* Event Listener: Gets called whenever a message gets recieved by Miki */
+        /// <summary>
+        ///  Event Listener: Gets called whenever a message gets recieved by Miki
+        /// </summary>
+        /// <param name="e">Message data recieved from discord</param>
         public void OnMessage(DiscordSharp.Events.DiscordMessageEventArgs e)
         {
             ChannelMessage channel = new ChannelMessage(e);

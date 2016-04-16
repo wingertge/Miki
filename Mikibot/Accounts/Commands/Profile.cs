@@ -8,7 +8,7 @@ namespace Miki.Accounts.Commands
         public override void Initialize()
         {
             id = "profile";
-            isPublic = true;
+            appearInHelp = true;
             description = "shows your profile";
 
             base.Initialize();

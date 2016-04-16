@@ -7,7 +7,7 @@ namespace Miki.Core.Commands
         public override void Initialize()
         {
             id = "fizzbuzz";
-            isPublic = true;
+            appearInHelp = true;
             hasParameters = true;
 
             base.Initialize();

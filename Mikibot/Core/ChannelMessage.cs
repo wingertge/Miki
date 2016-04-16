@@ -1,4 +1,5 @@
 ﻿using DiscordSharp.Events;
+using Miki.Core.Debug;
 using Miki.Extensions.IMDb;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,9 @@ namespace Miki.Core
             this.e = e;
         }
 
+        /// <summary>
+        /// This class checks all the commands that are initialized
+        /// </summary>
         public void RecieveMessage()
         {
             if (e.MessageText.StartsWith(">"))
