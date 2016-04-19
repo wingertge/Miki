@@ -1,5 +1,6 @@
 ﻿using DiscordSharp.Objects;
 using Miki.Core;
+using Miki.Core.Debug;
 using System;
 using System.IO;
 
@@ -15,7 +16,7 @@ namespace Miki.Accounts.Profiles
         public int Level;
         public int Wins;
 
-        DiscordChannel lastActiveChannel;
+        public DiscordChannel lastActiveChannel;
 
         public void Initialize(string name)
         {
@@ -50,11 +51,11 @@ namespace Miki.Accounts.Profiles
 
         public void SaveProfile(string id)
         {
-            if (!Directory.Exists(Global.AccountsFolder + id))
+            if (!Directory.Exists(Global.AccountsFolder + id + "/"))
             {
-                Directory.CreateDirectory(Global.AccountsFolder + id);
+                Directory.CreateDirectory(Global.AccountsFolder + id + "/");
             }
-            StreamWriter sw = new StreamWriter(Global.AccountsFolder + id + ".profile");
+            StreamWriter sw = new StreamWriter(Global.AccountsFolder + id + "/" + id + ".profile");
             sw.WriteLine(Health.ToString());
             sw.WriteLine(Experience);
             sw.WriteLine(MaxExperience);
@@ -64,12 +65,14 @@ namespace Miki.Accounts.Profiles
         }
         public void LoadProfile(string id)
         {
-            if (!Directory.Exists(Global.AccountsFolder + id))
+            if (!Directory.Exists(Global.AccountsFolder + id + "/"))
             {
+                Log.Warning(id + " does not exist");
                 return;
             }
-            StreamReader sr = new StreamReader(Global.AccountsFolder + id + ".profile");
+            StreamReader sr = new StreamReader(Global.AccountsFolder + id + "/" + id + ".profile");
             Health = int.Parse(sr.ReadLine());
+            Log.Message(Global.AccountsFolder + id + "/" + id + ".profile");
             Experience = int.Parse(sr.ReadLine());
             MaxExperience = int.Parse(sr.ReadLine());
             Level = int.Parse(sr.ReadLine());

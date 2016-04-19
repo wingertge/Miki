@@ -62,6 +62,7 @@ namespace Miki.Core.Config
             ChannelMessage.commands.Add(new HelpCommand());
             ChannelMessage.commands.Add(new Extensions.IMDb.IMDbNet_Discord());
             ChannelMessage.commands.Add(new InfoCommand());
+            ChannelMessage.commands.Add(new Accounts.Commands.TopProfiles());
             ChannelMessage.commands.Add(new Copypasta());
             ChannelMessage.commands.Add(new Accounts.Commands.Profile());
             ChannelMessage.commands.Add(new Statistics());

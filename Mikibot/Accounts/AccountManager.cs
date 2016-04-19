@@ -1,6 +1,7 @@
 ﻿using DiscordSharp.Objects;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -79,6 +80,18 @@ namespace Miki.Accounts
             return null;
 
         }
+
+        public Account[] GetAccountLeaderboards()
+        {
+            Account[] output = new Account[10];
+            accounts.Sort((a, b) => { return b.profile.Experience.CompareTo(a.profile.Experience); });
+            for (int i = 0; i < ((accounts.Count > 10) ? 10 : accounts.Count); i++)
+            {
+                output[i] = accounts[i];
+            }
+            return output;
+        }
+
         public string GetProfile(DiscordMember member)
         {
             Account a = GetAccountFromMember(member);
@@ -87,7 +100,6 @@ namespace Miki.Accounts
                 string output = "";
                 output += "**" + member.Username + "**\n";
                 output += "**Level**: " + a.profile.Level + " (exp " + a.profile.Experience + "/" + a.profile.MaxExperience + ")\n";
-                output += "**First appeared on**: " + a.timeOfCreation.ToString();
                 return output;
             }
             return "";
@@ -102,7 +114,7 @@ namespace Miki.Accounts
                     return true;
                 }
             }
-            return false;
+            return false;   
         }
 
     }

@@ -4,23 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DiscordSharp.Events;
+using DiscordSharp.Objects;
 
 namespace Miki.Core.Commands
 {
-    class InfoCommand : Command
+    class RequestIdea : Command
     {
+        public DiscordChannel Channel;
+
         public override void Initialize()
         {
-            id = "info";
+            id = "request";
             appearInHelp = true;
-            description = "description about the bot itself.";
+            description = "request an idea for future updates";
+
+            hasParameters = true;
+            expandedDescription = "usage: <command_name, explanation>\nrequest an idea to the developers via Miki. We will recieve all ideas in our main server.";
 
             base.Initialize();
         }
 
         protected override void PlayCommand(DiscordMessageEventArgs e)
         {
-            e.Channel.SendMessage("**Miki " + Global.VersionText + "**\nMade by: `Veld#5128`\nUses: DiscordSharp by `AXIYUM#6863`\n\n Thank you for using miki! ");
+
+
             base.PlayCommand(e);
         }
     }

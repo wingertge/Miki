@@ -96,9 +96,15 @@
   <ItemGroup>
     <Compile Include="Accounts\Account.cs" />
     <Compile Include="Accounts\AccountManager.cs" />
+    <Compile Include="Accounts\Commands\TopProfiles.cs" />
+    <Compile Include="Accounts\Profiles\Achievements\Achievement.cs" />
+    <Compile Include="Accounts\Profiles\Achievements\Level5.cs" />
     <Compile Include="Accounts\Commands\Profile.cs" />
+    <Compile Include="Accounts\Profiles\AchievementsManager.cs" />
+    <Compile Include="Accounts\Profiles\Achievements\SendOneMessage.cs" />
     <Compile Include="Core\Commands\BlacklistServer.cs" />
     <Compile Include="Core\Commands\CopyPasta.cs" />
+    <Compile Include="Core\Commands\RequestIdea.cs" />
     <Compile Include="Core\Commands\WhoamiCommand.cs" />
     <Compile Include="Core\Config\Blacklist.cs" />
     <Compile Include="Core\ChannelMessage.cs" />
@@ -115,7 +121,7 @@
     <Compile Include="Extensions\Danbooru\Danbooru_Discord.cs" />
     <Compile Include="Accounts\WordsSpoken.cs" />
     <Compile Include="Core\Global.cs" />
-    <Compile Include="Accounts\Profile\Profile.cs" />
+    <Compile Include="Accounts\Profiles\Profile.cs" />
     <Compile Include="Extensions\IMDb\IMDbNet_Discord.cs" />
     <Compile Include="Core\Debug\Log.cs" />
     <Compile Include="Extensions\SillyCompliments\SillyCompliments.cs" />

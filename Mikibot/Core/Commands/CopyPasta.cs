@@ -16,6 +16,7 @@ namespace Miki.Core.Commands
 
         public override void Initialize()
         {
+            Pasta = new Dictionary<string, string>();
             id = "pasta";
             appearInHelp = true;
             description = "throw in your favourite copy pasta's";

@@ -7,6 +7,7 @@ using DiscordSharp.Objects;
 using System.IO;
 using Miki.Accounts.Profiles;
 using Miki.Core;
+using Miki.Core.Debug;
 
 namespace Miki.Accounts
 {
@@ -17,6 +18,7 @@ namespace Miki.Accounts
         public DateTime timeOfCreation;
         public DiscordMember member;
         public Profile profile;
+        public AchievementsManager achievements;
         public WordsSpoken wordsSpoken;
 
         DateTime lastExpTime;
@@ -35,6 +37,7 @@ namespace Miki.Accounts
             timeOfCreation = DateTime.Now;
             SaveProfile();
             Discord.account.AddAccount(this);
+            Log.Error("DONT CALL THIS");
         }
         public void Login(DiscordMember member)
         {
@@ -75,7 +78,7 @@ namespace Miki.Accounts
             {
                 Directory.CreateDirectory(Global.AccountsFolder + member.ID);
             }
-            StreamWriter sw = new StreamWriter(Global.AccountsFolder + member.ID + ".sav");
+            StreamWriter sw = new StreamWriter(Global.AccountsFolder + member.ID + "/" + member.ID + ".sav");
             sw.WriteLine(timeOfCreation.ToString());
             sw.WriteLine(isDeveloper.ToString());
             sw.Close();
@@ -88,7 +91,7 @@ namespace Miki.Accounts
                 Create(member);
                 return;
             }
-            StreamReader sr = new StreamReader(Global.AccountsFolder + member.ID + ".sav");
+            StreamReader sr = new StreamReader(Global.AccountsFolder + member.ID + "/" + member.ID + ".sav");
             timeOfCreation = DateTime.Parse(sr.ReadLine());
             //isDeveloper = bool.Parse(sr.ReadLine());
             sr.Close();

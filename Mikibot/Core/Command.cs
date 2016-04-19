@@ -12,6 +12,8 @@ namespace Miki.Core
         protected string[] usage;
         protected string description;
 
+        protected string expandedDescription;
+
         protected string message;
 
         /// <summary>
