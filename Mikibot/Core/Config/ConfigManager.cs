@@ -56,17 +56,16 @@ namespace Miki.Core.Config
         void LoadCommands()
         {
             ChannelMessage.commands.Add(new BlacklistServer());
+            ChannelMessage.commands.Add(new Extensions.SillyCompliments.SillyCompliments_Core());
+            ChannelMessage.commands.Add(new Extensions.Danbooru.DanBooru_Discord());
+            ChannelMessage.commands.Add(new FizzbuzzCommand());
             ChannelMessage.commands.Add(new HelpCommand());
+            ChannelMessage.commands.Add(new Extensions.IMDb.IMDbNet_Discord());
             ChannelMessage.commands.Add(new InfoCommand());
+            ChannelMessage.commands.Add(new Copypasta());
+            ChannelMessage.commands.Add(new Accounts.Commands.Profile());
             ChannelMessage.commands.Add(new Statistics());
             ChannelMessage.commands.Add(new Uptime());
-            ChannelMessage.commands.Add(new FizzbuzzCommand());
-
-            ChannelMessage.commands.Add(new Accounts.Commands.Profile());
-
-            ChannelMessage.commands.Add(new Extensions.Danbooru.DanBooru_Discord());
-            ChannelMessage.commands.Add(new Extensions.IMDb.IMDbNet_Discord());
-            ChannelMessage.commands.Add(new Extensions.SillyCompliments.SillyCompliments_Core());
             ChannelMessage.commands.Add(new WhoamiCommand());
 
             for(int i = 0; i < ChannelMessage.commands.Count; i++)
@@ -125,11 +124,11 @@ namespace Miki.Core.Config
             s.WriteLine("Accounts=" + Global.AccountsFolder);
             s.WriteLine("Avatar=" + Global.AvatarImage);
             s.WriteLine("Status=" + Discord.client.GetCurrentGame);
-            try
+            if(info.Username != "")
             {
                 s.WriteLine("Username=" + info.Username);
             }
-            catch
+            else
             {
                 s.WriteLine("Username=Miki");
             }

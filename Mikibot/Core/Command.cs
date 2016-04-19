@@ -9,7 +9,7 @@ namespace Miki.Core
         protected bool appearInHelp;
         protected bool hasParameters;
 
-        protected string usage;
+        protected string[] usage;
         protected string description;
 
         protected string message;
@@ -97,7 +97,17 @@ namespace Miki.Core
         /// <returns>>dan: gets images from danbooru</returns>
         public string GetHelpLine()
         {
-            return ">" + id + ": " + description;
+            return "`>" + id + "`: " + description;
+        }
+
+        public string GetAllUsageTags()
+        {
+            string output = usage[0];
+            for(int i = 1; i < usage.Length; i++)
+            {
+                output += "," + usage[i];
+            }
+            return output;
         }
     }
 }

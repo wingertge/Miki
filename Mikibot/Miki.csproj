@@ -98,6 +98,7 @@
     <Compile Include="Accounts\AccountManager.cs" />
     <Compile Include="Accounts\Commands\Profile.cs" />
     <Compile Include="Core\Commands\BlacklistServer.cs" />
+    <Compile Include="Core\Commands\CopyPasta.cs" />
     <Compile Include="Core\Commands\WhoamiCommand.cs" />
     <Compile Include="Core\Config\Blacklist.cs" />
     <Compile Include="Core\ChannelMessage.cs" />
