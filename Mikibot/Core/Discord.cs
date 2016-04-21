@@ -2,6 +2,7 @@
 using Miki.Accounts;
 using Miki.Core.Config;
 using Miki.Core.Debug;
+using Miki.Extensions.Cleverbot;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,6 +15,7 @@ namespace Miki.Core
     /// </summary>
     public class Discord
     {
+        public static Cleverbot cleverbot = new Cleverbot();
         public static DiscordClient client = new DiscordClient("MTYwMTA1OTk0MjE3NTg2Njg5.Ce8QnQ.YoAWdFbFrCZ3-i9bkKIkDrmvFek", true, true);
         public static Discord instance;
         public static DateTime timeSinceReset;
@@ -30,11 +32,13 @@ namespace Miki.Core
         {
             Console.WriteLine("Starting Mikibot v" + Global.VersionText);
             config.Initialize();
+            cleverbot.Initialize();
             instance = this;
             client.Connected += (sender, e) => { OnConnect(e); };
             client.SocketClosed += (sender, e) => { OnDisconnect(e); };
             client.UserAddedToServer += (sender, e) => { OnUserAdded(e); };
             client.MessageReceived += (sender, e) => { OnMessage(e); };
+            client.MentionReceived += (sender, e) => { OnMentioned(e); };
             client.SendLoginRequest();
             client.Connect();
             Console.ReadLine();
@@ -71,6 +75,15 @@ namespace Miki.Core
         /// <param name="e">Data recieved from the DiscordMember that got added.</param>
         public void OnUserAdded(DiscordSharp.Events.DiscordGuildMemberAddEventArgs e)
         {        }
+
+        /// <summary>
+        /// Event Listener: Gets called whenever mentioned
+        /// </summary>
+        /// <param name="e"></param>
+        public void OnMentioned(DiscordSharp.Events.DiscordMessageEventArgs e)
+        {
+            cleverbot.GetAsked(e);
+        }
 
         /// <summary>
         ///  Event Listener: Gets called whenever a message gets recieved by Miki

@@ -67,6 +67,10 @@
       <HintPath>..\packages\IMDBNet.0.2.2\lib\net452\IMDBNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="JsonRequest, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\JsonRequest.dll</HintPath>
+    </Reference>
     <Reference Include="NAudio, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.1.7.3\lib\net35\NAudio.dll</HintPath>
       <Private>True</Private>
@@ -121,6 +125,11 @@
     <Compile Include="Core\Commands\Statistics.cs" />
     <Compile Include="Core\Discord.cs" />
     <Compile Include="Core\DiscordMemberHandler.cs" />
+    <Compile Include="Extensions\Cleverbot\Cleverbot.cs" />
+    <Compile Include="Extensions\Cleverbot\CleverbotAskCredentials.cs" />
+    <Compile Include="Extensions\Cleverbot\CleverbotCreateCredentials.cs" />
+    <Compile Include="Extensions\Cleverbot\CleverbotOnAskEvent.cs" />
+    <Compile Include="Extensions\Cleverbot\CleverbotOnCreateEvent.cs" />
     <Compile Include="Extensions\Danbooru\DanbooruPost.cs" />
     <Compile Include="Extensions\Danbooru\Danbooru_Discord.cs" />
     <Compile Include="Accounts\WordsSpoken.cs" />
