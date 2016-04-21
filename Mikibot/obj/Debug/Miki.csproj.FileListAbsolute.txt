@@ -28,7 +28,6 @@ C:\Users\Mike\Documents\miki\Mikibot\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Mike\Documents\miki\Mikibot\bin\Debug\websocket-sharp.dll
 C:\Users\Mike\Documents\miki\Mikibot\bin\Debug\WebSocket4Net.dll
 C:\Users\Mike\Documents\miki\Mikibot\bin\Debug\DiscordSharp.pdb
-C:\Users\Mike\Documents\miki\Mikibot\bin\Debug\DiscordSharp.xml
 C:\Users\Mike\Documents\miki\Mikibot\bin\Debug\NAudio.xml
 C:\Users\Mike\Documents\miki\Mikibot\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Mike\Documents\miki\Mikibot\bin\Debug\websocket-sharp.xml

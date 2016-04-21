@@ -7,7 +7,7 @@ using DiscordSharp.Events;
 
 namespace Miki.Core.Commands
 {
-    class WhoamiCommand : Command
+    class Whoami : Command
     {
         public override void Initialize()
         {

@@ -1,5 +1,6 @@
 ﻿using Miki.Core;
 using DiscordSharp.Events;
+using DiscordSharp.Objects;
 
 namespace Miki.Accounts.Commands
 {
@@ -11,6 +12,8 @@ namespace Miki.Accounts.Commands
             appearInHelp = true;
             description = "shows your profile";
 
+            parameterType = ParameterType.BOTH;
+
             base.Initialize();
         }
 
@@ -20,7 +23,9 @@ namespace Miki.Accounts.Commands
             if (message.StartsWith("profile "))
             {
                 DiscordMemberHandler m = new DiscordMemberHandler();
-                e.Channel.SendMessage(Discord.account.GetProfile(m.GetMemberFromLink(e.Channel, message)));
+                DiscordMember member = m.GetMemberFromLink(e.Channel, message);
+                    Discord.account.AddAccount(member);
+                e.Channel.SendMessage(Discord.account.GetProfile(member));
             }
             else if (Discord.account.GetProfile(e.Author) != "")
             {

@@ -32,6 +32,22 @@ namespace Miki.Core.Config
             {
                 Discord.client = new DiscordSharp.DiscordClient("MTY5OTAwMjc4MTMxMzI2OTc2.CfE-UA.Mo8XihTgIEH50ryAcIqZzDvtCKA", true, true);
             }
+            if (Directory.Exists(Global.AvatarsFolder))
+            {
+                if (File.Exists(Global.Avatar))
+                {
+                    Avatar = (Bitmap)Bitmap.FromFile(Global.Avatar);
+                }
+                else
+                {
+                    Log.Warning("target avatar file not found: " + Global.Avatar);
+                }
+            }
+            else
+            {
+                Log.Warning("No avatars folder found, creating one...");
+                Directory.CreateDirectory(Global.AvatarsFolder);
+            }
             Log.Done("Loading config files");
         }
 
@@ -39,6 +55,14 @@ namespace Miki.Core.Config
         /// Loads data AFTER the bot has been connected to discord. 
         /// </summary>
         public void OnConnectInitialize()
+        {
+            Discord.client.UpdateCurrentGame("'>help' | v" + Global.VersionText);
+        }
+
+        /// <summary>
+        /// Sets new avatar
+        /// </summary>
+        public void UpdateAvatar()
         {
             if (Avatar != null)
             {
@@ -65,14 +89,20 @@ namespace Miki.Core.Config
             ChannelMessage.commands.Add(new Accounts.Commands.TopProfiles());
             ChannelMessage.commands.Add(new Copypasta());
             ChannelMessage.commands.Add(new Accounts.Commands.Profile());
+            ChannelMessage.commands.Add(new RequestIdea());
+            ChannelMessage.commands.Add(new Roll());
+            ChannelMessage.commands.Add(new ForceSave());
             ChannelMessage.commands.Add(new Statistics());
+            ChannelMessage.commands.Add(new UpdateAvatar());
             ChannelMessage.commands.Add(new Uptime());
-            ChannelMessage.commands.Add(new WhoamiCommand());
+            ChannelMessage.commands.Add(new Whoami());
+            ChannelMessage.commands.Add(new Whoisserver());
 
             for(int i = 0; i < ChannelMessage.commands.Count; i++)
             {
                 ChannelMessage.commands[i].Initialize();
             }
+            Log.Done("Loaded " + ChannelMessage.commands.Count + " commands!");
         }
 
         /// <summary>

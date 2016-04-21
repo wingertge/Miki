@@ -8,7 +8,7 @@ namespace Miki.Core.Commands
         {
             id = "fizzbuzz";
             appearInHelp = false;
-            hasParameters = true;
+            parameterType = ParameterType.YES;
 
             base.Initialize();
         }

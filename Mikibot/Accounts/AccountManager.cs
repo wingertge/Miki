@@ -25,8 +25,7 @@ namespace Miki.Accounts
         {
             if (!isLoggedIn(a))
             {
-                Console.WriteLine("Added member " + a.Username);
-                accounts.Add(GetAccountFromMember(a));
+                CreateAccountFromMember(a);
             }
         }
         public void RemoveAccount(Account a)
@@ -48,13 +47,27 @@ namespace Miki.Accounts
 
         public void SaveAllAccounts()
         {
-            for(int i = 0; i < accounts.Count; i++)
+            lock(accounts)
             {
-                accounts[i].SaveProfile();
+                for (int i = 0; i < accounts.Count; i++)
+                {
+                    accounts[i].SaveProfile();
+                }
             }
             Console.WriteLine("Saved all accounts!");
             Thread.Sleep(300000);
             SaveAllAccounts();
+        }
+
+        public void SaveAccountsOnCommand()
+        {
+            lock (accounts)
+            {
+                for (int i = 0; i < accounts.Count; i++)
+                {
+                    accounts[i].SaveProfile();
+                }
+            }
         }
 
         public Account GetAccountFromMember(DiscordMember member)
@@ -68,6 +81,14 @@ namespace Miki.Accounts
             }
             return null;
         }
+
+        public Account CreateAccountFromMember(DiscordMember member)
+        {
+            Account a = new Account();
+            a.Login(member);
+            return a;
+        }
+
         public Account GetAccountFromID(string ID)
         {
             for (int i = 0; i < accounts.Count; i++)

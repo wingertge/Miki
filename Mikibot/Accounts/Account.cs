@@ -32,12 +32,12 @@ namespace Miki.Accounts
         }
         public void Create(DiscordMember member)
         {
+            Log.Message("Creating account: " + member.ID);
             this.member = member;
             Initialize();
             timeOfCreation = DateTime.Now;
             SaveProfile();
             Discord.account.AddAccount(this);
-            Log.Error("DONT CALL THIS");
         }
         public void Login(DiscordMember member)
         {

@@ -20,7 +20,7 @@ namespace Miki.Extensions.Danbooru
         {
             id = "dan";
             appearInHelp = true;
-            hasParameters = true;
+            parameterType = ParameterType.YES;
             description = "get danbooru images";
 
             base.Initialize();

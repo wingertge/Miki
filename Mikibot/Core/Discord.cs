@@ -46,7 +46,6 @@ namespace Miki.Core
         {
             Console.WriteLine("Connected! User: " + e.User.Username);
             config.OnConnectInitialize();
-            client.UpdateCurrentGame("'>help' | v" + Global.VersionText);
             timeSinceReset = DateTime.Now;
             Thread t = new Thread(account.SaveAllAccounts, 0);
             t.Start();

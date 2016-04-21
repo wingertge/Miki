@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DiscordSharp.Events;
 using System.IO;
 using Miki.Core.Debug;
+using System.Threading;
 
 namespace Miki.Core.Commands
 {
@@ -20,7 +21,7 @@ namespace Miki.Core.Commands
             id = "pasta";
             appearInHelp = true;
             description = "throw in your favourite copy pasta's";
-            hasParameters = true;
+            parameterType = ParameterType.YES;
             usage = new string[] { "tag or 'add'" };
 
             if(!Directory.Exists(CopypastaFolder))
@@ -43,9 +44,12 @@ namespace Miki.Core.Commands
             string[] parameters = message.Split(' ');
             if (parameters[1] == "new")
             {
-                AddCopypasta(parameters[2], message.Substring(parameters[2].Length + 11));
-                e.Channel.SendMessage("Added copypasta '" + parameters[2] + "'!");
-                return;
+                if (parameters.Length > 2)
+                {
+                    AddCopypasta(parameters[2], message.Substring(parameters[2].Length + 11));
+                    e.Channel.SendMessage("Added copypasta '" + parameters[2] + "'!");
+                    return;
+                }
             }
             else
             {
@@ -56,6 +60,7 @@ namespace Miki.Core.Commands
                 catch
                 {
                     Log.Warning("Copypasta not found");
+                    Thread.CurrentThread.Abort();
                 }
             }
             base.PlayCommand(e);

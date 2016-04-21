@@ -60,9 +60,8 @@
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DiscordSharp, Version=0.6.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\DiscordSharp.0.6.0.7-rc1\lib\DiscordSharp.dll</HintPath>
+    <Reference Include="DiscordSharp">
+      <HintPath>..\..\DiscordSharp\DiscordSharp\bin\Debug\DiscordSharp.dll</HintPath>
     </Reference>
     <Reference Include="IMDBNet, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\IMDBNet.0.2.2\lib\net452\IMDBNet.dll</HintPath>
@@ -105,7 +104,11 @@
     <Compile Include="Core\Commands\BlacklistServer.cs" />
     <Compile Include="Core\Commands\CopyPasta.cs" />
     <Compile Include="Core\Commands\RequestIdea.cs" />
-    <Compile Include="Core\Commands\WhoamiCommand.cs" />
+    <Compile Include="Core\Commands\Roll.cs" />
+    <Compile Include="Core\Debug\Commands\ForceSave.cs" />
+    <Compile Include="Core\Debug\Commands\UpdateAvatar.cs" />
+    <Compile Include="Core\Debug\Commands\Whoami.cs" />
+    <Compile Include="Core\Debug\Commands\Whoisserver.cs" />
     <Compile Include="Core\Config\Blacklist.cs" />
     <Compile Include="Core\ChannelMessage.cs" />
     <Compile Include="Core\Command.cs" />
@@ -131,10 +134,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="libsodium.dll" />
-    <Content Include="opus.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

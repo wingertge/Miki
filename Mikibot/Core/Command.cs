@@ -3,11 +3,13 @@ using System.Diagnostics;
 
 namespace Miki.Core
 {
+    public enum ParameterType { YES, NO, BOTH };
+
     public class Command
     {
         protected string id;
         protected bool appearInHelp;
-        protected bool hasParameters;
+        protected ParameterType parameterType = ParameterType.NO;
 
         protected string[] usage;
         protected string description;
@@ -25,7 +27,6 @@ namespace Miki.Core
         /// (Optional) usage
         /// </summary>
         public virtual void Initialize() {
-            Log.Message("Loaded Command: " + id);
         }
 
         /// <summary>
@@ -38,7 +39,7 @@ namespace Miki.Core
         {
             message = e.MessageText.Trim(new char[] { '>' });
             message = message.ToLower();
-            if (hasParameters)
+            if (parameterType == ParameterType.YES)
             {
                 if (message.StartsWith(id + " "))
                 {
@@ -59,9 +60,30 @@ namespace Miki.Core
                     }
                 }
             }
-            else
+            else if(parameterType == ParameterType.NO)
             {
                 if (message == id)
+                {
+                    if (Debugger.IsAttached)
+                    {
+                        PlayCommand(e);
+                    }
+                    else
+                    {
+                        try
+                        {
+                            PlayCommand(e);
+                        }
+                        catch
+                        {
+                            Log.Error("command: " + id);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (message.StartsWith(id))
                 {
                     if (Debugger.IsAttached)
                     {
