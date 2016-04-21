@@ -20,7 +20,7 @@ namespace Miki.Core.Commands
             Pasta = new Dictionary<string, string>();
             id = "pasta";
             appearInHelp = true;
-            description = "throw in your favourite copy pasta's";
+            description = "throw in your favourite copypastas";
             parameterType = ParameterType.YES;
             usage = new string[] { "tag or 'add'" };
 
@@ -42,14 +42,26 @@ namespace Miki.Core.Commands
         protected override void PlayCommand(DiscordMessageEventArgs e)
         {
             string[] parameters = message.Split(' ');
-            if (parameters[1] == "new")
+            if (parameters[1].ToLower() == "new")
             {
                 if (parameters.Length > 2)
                 {
-                    AddCopypasta(parameters[2], message.Substring(parameters[2].Length + 11));
+                    AddCopypasta(parameters[2].ToLower(), message.Substring(parameters[2].Length + 11));
                     e.Channel.SendMessage("Added copypasta '" + parameters[2] + "'!");
                     return;
                 }
+            }
+            else if(parameters[1].ToLower() == "list")
+            {
+                string output = "`";
+                for(int i = 0; i < Directory.GetFiles(CopypastaFolder).Length; i++)
+                {
+                    string path = Directory.GetFiles(CopypastaFolder)[i];
+                    path = path.Split('/')[4].Split('.')[0];
+                    output += path + " - ";
+                }
+                e.Channel.SendMessage(output + "`");
+                return;
             }
             else
             {

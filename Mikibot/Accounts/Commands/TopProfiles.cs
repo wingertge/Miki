@@ -14,7 +14,7 @@ namespace Miki.Accounts.Commands
         {
             id = "leaderboards";
             appearInHelp = true;
-            description = "check the top 10 profiles";
+            description = "check the top 10 highest ranking profiles";
             base.Initialize();
         }
 
@@ -23,7 +23,8 @@ namespace Miki.Accounts.Commands
             base.PlayCommand(e);
             string output = "";
             Account[] a = Discord.account.GetAccountLeaderboards();
-            for(int i = 0; i < a.Length; i++)
+            output += ":crown:: `" + a[0].member.Username + "`\n";
+            for(int i = 1; i < a.Length; i++)
             {
                 if (a[i] != null)
                 {

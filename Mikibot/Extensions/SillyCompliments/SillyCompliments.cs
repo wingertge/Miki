@@ -37,7 +37,7 @@ namespace Miki.Extensions.SillyCompliments
             " alot",
             " a bit",
             " quite a bit",
-            " alot, is that weird?",
+            " a lot, is that weird?",
         };
 
         public override void Initialize()

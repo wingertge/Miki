@@ -1,5 +1,6 @@
 ﻿using Miki.Core.Commands;
 using Miki.Core.Debug;
+using Miki.Extensions.RandomCatExtension;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -80,6 +81,7 @@ namespace Miki.Core.Config
         void LoadCommands()
         {
             ChannelMessage.commands.Add(new BlacklistServer());
+            ChannelMessage.commands.Add(new RandomCat());
             ChannelMessage.commands.Add(new Extensions.SillyCompliments.SillyCompliments_Core());
             ChannelMessage.commands.Add(new Extensions.Danbooru.DanBooru_Discord());
             ChannelMessage.commands.Add(new ErrorCount());

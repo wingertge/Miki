@@ -38,10 +38,9 @@ namespace Miki.Core
         public virtual void CheckCommand(DiscordSharp.Events.DiscordMessageEventArgs e)
         {
             message = e.MessageText.Trim(new char[] { '>' });
-            message = message.ToLower();
             if (parameterType == ParameterType.YES)
             {
-                if (message.StartsWith(id + " "))
+                if (message.ToLower().StartsWith(id + " "))
                 {
                     if (Debugger.IsAttached)
                     {
@@ -62,7 +61,7 @@ namespace Miki.Core
             }
             else if(parameterType == ParameterType.NO)
             {
-                if (message == id)
+                if (message.ToLower() == id)
                 {
                     if (Debugger.IsAttached)
                     {
@@ -83,7 +82,7 @@ namespace Miki.Core
             }
             else
             {
-                if (message.StartsWith(id))
+                if (message.ToLower().StartsWith(id))
                 {
                     if (Debugger.IsAttached)
                     {
