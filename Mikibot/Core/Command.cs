@@ -114,14 +114,18 @@ namespace Miki.Core
         {
 
         }
-    
+
         /// <summary>
         /// We call this to get the >help command. all commands will return this line in a list.
         /// </summary>
         /// <returns>>dan: gets images from danbooru</returns>
         public string GetHelpLine()
         {
-            return "`>" + id + "`: " + description;
+            if (appearInHelp)
+            {
+                return "`>" + id + "`: " + description + '\n';
+            }
+            return "";
         }
 
         public string GetAllUsageTags()

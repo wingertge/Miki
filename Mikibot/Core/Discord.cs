@@ -21,6 +21,8 @@ namespace Miki.Core
         public static Blacklist blacklist = new Blacklist();
         public static ConfigManager config = new ConfigManager();
 
+        public static int errors;
+
         /// <summary>
         /// The program runs all discord services and loads all the data here.
         /// </summary>
@@ -57,8 +59,10 @@ namespace Miki.Core
         /// <param name="e">Discord data recieved about error details</param>
         public void OnDisconnect(DiscordSocketClosedEventArgs e)
         {
+            errors++;
             Log.Error(e.Code + " - " + e.Reason);
-            Start();
+            client.SendLoginRequest();
+            client.Connect();
         }
 
         /// <summary>
