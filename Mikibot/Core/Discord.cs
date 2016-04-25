@@ -80,7 +80,7 @@ namespace Miki.Core
         public void OnDisconnect(DiscordSocketClosedEventArgs e)
         {
             client.Dispose();
-            client = new DiscordClient("MTYwMTA1OTk0MjE3NTg2Njg5.Ce8QnQ.YoAWdFbFrCZ3-i9bkKIkDrmvFek", true, true);
+            client = new DiscordClient(Global.ApiKey, true, true);
             errors++;
             Log.Error(e.Code + " - " + e.Reason);
             client.SendLoginRequest();
