@@ -29,5 +29,23 @@ C:\Users\Mike\Documents\miki\Mikibot\bin\Debug\DiscordSharp.pdb
 C:\Users\Mike\Documents\miki\Mikibot\bin\Debug\NAudio.xml
 C:\Users\Mike\Documents\miki\Mikibot\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Mike\Documents\miki\Mikibot\bin\Debug\websocket-sharp.xml
+<<<<<<< HEAD
 C:\Users\Veld\Documents\miki\Mikibot\bin\Debug\DiscordSharp.dll
 C:\Users\Veld\Documents\miki\Mikibot\bin\Debug\DiscordSharp.xml
+=======
+C:\Users\Mine\Documents\miki\Mikibot\bin\Debug\Miki.exe.config
+C:\Users\Mine\Documents\miki\Mikibot\obj\Debug\Miki.exe
+C:\Users\Mine\Documents\miki\Mikibot\obj\Debug\Miki.pdb
+C:\Users\Mine\Documents\miki\Mikibot\bin\Debug\Miki.exe
+C:\Users\Mine\Documents\miki\Mikibot\bin\Debug\Miki.pdb
+C:\Users\Mine\Documents\miki\Mikibot\bin\Debug\IMDBNet.dll
+C:\Users\Mine\Documents\miki\Mikibot\bin\Debug\NAudio.dll
+C:\Users\Mine\Documents\miki\Mikibot\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Mine\Documents\miki\Mikibot\bin\Debug\websocket-sharp.dll
+C:\Users\Mine\Documents\miki\Mikibot\bin\Debug\WebSocket4Net.dll
+C:\Users\Mine\Documents\miki\Mikibot\bin\Debug\DiscordSharp.pdb
+C:\Users\Mine\Documents\miki\Mikibot\bin\Debug\NAudio.xml
+C:\Users\Mine\Documents\miki\Mikibot\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Mine\Documents\miki\Mikibot\bin\Debug\websocket-sharp.xml
+C:\Users\Mine\Documents\miki\Mikibot\obj\Debug\Miki.csprojResolveAssemblyReference.cache
+>>>>>>> 1b8d0da6d4daebdb6c0a73b6c950f9a7c8b1e864
