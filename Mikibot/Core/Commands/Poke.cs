@@ -2,13 +2,13 @@
 
 namespace Miki.Core.Commands
 {
-    class Hug:Command
+    class Poke : Command
     {
         public override void Initialize()
         {
-            id = "hug";
+            id = "poke";
             appearInHelp = true;
-            description = "Give a hug or receive a hug";
+            description = "Give a poke or receive a poke";
             parameterType = ParameterType.BOTH;
 
             base.Initialize();
@@ -18,10 +18,10 @@ namespace Miki.Core.Commands
         {
             if (e.MessageText.Split(' ').Length > 1)
             {
-                e.Channel.SendMessage("<@" + e.Author.ID + "> hugs " + e.MessageText.Split(' ')[1]);
+                e.Channel.SendMessage("<@" + e.Author.ID + "> pokes " + e.MessageText.Split(' ')[1]);
                 return;
             }
-            e.Channel.SendMessage("Miki hugs " + "<@" + e.Author.ID + ">");
+            e.Channel.SendMessage("Miki pokes " + "<@" + e.Author.ID + ">");
             base.PlayCommand(e);
         }
     }

@@ -2,13 +2,13 @@
 
 namespace Miki.Core.Commands
 {
-    class Hug:Command
+    class Pat : Command
     {
         public override void Initialize()
         {
-            id = "hug";
+            id = "pat";
             appearInHelp = true;
-            description = "Give a hug or receive a hug";
+            description = "Give a pat or receive a pat";
             parameterType = ParameterType.BOTH;
 
             base.Initialize();
@@ -18,10 +18,10 @@ namespace Miki.Core.Commands
         {
             if (e.MessageText.Split(' ').Length > 1)
             {
-                e.Channel.SendMessage("<@" + e.Author.ID + "> hugs " + e.MessageText.Split(' ')[1]);
+                e.Channel.SendMessage("<@" + e.Author.ID + "> pats " + e.MessageText.Split(' ')[1]);
                 return;
             }
-            e.Channel.SendMessage("Miki hugs " + "<@" + e.Author.ID + ">");
+            e.Channel.SendMessage("Miki pats " + "<@" + e.Author.ID + ">");
             base.PlayCommand(e);
         }
     }
