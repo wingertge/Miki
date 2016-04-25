@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using DiscordSharp.Events;
 using System.IO;
 using Miki.Core.Debug;
@@ -53,13 +49,15 @@ namespace Miki.Core.Commands
             }
             else if(parameters[1].ToLower() == "list")
             {
-                string output = "`";
-                for(int i = 0; i < Directory.GetFiles(CopypastaFolder).Length; i++)
+                string output = "";
+                string[] list = Directory.GetFiles(CopypastaFolder);
+                for (int i = 0; i < list.Length; i++)
                 {
-                    string path = Directory.GetFiles(CopypastaFolder)[i];
+                    string path = "`";
+                    path += list[i];
                     path = path.Split('/')[4];
                     path.Remove(path.Length - 3);
-                    output += path + " - ";
+                    output += path + "` ";
                 }
                 e.Channel.SendMessage(output + "`");
                 return;

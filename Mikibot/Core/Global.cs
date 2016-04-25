@@ -12,7 +12,7 @@ namespace Miki.Core
     /// </summary>
     public class Global
     {
-        public const string MikiFolder = @"/miki/";
+        public const string MikiFolder = "/miki/";
 
         public static string AccountsFolder = MikiFolder + "accounts/";
         public static string AvatarsFolder = MikiFolder + "avatars/";
@@ -25,6 +25,7 @@ namespace Miki.Core
         public static string Status = ">help | " + VersionNumber;
         public const string VersionNumber = "0.1.52";
 
+        public static string Username = "Miki";
         public static string ApiKey = "";
     }
 }

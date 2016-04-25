@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Miki.Extensions.RandomCatExtension
 {
-    class Cat
+    class CatImage
     {
         public string file;
     }

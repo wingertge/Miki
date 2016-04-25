@@ -20,13 +20,13 @@ namespace Miki.Core.Commands
 
         protected override void PlayCommand(DiscordMessageEventArgs e)
         {
-            base.PlayCommand(e);
             string output = "";
             for (int i = 0; i < ChannelMessage.commands.Count; i++)
             {
                 output += ChannelMessage.commands[i].GetHelpLine();
             }
             e.Channel.SendMessage(output);
+            base.PlayCommand(e);
         }
     }
 }

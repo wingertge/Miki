@@ -4,23 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DiscordSharp.Events;
+using DiscordSharp.Objects;
 
-namespace Miki.Core.Commands
+namespace Miki.Core.Debug.Commands
 {
-    class InfoCommand : Command
+    class Ping:Command
     {
         public override void Initialize()
         {
-            id = "info";
+            id = "ping";
             appearInHelp = true;
-            description = "description about the bot itself.";
+            description = "pong";
+            parameterType = ParameterType.NO;
 
             base.Initialize();
         }
 
         protected override void PlayCommand(DiscordMessageEventArgs e)
         {
-            e.Channel.SendMessage("__** Miki " + Global.VersionNumber + " **__\nMade by: **Veld#5128**\nLibraries used: **DiscordSharp**, **IMDbNet**, **Json.NET**\nWebsite: http://velddev.github.io/miki");
+            DiscordMessage m = e.Channel.SendMessage("Pong! ");
+            Discord.client.EditMessage(m.ID, "Pong! " + (m.timestamp.TimeOfDay - e.Message.timestamp.TimeOfDay).Milliseconds + "ms", e.Channel);
             base.PlayCommand(e);
         }
     }

@@ -5,22 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using DiscordSharp.Events;
 
-namespace Miki.Core.Commands
+namespace Miki.Core.Debug.Commands
 {
-    class ForceSave : Command
+    class ChangeUsername:Command
     {
         public override void Initialize()
         {
-            id = "saveprofiles";
+            id = "name";
             appearInHelp = false;
             devOnly = true;
+            description = "";
+
+            parameterType = ParameterType.YES;
+            usage = new string[] { "name" };
+
             base.Initialize();
         }
 
         protected override void PlayCommand(DiscordMessageEventArgs e)
         {
-            Discord.account.SaveAccountsOnCommand();
-            e.Channel.SendMessage("Your data is safe, Senpai!");
+            Discord.client.ChangeClientInformation(new DiscordSharp.Objects.DiscordUserInformation() { Username = e.MessageText.Split(' ')[1], Avatar=Discord.client.ClientPrivateInformation.Avatar});
             base.PlayCommand(e);
         }
     }

@@ -1,5 +1,6 @@
 ﻿using Miki.Core.Commands;
 using Miki.Core.Debug;
+using Miki.Core.Debug.Commands;
 using Miki.Extensions.RandomCatExtension;
 using System.Diagnostics;
 using System.Drawing;
@@ -10,14 +11,12 @@ namespace Miki.Core.Config
     public class ConfigManager
     {
         public Bitmap Avatar;
-        public DiscordSharp.Objects.DiscordUserInformation info;
 
         /// <summary>
         /// Creates alot of data on C:/miki, and runs all basic tasks
         /// </summary>
         public void Initialize()
         {
-            info = new DiscordSharp.Objects.DiscordUserInformation();
             if (!File.Exists(Global.ConfigFile))
             {
                 Log.Warning("'Miki/Config.cfg' not found. Creating Folders/Files");
@@ -29,10 +28,6 @@ namespace Miki.Core.Config
             LoadCommands();
             Log.Message("Loading Blacklist");
             LoadBlacklist();
-            if (Global.Debug)
-            {
-                Discord.client = new DiscordSharp.DiscordClient("", true, true);
-            }
             if (Directory.Exists(Global.AvatarsFolder))
             {
                 if (File.Exists(Global.Avatar))
@@ -57,7 +52,7 @@ namespace Miki.Core.Config
         /// </summary>
         public void OnConnectInitialize()
         {
-            Discord.client.UpdateCurrentGame("'>help' | v" + Global.VersionText);
+            Discord.client.UpdateCurrentGame("'>help' | v" + Global.VersionNumber);
         }
 
         /// <summary>
@@ -92,9 +87,12 @@ namespace Miki.Core.Config
             ChannelMessage.commands.Add(new InfoCommand());
             ChannelMessage.commands.Add(new Accounts.Commands.TopProfiles());
             ChannelMessage.commands.Add(new Copypasta());
+            ChannelMessage.commands.Add(new Ping());
             ChannelMessage.commands.Add(new Accounts.Commands.Profile());
+            ChannelMessage.commands.Add(new ChangeUsername());
             ChannelMessage.commands.Add(new RequestIdea());
             ChannelMessage.commands.Add(new Roll());
+            ChannelMessage.commands.Add(new Roulette());
             ChannelMessage.commands.Add(new ForceSave());
             ChannelMessage.commands.Add(new Statistics());
             ChannelMessage.commands.Add(new UpdateAvatar());
@@ -160,14 +158,6 @@ namespace Miki.Core.Config
             s.WriteLine("Avatar=" + Global.AvatarImage);
             s.WriteLine("Key=" + Global.ApiKey);
             s.WriteLine("Status=" + Discord.client.GetCurrentGame);
-            if(info.Username != "")
-            {
-                s.WriteLine("Username=" + info.Username);
-            }
-            else
-            {
-                s.WriteLine("Username=Miki");
-            }
             s.Close();
         }
 
@@ -181,7 +171,6 @@ namespace Miki.Core.Config
             Global.AvatarImage = r.ReadLine().Split('=')[1];
             Global.ApiKey = r.ReadLine().Split('=')[1];
             Global.Status = r.ReadLine().Split('=')[1];
-            info.Username = r.ReadLine().Split('=')[1];
             r.Close();
         }
     }

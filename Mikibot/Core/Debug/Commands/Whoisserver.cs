@@ -13,6 +13,7 @@ namespace Miki.Core.Commands
         {
             id = "channelid";
             appearInHelp = false;
+            devOnly = true;
             parameterType = ParameterType.NO;
 
             base.Initialize();

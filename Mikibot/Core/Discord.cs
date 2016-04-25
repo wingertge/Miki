@@ -28,15 +28,23 @@ namespace Miki.Core
         public static Blacklist blacklist = new Blacklist();
         public static ConfigManager config = new ConfigManager();
 
+        Thread t = new Thread(account.SaveAllAccounts, 0);
+        Thread s = new Thread(SendServerData, 0);
+
         public static int errors;
+
+        public void FirstRun()
+        {
+            Console.WriteLine("Starting Mikibot v" + Global.VersionNumber);
+            config.Initialize();
+            Start();
+        }
 
         /// <summary>
         /// The program runs all discord services and loads all the data here.
         /// </summary>
         public void Start()
         {
-            Console.WriteLine("Starting Mikibot v" + Global.VersionText);
-            config.Initialize();
             client = new DiscordClient(Global.ApiKey, true, true);
             instance = this;
             client.Connected += (sender, e) => { OnConnect(e); };
@@ -44,7 +52,6 @@ namespace Miki.Core
             client.UserAddedToServer += (sender, e) => { OnUserAdded(e); };
             client.MessageReceived += (sender, e) => { OnMessage(e); };
             client.MentionReceived += (sender, e) => { OnMentioned(e); };
-            System.Net.ServicePointManager.ServerCertificateValidationCallback += (s, ce, ca, p) => true;
             client.SendLoginRequest();
             client.Connect();
             Console.ReadLine();
@@ -59,13 +66,11 @@ namespace Miki.Core
             Console.WriteLine("Connected! User: " + e.User.Username);
             config.OnConnectInitialize();
             timeSinceReset = DateTime.Now;
-            Thread t = new Thread(account.SaveAllAccounts, 0);
-            Thread s = new Thread(SendServerData, 0);
             t.Start();
             s.Start();
         }
 
-        void SendServerData()
+        static void SendServerData()
         {
             POST p = new POST();
             p.UploadString(JsonConvert.SerializeObject(new ServerData("veld882b398cd81632bb25", client.GetServersList().Count.ToString())), "https://www.carbonitex.net/discord/data/botdata.php");
@@ -79,12 +84,10 @@ namespace Miki.Core
         /// <param name="e">Discord data recieved about error details</param>
         public void OnDisconnect(DiscordSocketClosedEventArgs e)
         {
-            client.Dispose();
-            client = new DiscordClient(Global.ApiKey, true, true);
+            Log.Message("Disconnected");
             errors++;
             Log.Error(e.Code + " - " + e.Reason);
-            client.SendLoginRequest();
-            client.Connect();
+            Start();
         }
 
         /// <summary>
@@ -100,10 +103,7 @@ namespace Miki.Core
         /// <param name="e"></param>
         public void OnMentioned(DiscordSharp.Events.DiscordMessageEventArgs e)
         {
-            if (Global.Debug)
-            {
-                cleverbot.GetAsked(e);
-            }
+         //       cleverbot.GetAsked(e);
         }
 
         /// <summary>
@@ -112,8 +112,7 @@ namespace Miki.Core
         /// <param name="e">Message data recieved from discord</param>
         public void OnMessage(DiscordSharp.Events.DiscordMessageEventArgs e)
         {
-            ChannelMessage channel = new ChannelMessage(e);
-            Thread t = new Thread(channel.RecieveMessage, 0);
+            Log.Message("Message");
             if (!blacklist.isBlacklisted(e.Channel.ID))
             {
                 if (account.GetAccountFromMember(e.Author) == null)
@@ -124,7 +123,7 @@ namespace Miki.Core
                 }
                 account.GetAccountFromID(e.Author.ID).OnMessageRecieved(e.Channel);
             }
-            t.Start();
+            new Thread(new ChannelMessage(e).RecieveMessage, 0).Start();
         }
     }
 }

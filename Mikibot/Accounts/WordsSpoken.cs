@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Miki.Accounts
 {
-    /* Work in progress, funny command to check how many times <DiscordMember> said <FilterWords> in chat */
     public class WordsSpoken
     {
         string[] FilterWords;

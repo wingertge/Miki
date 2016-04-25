@@ -63,7 +63,7 @@ namespace Miki.Core.Commands
 
         int RollDice(int max)
         {
-            return r.Next(0, max);
+            return r.Next(0, max) + 1;
         }
     }
 }

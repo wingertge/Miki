@@ -1,0 +1,17 @@
+C:\Users\Veld\Documents\miki\Mikibot\bin\Release\Miki.exe.config
+C:\Users\Veld\Documents\miki\Mikibot\bin\Release\Miki.exe
+C:\Users\Veld\Documents\miki\Mikibot\bin\Release\Miki.pdb
+C:\Users\Veld\Documents\miki\Mikibot\bin\Release\DiscordSharp.dll
+C:\Users\Veld\Documents\miki\Mikibot\bin\Release\IMDBNet.dll
+C:\Users\Veld\Documents\miki\Mikibot\bin\Release\JsonRequest.dll
+C:\Users\Veld\Documents\miki\Mikibot\bin\Release\NAudio.dll
+C:\Users\Veld\Documents\miki\Mikibot\bin\Release\Newtonsoft.Json.dll
+C:\Users\Veld\Documents\miki\Mikibot\bin\Release\websocket-sharp.dll
+C:\Users\Veld\Documents\miki\Mikibot\bin\Release\WebSocket4Net.dll
+C:\Users\Veld\Documents\miki\Mikibot\bin\Release\DiscordSharp.pdb
+C:\Users\Veld\Documents\miki\Mikibot\bin\Release\DiscordSharp.xml
+C:\Users\Veld\Documents\miki\Mikibot\bin\Release\NAudio.xml
+C:\Users\Veld\Documents\miki\Mikibot\bin\Release\Newtonsoft.Json.xml
+C:\Users\Veld\Documents\miki\Mikibot\bin\Release\websocket-sharp.xml
+C:\Users\Veld\Documents\miki\Mikibot\obj\Release\Miki.exe
+C:\Users\Veld\Documents\miki\Mikibot\obj\Release\Miki.pdb

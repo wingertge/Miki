@@ -17,20 +17,21 @@ namespace Miki.Core.Commands
         protected override void PlayCommand(DiscordSharp.Events.DiscordMessageEventArgs e)
         {
             Process proc = Process.GetCurrentProcess();
-            int memsize = 0;
-            PerformanceCounter PC = new PerformanceCounter();
-            PC.CategoryName = "Process";
+            long memsize = proc.PrivateMemorySize64;
+            //PerformanceCounter PC = new PerformanceCounter();
+           /* PC.CategoryName = "Process";
             PC.CounterName = "Working Set - Private";
             PC.InstanceName = proc.ProcessName;
             memsize = Convert.ToInt32(PC.NextValue()) / (int)(1024) / (int)1024;
             PC.Close();
-            PC.Dispose();
+            PC.Dispose();*/
             int members = 0;
             for (int i = 0; i < Discord.client.GetServersList().Count; i++)
             {
                 members += Discord.client.GetServersList()[i].Members.Count;
             }
-            e.Channel.SendMessage("running on **" + Discord.client.GetServersList().Count + " servers**\nusing **" + memsize + "MB** ram\nused by **" + members + " users**");
+            int threads = proc.Threads.Count;
+            e.Channel.SendMessage("running on **" + Discord.client.GetServersList().Count + " servers**\nused by **" + members + " users**\nusing **" + ((memsize / 1024) / 1024) + "MB** ram\nrunning on **" + threads + " threads**!");
         }
     }
 }

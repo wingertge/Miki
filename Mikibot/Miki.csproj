@@ -60,8 +60,9 @@
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DiscordSharp">
-      <HintPath>..\..\DiscordSharp\DiscordSharp\bin\Debug\DiscordSharp.dll</HintPath>
+    <Reference Include="DiscordSharp, Version=0.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DiscordSharp.0.6.2.0-rc1\lib\DiscordSharp.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="IMDBNet, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\IMDBNet.0.2.2\lib\net452\IMDBNet.dll</HintPath>
@@ -111,7 +112,10 @@
     <Compile Include="Core\Commands\ErrorCount.cs" />
     <Compile Include="Core\Commands\RequestIdea.cs" />
     <Compile Include="Core\Commands\Roll.cs" />
+    <Compile Include="Core\Commands\Roulette.cs" />
+    <Compile Include="Core\Debug\Commands\ChangeUsername.cs" />
     <Compile Include="Core\Debug\Commands\ForceSave.cs" />
+    <Compile Include="Core\Debug\Commands\Ping.cs" />
     <Compile Include="Core\Debug\Commands\UpdateAvatar.cs" />
     <Compile Include="Core\Debug\Commands\Whoami.cs" />
     <Compile Include="Core\Debug\Commands\Whoisserver.cs" />
@@ -140,7 +144,7 @@
     <Compile Include="Extensions\IMDb\IMDbNet_Discord.cs" />
     <Compile Include="Core\Debug\Log.cs" />
     <Compile Include="Extensions\POSTLinux\POST.cs" />
-    <Compile Include="Extensions\RandomCatExtension\Cat.cs" />
+    <Compile Include="Extensions\RandomCatExtension\Objects\CatImage.cs" />
     <Compile Include="Extensions\RandomCatExtension\RandomCat.cs" />
     <Compile Include="Extensions\SillyCompliments\SillyCompliments.cs" />
     <Compile Include="Program.cs" />
@@ -148,7 +152,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="libsodium.dll" />
+    <Content Include="opus.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

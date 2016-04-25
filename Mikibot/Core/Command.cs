@@ -1,5 +1,6 @@
 ﻿using Miki.Core.Debug;
 using System.Diagnostics;
+using System.Threading;
 
 namespace Miki.Core
 {
@@ -9,10 +10,12 @@ namespace Miki.Core
     {
         protected string id;
         protected bool appearInHelp;
+        protected bool devOnly;
         protected ParameterType parameterType = ParameterType.NO;
 
         protected string[] usage;
         protected string description;
+
 
         protected string expandedDescription;
 
@@ -38,68 +41,76 @@ namespace Miki.Core
         public virtual void CheckCommand(DiscordSharp.Events.DiscordMessageEventArgs e)
         {
             message = e.MessageText.Trim(new char[] { '>' });
-            if (parameterType == ParameterType.YES)
+            if(devOnly)
             {
-                if (message.ToLower().StartsWith(id + " "))
+                if(e.Author.ID != "121919449996460033")
                 {
-                    if (Debugger.IsAttached)
-                    {
-                        PlayCommand(e);
-                    }
-                    else
-                    {
-                        try
-                        {
-                            PlayCommand(e);
-                        }
-                        catch
-                        {
-                            Log.Error("command: " + id);
-                        }
-                    }
+                    return;
                 }
             }
-            else if(parameterType == ParameterType.NO)
+
+            switch(parameterType)
             {
-                if (message.ToLower() == id)
-                {
-                    if (Debugger.IsAttached)
+                case ParameterType.YES:
+                    if (message.ToLower().StartsWith(id + " "))
                     {
-                        PlayCommand(e);
-                    }
-                    else
-                    {
-                        try
+                        if (Debugger.IsAttached)
                         {
                             PlayCommand(e);
                         }
-                        catch
+                        else
                         {
-                            Log.Error("command: " + id);
+                            try
+                            {
+                                PlayCommand(e);
+                            }
+                            catch
+                            {
+                                Log.Error("command: " + id);
+                            }
                         }
                     }
-                }
-            }
-            else
-            {
-                if (message.ToLower().StartsWith(id))
-                {
-                    if (Debugger.IsAttached)
+                    break;
+                case ParameterType.NO:
+                    if (message.ToLower() == id)
                     {
-                        PlayCommand(e);
-                    }
-                    else
-                    {
-                        try
+                        if (Debugger.IsAttached)
                         {
                             PlayCommand(e);
                         }
-                        catch
+                        else
                         {
-                            Log.Error("command: " + id);
+                            try
+                            {
+                                PlayCommand(e);
+                            }
+                            catch
+                            {
+                                Log.Error("command: " + id);
+                            }
                         }
                     }
-                }
+                    break;
+                case ParameterType.BOTH:
+                    if (message.ToLower().StartsWith(id))
+                    {
+                        if (Debugger.IsAttached)
+                        {
+                            PlayCommand(e);
+                        }
+                        else
+                        {
+                            try
+                            {
+                                PlayCommand(e);
+                            }
+                            catch
+                            {
+                                Log.Error("command: " + id);
+                            }
+                        }
+                    }
+                    break;
             }
         }
 
@@ -111,7 +122,7 @@ namespace Miki.Core
         /// <param name="e">message recieved from discord</param>
         protected virtual void PlayCommand(DiscordSharp.Events.DiscordMessageEventArgs e)
         {
-
+            Log.Message("Command Triggered: " + id);
         }
 
         /// <summary>
@@ -122,9 +133,19 @@ namespace Miki.Core
         {
             if (appearInHelp)
             {
-                return "`>" + id + "`: " + description + '\n';
+                return "`>" + id + " " + GetSpace(12-id.Length) + ":` __" + description + "__\n";
             }
             return "";
+        }
+
+        public string GetSpace(int amount)
+        {
+            string output = "";
+            for(int i = 0; i < amount; i++)
+            {
+                output += " ";
+            }
+            return output;
         }
 
         public string GetAllUsageTags()
