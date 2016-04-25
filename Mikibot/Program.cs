@@ -1,4 +1,6 @@
 ﻿using Miki.Core;
+using Miki.Core.Debug;
+using System.Diagnostics;
 
 namespace Miki
 {
@@ -8,6 +10,11 @@ namespace Miki
 
         static void Main(string[] args)
         {
+            if(args.Length > 0 || Debugger.IsAttached)
+            {
+                Global.Debug = true;
+                Log.Warning("Debug mode");
+            }
             d.Start();
         }
     }

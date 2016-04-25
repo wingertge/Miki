@@ -3,9 +3,14 @@ using Miki.Accounts;
 using Miki.Core.Config;
 using Miki.Core.Debug;
 using Miki.Extensions.Cleverbot;
+using Miki.Extensions.POSTLinux;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 
 namespace Miki.Core
@@ -32,13 +37,13 @@ namespace Miki.Core
         {
             Console.WriteLine("Starting Mikibot v" + Global.VersionText);
             config.Initialize();
-            cleverbot.Initialize();
             instance = this;
             client.Connected += (sender, e) => { OnConnect(e); };
             client.SocketClosed += (sender, e) => { OnDisconnect(e); };
             client.UserAddedToServer += (sender, e) => { OnUserAdded(e); };
             client.MessageReceived += (sender, e) => { OnMessage(e); };
             client.MentionReceived += (sender, e) => { OnMentioned(e); };
+            System.Net.ServicePointManager.ServerCertificateValidationCallback += (s, ce, ca, p) => true;
             client.SendLoginRequest();
             client.Connect();
             Console.ReadLine();
@@ -54,7 +59,17 @@ namespace Miki.Core
             config.OnConnectInitialize();
             timeSinceReset = DateTime.Now;
             Thread t = new Thread(account.SaveAllAccounts, 0);
+            Thread s = new Thread(SendServerData, 0);
             t.Start();
+            s.Start();
+        }
+
+        void SendServerData()
+        {
+            POST p = new POST();
+            p.UploadString(JsonConvert.SerializeObject(new ServerData("veld882b398cd81632bb25", client.GetServersList().Count.ToString())), "https://www.carbonitex.net/discord/data/botdata.php");
+            Log.Message("Sent data to carbon");
+            Thread.Sleep(300000);
         }
 
         /// <summary>
@@ -63,6 +78,8 @@ namespace Miki.Core
         /// <param name="e">Discord data recieved about error details</param>
         public void OnDisconnect(DiscordSocketClosedEventArgs e)
         {
+            client.Dispose();
+            client = new DiscordClient("MTYwMTA1OTk0MjE3NTg2Njg5.Ce8QnQ.YoAWdFbFrCZ3-i9bkKIkDrmvFek", true, true);
             errors++;
             Log.Error(e.Code + " - " + e.Reason);
             client.SendLoginRequest();
@@ -82,7 +99,10 @@ namespace Miki.Core
         /// <param name="e"></param>
         public void OnMentioned(DiscordSharp.Events.DiscordMessageEventArgs e)
         {
-            cleverbot.GetAsked(e);
+            if (Global.Debug)
+            {
+                cleverbot.GetAsked(e);
+            }
         }
 
         /// <summary>

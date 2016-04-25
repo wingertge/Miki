@@ -108,6 +108,11 @@ namespace Miki.Accounts
             accounts.Sort((a, b) => { return b.profile.Experience.CompareTo(a.profile.Experience); });
             for (int i = 0; i < ((accounts.Count > 10) ? 10 : accounts.Count); i++)
             {
+                if(accounts[i].member.IsBot)
+                {
+                    accounts.Remove(accounts[i]);
+                    i--;
+                }
                 output[i] = accounts[i];
             }
             return output;

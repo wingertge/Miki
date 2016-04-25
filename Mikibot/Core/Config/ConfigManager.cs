@@ -29,7 +29,7 @@ namespace Miki.Core.Config
             LoadCommands();
             Log.Message("Loading Blacklist");
             LoadBlacklist();
-            if (Debugger.IsAttached)
+            if (Global.Debug)
             {
                 Discord.client = new DiscordSharp.DiscordClient("MTY5OTAwMjc4MTMxMzI2OTc2.CfE-UA.Mo8XihTgIEH50ryAcIqZzDvtCKA", true, true);
             }
@@ -37,7 +37,7 @@ namespace Miki.Core.Config
             {
                 if (File.Exists(Global.Avatar))
                 {
-                    Avatar = (Bitmap)Bitmap.FromFile(Global.Avatar);
+                    Avatar = (Bitmap)Image.FromFile(Global.Avatar);
                 }
                 else
                 {
@@ -82,6 +82,7 @@ namespace Miki.Core.Config
         {
             ChannelMessage.commands.Add(new BlacklistServer());
             ChannelMessage.commands.Add(new RandomCat());
+            ChannelMessage.commands.Add(new Changelog());
             ChannelMessage.commands.Add(new Extensions.SillyCompliments.SillyCompliments_Core());
             ChannelMessage.commands.Add(new Extensions.Danbooru.DanBooru_Discord());
             ChannelMessage.commands.Add(new ErrorCount());

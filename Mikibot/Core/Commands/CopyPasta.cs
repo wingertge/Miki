@@ -35,7 +35,7 @@ namespace Miki.Core.Commands
                 input = input.Split('/')[input.Split('/').Length -1];
                 LoadCopypasta(input);
             }
-
+            Log.Done("total pasta's loaded: " + allCP.Length);
             base.Initialize();
         }
 
@@ -57,7 +57,8 @@ namespace Miki.Core.Commands
                 for(int i = 0; i < Directory.GetFiles(CopypastaFolder).Length; i++)
                 {
                     string path = Directory.GetFiles(CopypastaFolder)[i];
-                    path = path.Split('/')[4].Split('.')[0];
+                    path = path.Split('/')[4];
+                    path.Remove(path.Length - 3);
                     output += path + " - ";
                 }
                 e.Channel.SendMessage(output + "`");
@@ -100,7 +101,6 @@ namespace Miki.Core.Commands
             StreamReader sr = new StreamReader(CopypastaFolder + tag + ".cp");
             Pasta.Add(tag, sr.ReadLine());
             sr.Close();
-            Log.Message("Loaded copypasta: " + tag);
         }
     }
 }

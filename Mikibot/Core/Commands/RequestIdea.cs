@@ -27,7 +27,7 @@ namespace Miki.Core.Commands
         {
             string idea = message.Substring(8);
             e.Channel.SendMessage("Thank you for your idea, we will check it out, " + e.Author.Username + "-senpai");
-            Discord.client.SendMessageToChannel(e.Author.Username + " has an idea: `" + idea +"`" , Discord.client.GetServersList().Find(x => "160067691783127041" == x.ID).Channels.Find(x => Global.RequestChannelID == x.ID));
+            Discord.client.SendMessageToChannel("__**" + e.Author.Username + "** from **" + e.Channel.Parent.Name + "** has an idea**__\n" + idea, Discord.client.GetServersList().Find(x => "160067691783127041" == x.ID).Channels.Find(x => Global.RequestChannelID == x.ID));
             base.PlayCommand(e);
         }
     }

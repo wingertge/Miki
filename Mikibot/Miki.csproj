@@ -106,6 +106,7 @@
     <Compile Include="Accounts\Profiles\AchievementsManager.cs" />
     <Compile Include="Accounts\Profiles\Achievements\SendOneMessage.cs" />
     <Compile Include="Core\Commands\BlacklistServer.cs" />
+    <Compile Include="Core\Commands\Changelog.cs" />
     <Compile Include="Core\Commands\CopyPasta.cs" />
     <Compile Include="Core\Commands\ErrorCount.cs" />
     <Compile Include="Core\Commands\RequestIdea.cs" />
@@ -125,11 +126,12 @@
     <Compile Include="Core\Commands\Statistics.cs" />
     <Compile Include="Core\Discord.cs" />
     <Compile Include="Core\DiscordMemberHandler.cs" />
+    <Compile Include="Core\ServerData.cs" />
     <Compile Include="Extensions\Cleverbot\Cleverbot.cs" />
-    <Compile Include="Extensions\Cleverbot\CleverbotAskCredentials.cs" />
-    <Compile Include="Extensions\Cleverbot\CleverbotCreateCredentials.cs" />
-    <Compile Include="Extensions\Cleverbot\CleverbotOnAskEvent.cs" />
-    <Compile Include="Extensions\Cleverbot\CleverbotOnCreateEvent.cs" />
+    <Compile Include="Extensions\Cleverbot\Objects\CleverbotAskCredentials.cs" />
+    <Compile Include="Extensions\Cleverbot\Objects\CleverbotCreateCredentials.cs" />
+    <Compile Include="Extensions\Cleverbot\Objects\CleverbotOnAskEvent.cs" />
+    <Compile Include="Extensions\Cleverbot\Objects\CleverbotOnCreateEvent.cs" />
     <Compile Include="Extensions\Danbooru\DanbooruPost.cs" />
     <Compile Include="Extensions\Danbooru\Danbooru_Discord.cs" />
     <Compile Include="Accounts\WordsSpoken.cs" />
@@ -137,6 +139,7 @@
     <Compile Include="Accounts\Profiles\Profile.cs" />
     <Compile Include="Extensions\IMDb\IMDbNet_Discord.cs" />
     <Compile Include="Core\Debug\Log.cs" />
+    <Compile Include="Extensions\POSTLinux\POST.cs" />
     <Compile Include="Extensions\RandomCatExtension\Cat.cs" />
     <Compile Include="Extensions\RandomCatExtension\RandomCat.cs" />
     <Compile Include="Extensions\SillyCompliments\SillyCompliments.cs" />

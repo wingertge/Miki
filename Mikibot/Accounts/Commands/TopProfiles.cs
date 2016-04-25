@@ -30,7 +30,7 @@ namespace Miki.Accounts.Commands
                 {
                     output += i + 1 + ": `" + a[i].member.Username + " (" + a[i].profile.Experience + ")`\n";
                 }
-            }
+            }   
             e.Channel.SendMessage(output);
         }
     }

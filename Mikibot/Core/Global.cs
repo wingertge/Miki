@@ -12,6 +12,8 @@ namespace Miki.Core
     /// </summary>
     public class Global
     {
+        public static bool Debug;
+
         public const string MikiFolder = @"/miki/";
 
         public static string AccountsFolder = MikiFolder + "accounts/";
@@ -23,7 +25,8 @@ namespace Miki.Core
         public static string RequestChannelID = "171793473156939777";
 
         public static string Status = ">help | " + VersionText;
-        public const string VersionNumber = "0.1.5";
-        public static string VersionText = (Debugger.IsAttached) ? VersionNumber + "_beta" : VersionNumber;
+        public const string VersionNumber = "0.1.52";
+        public static string VersionText = (Debug) ? VersionNumber + "_beta" : VersionNumber;
+
     }
 }
