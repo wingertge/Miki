@@ -1,5 +1,6 @@
 ﻿using Miki.Core.Commands;
 using Miki.Core.Debug;
+using Miki.Extensions.Hug;
 using Miki.Extensions.RandomCatExtension;
 using System.Diagnostics;
 using System.Drawing;
@@ -95,6 +96,8 @@ namespace Miki.Core.Config
             ChannelMessage.commands.Add(new Accounts.Commands.Profile());
             ChannelMessage.commands.Add(new RequestIdea());
             ChannelMessage.commands.Add(new Roll());
+            ChannelMessage.commands.Add(new Extensions.Gelbooru.GelBooru_Discord());
+            ChannelMessage.commands.Add(new Hug_Discord_Core());
             ChannelMessage.commands.Add(new ForceSave());
             ChannelMessage.commands.Add(new Statistics());
             ChannelMessage.commands.Add(new UpdateAvatar());
