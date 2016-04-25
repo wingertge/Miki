@@ -28,5 +28,6 @@ namespace Miki.Core
         public const string VersionNumber = "0.1.52";
         public static string VersionText = (Debug) ? VersionNumber + "_beta" : VersionNumber;
 
+        public static string ApiKey = "";
     }
 }
