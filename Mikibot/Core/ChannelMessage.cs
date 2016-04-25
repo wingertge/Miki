@@ -29,9 +29,12 @@ namespace Miki.Core
         {
             if (e.MessageText.StartsWith(">"))
             {
-                for (int i = 0; i < commands.Count; i++)
+                if (!e.Author.IsBot)
                 {
-                    commands[i].CheckCommand(e);
+                    for (int i = 0; i < commands.Count; i++)
+                    {
+                        commands[i].CheckCommand(e);
+                    }
                 }
             }
         }

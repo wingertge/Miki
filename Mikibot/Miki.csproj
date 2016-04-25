@@ -141,12 +141,15 @@
     <Compile Include="Accounts\WordsSpoken.cs" />
     <Compile Include="Core\Global.cs" />
     <Compile Include="Accounts\Profiles\Profile.cs" />
+    <Compile Include="Core\Commands\Hug.cs" />
     <Compile Include="Extensions\IMDb\IMDbNet_Discord.cs" />
     <Compile Include="Core\Debug\Log.cs" />
     <Compile Include="Extensions\POSTLinux\POST.cs" />
     <Compile Include="Extensions\RandomCatExtension\Objects\CatImage.cs" />
     <Compile Include="Extensions\RandomCatExtension\RandomCat.cs" />
     <Compile Include="Extensions\SillyCompliments\SillyCompliments.cs" />
+    <Compile Include="Extensions\Gelbooru\GelbooruPost.cs" />
+    <Compile Include="Extensions\Gelbooru\Gelbooru_Discord.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

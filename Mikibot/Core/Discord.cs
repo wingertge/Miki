@@ -84,7 +84,6 @@ namespace Miki.Core
         /// <param name="e">Discord data recieved about error details</param>
         public void OnDisconnect(DiscordSocketClosedEventArgs e)
         {
-            Log.Message("Disconnected");
             errors++;
             Log.Error(e.Code + " - " + e.Reason);
             Start();
@@ -112,7 +111,6 @@ namespace Miki.Core
         /// <param name="e">Message data recieved from discord</param>
         public void OnMessage(DiscordSharp.Events.DiscordMessageEventArgs e)
         {
-            Log.Message("Message");
             if (!blacklist.isBlacklisted(e.Channel.ID))
             {
                 if (account.GetAccountFromMember(e.Author) == null)

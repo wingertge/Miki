@@ -35,26 +35,53 @@ namespace Miki.Extensions.Gelbooru
 
             byte[] b;
             string[] command = e.MessageText.Split(' ');
-            string tag = command[1];
-            string nsfwTag = (command[command.Length - 1] == "-nsfw") ? " rating:explicit" : " rating:safe";
-            if (tag == "awoo")
+
+        
+            List<string> tags = new List<string>();
+            for (int i = 1; i < command.Length; i++)
             {
-                tag = "inubashiri_momiji";
+                if (command[i] == "awoo")
+                {
+                    tags.Add("inubashiri_momiji");
+                    continue;
+                }
+                if(command[i] == "miki")
+                {
+                    tags.Add("sf-a2_miki");
+                    continue;
+                }
+                if(command[i] == "-nsfw")
+                {
+                    tags.Add("rating:explicit");
+                    continue;
+                }
+                tags.Add(command[i]);
             }
-            XmlDocument myDoc = new XmlDocument();
-            myDoc.Load("http://gelbooru.com/index.php?page=dapi&s=post&q=index&limit=1&tags=" + tag + nsfwTag);
-
-            string details = myDoc["Posts"]["Post"]["file_url"].InnerText;
-
-            /*int randNumber = r.Next(0, d.Count);
-            if (d.Count > 0)
+            if(!tags.Contains("rating:explicit"))
             {
-                e.Channel.SendMessage("http://gelbooru.com" + d[randNumber].file_url);
+                tags.Add("rating:safe");
             }
-            */
 
-            e.Channel.SendMessage(details);
+            b = c.DownloadData("http://gelbooru.com/index.php?page=dapi&s=post&q=index&json=1&tags=" + getTags(tags));
+            if (b != null)
+            {
+                string result = Encoding.UTF8.GetString(b);
+                List<GelbooruPost> d = JsonConvert.DeserializeObject<List<GelbooruPost>>(result);
+                int randNumber = r.Next(0, d.Count);
+
+                e.Channel.SendMessage(d[randNumber].file_url);
+            }
             base.PlayCommand(e);
+        }
+
+        string getTags(List<string> tags)
+        {
+            string output = "";
+            for(int i = 0; i < tags.Count; i++)
+            {
+                output += tags[i] + " ";
+            }
+            return output;
         }
     }
 }

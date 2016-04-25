@@ -1,10 +1,6 @@
 ﻿using Miki.Core.Commands;
 using Miki.Core.Debug;
-<<<<<<< HEAD
 using Miki.Core.Debug.Commands;
-=======
-using Miki.Extensions.Hug;
->>>>>>> 1b8d0da6d4daebdb6c0a73b6c950f9a7c8b1e864
 using Miki.Extensions.RandomCatExtension;
 using System.Diagnostics;
 using System.Drawing;
@@ -86,7 +82,9 @@ namespace Miki.Core.Config
             ChannelMessage.commands.Add(new Extensions.Danbooru.DanBooru_Discord());
             ChannelMessage.commands.Add(new ErrorCount());
             ChannelMessage.commands.Add(new FizzbuzzCommand());
+            ChannelMessage.commands.Add(new Extensions.Gelbooru.GelBooru_Discord());
             ChannelMessage.commands.Add(new HelpCommand());
+            ChannelMessage.commands.Add(new Hug());
             ChannelMessage.commands.Add(new Extensions.IMDb.IMDbNet_Discord());
             ChannelMessage.commands.Add(new InfoCommand());
             ChannelMessage.commands.Add(new Accounts.Commands.TopProfiles());
@@ -96,12 +94,7 @@ namespace Miki.Core.Config
             ChannelMessage.commands.Add(new ChangeUsername());
             ChannelMessage.commands.Add(new RequestIdea());
             ChannelMessage.commands.Add(new Roll());
-<<<<<<< HEAD
             ChannelMessage.commands.Add(new Roulette());
-=======
-            ChannelMessage.commands.Add(new Extensions.Gelbooru.GelBooru_Discord());
-            ChannelMessage.commands.Add(new Hug_Discord_Core());
->>>>>>> 1b8d0da6d4daebdb6c0a73b6c950f9a7c8b1e864
             ChannelMessage.commands.Add(new ForceSave());
             ChannelMessage.commands.Add(new Statistics());
             ChannelMessage.commands.Add(new UpdateAvatar());
