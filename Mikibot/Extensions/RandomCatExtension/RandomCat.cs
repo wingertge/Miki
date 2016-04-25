@@ -1,12 +1,6 @@
 ﻿using Miki.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DiscordSharp.Events;
 using System.Net;
-using Miki.Core.Debug;
 using Newtonsoft.Json;
 
 namespace Miki.Extensions.RandomCatExtension
@@ -27,7 +21,7 @@ namespace Miki.Extensions.RandomCatExtension
             WebClient c = new WebClient();
             byte[] b = c.DownloadData("http://random.cat/meow");
             var str = System.Text.Encoding.Default.GetString(b);
-            Cat cat = JsonConvert.DeserializeObject<Cat>(str);
+            CatImage cat = JsonConvert.DeserializeObject<CatImage>(str);
             e.Channel.SendMessage(cat.file);
             base.PlayCommand(e);
         }
