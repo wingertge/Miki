@@ -21,7 +21,7 @@ namespace Miki.Core
     public class Discord
     {
         public static Cleverbot cleverbot = new Cleverbot();
-        public static DiscordClient client = new DiscordClient("MTYwMTA1OTk0MjE3NTg2Njg5.Ce8QnQ.YoAWdFbFrCZ3-i9bkKIkDrmvFek", true, true);
+        public static DiscordClient client;
         public static Discord instance;
         public static DateTime timeSinceReset;
         public static AccountManager account = new AccountManager();
@@ -37,6 +37,7 @@ namespace Miki.Core
         {
             Console.WriteLine("Starting Mikibot v" + Global.VersionText);
             config.Initialize();
+            client = new DiscordClient(Global.ApiKey, true, true);
             instance = this;
             client.Connected += (sender, e) => { OnConnect(e); };
             client.SocketClosed += (sender, e) => { OnDisconnect(e); };

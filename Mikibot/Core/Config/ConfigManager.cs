@@ -31,7 +31,7 @@ namespace Miki.Core.Config
             LoadBlacklist();
             if (Global.Debug)
             {
-                Discord.client = new DiscordSharp.DiscordClient("MTY5OTAwMjc4MTMxMzI2OTc2.CfE-UA.Mo8XihTgIEH50ryAcIqZzDvtCKA", true, true);
+                Discord.client = new DiscordSharp.DiscordClient("", true, true);
             }
             if (Directory.Exists(Global.AvatarsFolder))
             {
@@ -158,6 +158,7 @@ namespace Miki.Core.Config
             StreamWriter s = new StreamWriter(Global.ConfigFile);
             s.WriteLine("Accounts=" + Global.AccountsFolder);
             s.WriteLine("Avatar=" + Global.AvatarImage);
+            s.WriteLine("Key=" + Global.ApiKey);
             s.WriteLine("Status=" + Discord.client.GetCurrentGame);
             if(info.Username != "")
             {
@@ -178,6 +179,7 @@ namespace Miki.Core.Config
             StreamReader r = new StreamReader(Global.ConfigFile);
             Global.AccountsFolder = r.ReadLine().Split('=')[1];
             Global.AvatarImage = r.ReadLine().Split('=')[1];
+            Global.ApiKey = r.ReadLine().Split('=')[1];
             Global.Status = r.ReadLine().Split('=')[1];
             info.Username = r.ReadLine().Split('=')[1];
             r.Close();
