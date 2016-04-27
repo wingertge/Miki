@@ -15,33 +15,31 @@ namespace Miki.Accounts
 
         public void AddAccount(Account a)
         {
-            if (!isLoggedIn(a.member))
+            if (isLoggedIn(a.memberID) == -1)
             {
-                Console.WriteLine("Added member " + a.member.Username);
                 accounts.Add(a);
             }
         }
-        public void AddAccount(DiscordMember a)
+        public void AddAccount(DiscordMember a, DiscordChannel channel)
         {
-            if (!isLoggedIn(a))
+            if (isLoggedIn(a.ID) == -1)
             {
-                CreateAccountFromMember(a);
+                CreateAccountFromMember(a, channel);
             }
         }
         public void RemoveAccount(Account a)
         {
-            if (isLoggedIn(a.member))
+            if (isLoggedIn(a.memberID) != -1)
             {
-                Console.WriteLine("Removed member " + a.member.Username);
                 accounts.Remove(a);
             }
         }
         public void RemoveAccount(DiscordMember a)
         {
-            if (isLoggedIn(a))
+            if (isLoggedIn(a.ID) != -1)
             {
                 Console.WriteLine("Removed member " + a.Username);
-                accounts.Remove(GetAccountFromMember(a));
+                accounts.Remove(GetAccountFromMember(a.ID));
             }
         }
 
@@ -70,11 +68,11 @@ namespace Miki.Accounts
             }
         }
 
-        public Account GetAccountFromMember(DiscordMember member)
+        public Account GetAccountFromMember(string ID)
         {
             for(int i = 0; i < accounts.Count; i++)
             {
-                if(member == accounts[i].member)
+                if(ID == accounts[i].memberID)
                 {
                     return accounts[i];
                 }
@@ -82,24 +80,20 @@ namespace Miki.Accounts
             return null;
         }
 
-        public Account CreateAccountFromMember(DiscordMember member)
+        public Account CreateAccountFromMember(DiscordMember member, DiscordChannel channel)
         {
             Account a = new Account();
-            a.Login(member);
+            a.Login(member, channel);
             return a;
         }
 
         public Account GetAccountFromID(string ID)
         {
-            for (int i = 0; i < accounts.Count; i++)
+            if(isLoggedIn(ID) != -1)
             {
-                if (ID == accounts[i].member.ID)
-                {
-                    return accounts[i];
-                }
+                return accounts[isLoggedIn(ID)];
             }
             return null;
-
         }
 
         public Account[] GetAccountLeaderboards()
@@ -108,7 +102,7 @@ namespace Miki.Accounts
             accounts.Sort((a, b) => { return b.profile.Experience.CompareTo(a.profile.Experience); });
             for (int i = 0; i < ((accounts.Count > 10) ? 10 : accounts.Count); i++)
             {
-                if(accounts[i].member.IsBot)
+                if(accounts[i].GetMember(accounts[i].memberID).IsBot)
                 {
                     accounts.Remove(accounts[i]);
                     i--;
@@ -118,29 +112,29 @@ namespace Miki.Accounts
             return output;
         }
 
-        public string GetProfile(DiscordMember member)
+        public string GetProfile(string ID)
         {
-            Account a = GetAccountFromMember(member);
+            Account a = GetAccountFromMember(ID);
             if (a != null)
             {
                 string output = "";
-                output += "**" + member.Username + "**\n";
+                output += "**" + a.GetMember(a.memberID).Username + "**\n";
                 output += "**Level**: " + a.profile.Level + " (exp " + a.profile.Experience + "/" + a.profile.MaxExperience + ")\n";
                 return output;
             }
             return "";
         }
 
-        public bool isLoggedIn(DiscordMember a)
+        public int isLoggedIn(string ID)
         {
             for(int i = 0; i < accounts.Count; i++)
             {
-                if(accounts[i].member.ID == a.ID)
+                if(accounts[i].memberID == ID)
                 {
-                    return true;
+                    return i;
                 }
             }
-            return false;   
+            return -1;   
         }
 
     }

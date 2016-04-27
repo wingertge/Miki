@@ -110,6 +110,8 @@
     <Compile Include="Core\Commands\Changelog.cs" />
     <Compile Include="Core\Commands\CopyPasta.cs" />
     <Compile Include="Core\Commands\ErrorCount.cs" />
+    <Compile Include="Core\Commands\Pat.cs" />
+    <Compile Include="Core\Commands\Poke.cs" />
     <Compile Include="Core\Commands\RequestIdea.cs" />
     <Compile Include="Core\Commands\Roll.cs" />
     <Compile Include="Core\Commands\Roulette.cs" />

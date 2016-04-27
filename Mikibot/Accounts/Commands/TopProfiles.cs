@@ -23,12 +23,12 @@ namespace Miki.Accounts.Commands
             base.PlayCommand(e);
             string output = "";
             Account[] a = Discord.account.GetAccountLeaderboards();
-            output += ":crown:: `" + a[0].member.Username + "`\n";
+            output += ":crown:: `" + a[0].GetMember(a[0].memberID).Username + "`\n";
             for(int i = 1; i < a.Length; i++)
             {
                 if (a[i] != null)
                 {
-                    output += i + 1 + ": `" + a[i].member.Username + " (" + a[i].profile.Experience + ")`\n";
+                    output += i + 1 + ": `" + a[i].GetMember(a[i].memberID).Username + " (" + a[i].profile.Experience + ")`\n";
                 }
             }   
             e.Channel.SendMessage(output);

@@ -24,12 +24,12 @@ namespace Miki.Accounts.Commands
             {
                 DiscordMemberHandler m = new DiscordMemberHandler();
                 DiscordMember member = m.GetMemberFromLink(e.Channel, message);
-                    Discord.account.AddAccount(member);
-                e.Channel.SendMessage(Discord.account.GetProfile(member));
+                Discord.account.AddAccount(member, e.Channel);
+                e.Channel.SendMessage(Discord.account.GetProfile(member.ID));
             }
-            else if (Discord.account.GetProfile(e.Author) != "")
+            else if (Discord.account.GetProfile(e.Author.ID) != "")
             {
-                e.Channel.SendMessage(Discord.account.GetProfile(e.Author));
+                e.Channel.SendMessage(Discord.account.GetProfile(e.Author.ID));
             }
         }
     }

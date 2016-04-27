@@ -89,7 +89,9 @@ namespace Miki.Core.Config
             ChannelMessage.commands.Add(new InfoCommand());
             ChannelMessage.commands.Add(new Accounts.Commands.TopProfiles());
             ChannelMessage.commands.Add(new Copypasta());
+            ChannelMessage.commands.Add(new Pat());
             ChannelMessage.commands.Add(new Ping());
+            ChannelMessage.commands.Add(new Poke());
             ChannelMessage.commands.Add(new Accounts.Commands.Profile());
             ChannelMessage.commands.Add(new ChangeUsername());
             ChannelMessage.commands.Add(new RequestIdea());

@@ -29,7 +29,7 @@ namespace Miki.Accounts
             if (!hasAchieved)
             {
                 hasAchieved = true;
-                account.profile.lastActiveChannel.SendMessage(":confetti_ball:  " + account.member.Username + " gained the achievement: " + name + " :confetti_ball:");
+                account.GetChannel().SendMessage(":confetti_ball:  " + account.GetMember(account.memberID).Username + " gained the achievement: " + name + " :confetti_ball:");
             }
         }
     }

@@ -16,32 +16,34 @@ namespace Miki.Accounts
         public bool isDeveloper = false;
 
         public DateTime timeOfCreation;
-        public DiscordMember member;
+        public string memberID;
         public Profile profile;
         public AchievementsManager achievements;
         public WordsSpoken wordsSpoken;
+        public string lastActiveChannel;
 
         DateTime lastExpTime;
 
         void Initialize()
         {
             profile = new Profile();
-            profile.Initialize(member.Username);
+            profile.Initialize(GetMember(memberID).Username, this);
             wordsSpoken = new WordsSpoken();
             wordsSpoken.Initialize();
         }
-        public void Create(DiscordMember member)
+        public void Create(DiscordMember member, DiscordChannel channel)
         {
-            Log.Message("Creating account: " + member.ID);
-            this.member = member;
+            this.memberID = member.ID;
+            lastActiveChannel = channel.ID;
             Initialize();
             timeOfCreation = DateTime.Now;
             SaveProfile();
             Discord.account.AddAccount(this);
         }
-        public void Login(DiscordMember member)
+        public void Login(DiscordMember member, DiscordChannel channel)
         {
-            this.member = member;
+            memberID = member.ID;
+            lastActiveChannel = channel.ID;
             Initialize();
             LoadProfile();
             Discord.account.AddAccount(this);
@@ -55,7 +57,18 @@ namespace Miki.Accounts
         {
             return profile.Level;
         }
-
+        public DiscordMember GetMember()
+        {
+            return Discord.client.GetMemberFromChannel(GetChannel(), memberID);
+        }
+        public DiscordMember GetMember(string ID)
+        {
+            return Discord.client.GetMemberFromChannel(GetChannel(), ID);
+        }
+        public DiscordChannel GetChannel()
+        {
+            return Discord.client.GetChannelByID(long.Parse(lastActiveChannel));
+        }
         bool canGetXP()
         {
             return (lastExpTime.AddSeconds(15) <= DateTime.Now);
@@ -69,33 +82,37 @@ namespace Miki.Accounts
                 lastExpTime = DateTime.Now;
             }
             wordsSpoken.MessagesSent++;
-            profile.SetChannel(c);
+            SetChannel(c);
+        }
+
+        public void SetChannel(DiscordChannel c)
+        {
+            lastActiveChannel = c.ID;
         }
 
         public void SaveProfile()
         {
-            if(!Directory.Exists(Global.AccountsFolder + member.ID))
+            if(!Directory.Exists(Global.AccountsFolder + memberID))
             {
-                Directory.CreateDirectory(Global.AccountsFolder + member.ID);
+                Directory.CreateDirectory(Global.AccountsFolder + memberID);
             }
-            StreamWriter sw = new StreamWriter(Global.AccountsFolder + member.ID + "/" + member.ID + ".sav");
+            StreamWriter sw = new StreamWriter(Global.AccountsFolder + memberID + "/" + memberID + ".sav");
             sw.WriteLine(timeOfCreation.ToString());
             sw.WriteLine(isDeveloper.ToString());
             sw.Close();
-            profile.SaveProfile(member.ID);
+            profile.SaveProfile(memberID);
         }
         public void LoadProfile()
         {
-            if (!Directory.Exists(Global.AccountsFolder + member.ID))
+            if (!Directory.Exists(Global.AccountsFolder + memberID))
             {
-                Create(member);
+                Create(GetMember(memberID), GetChannel());
                 return;
             }
-            StreamReader sr = new StreamReader(Global.AccountsFolder + member.ID + "/" + member.ID + ".sav");
+            StreamReader sr = new StreamReader(Global.AccountsFolder + memberID + "/" + memberID + ".sav");
             timeOfCreation = DateTime.Parse(sr.ReadLine());
-            //isDeveloper = bool.Parse(sr.ReadLine());
             sr.Close();
-            profile.LoadProfile(member.ID);
+            profile.LoadProfile(memberID);
         }
     }
 }

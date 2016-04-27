@@ -23,7 +23,7 @@ namespace Miki.Core
         public static string RequestChannelID = "171793473156939777";
 
         public static string Status = ">help | " + VersionNumber;
-        public const string VersionNumber = "0.1.53";
+        public const string VersionNumber = "0.1.531";
 
         public static string Username = "Miki";
         public static string ApiKey = "";

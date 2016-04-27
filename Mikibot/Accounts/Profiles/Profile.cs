@@ -16,9 +16,9 @@ namespace Miki.Accounts.Profiles
         public int Level;
         public int Wins;
 
-        public DiscordChannel lastActiveChannel;
+        Account parent;
 
-        public void Initialize(string name)
+        public void Initialize(string name, Account parent)
         {
             this.name = name;
             Level = 1;
@@ -26,12 +26,10 @@ namespace Miki.Accounts.Profiles
             MaxExperience = 60;
             Health = 20;
             Wins = 0;
+
+            this.parent = parent;
         }
 
-        public void SetChannel(DiscordChannel c)
-        {
-            lastActiveChannel = c;
-        }
         public void AddExp(int exp)
         {
             Experience += exp;
@@ -40,7 +38,7 @@ namespace Miki.Accounts.Profiles
                 Level++;
                 MaxExperience = (int)Math.Round(MaxExperience * 2.5);
                 Console.WriteLine(name + " has levelled up! (" + (Level - 1) + " -> " + Level + ")");
-                lastActiveChannel.SendMessage(name + " has levelled up! (" + (Level - 1) + " -> " + Level + ")\n");
+                parent.GetChannel().SendMessage(name + " has levelled up! (" + (Level - 1) + " -> " + Level + ")\n");
             }
         }
 

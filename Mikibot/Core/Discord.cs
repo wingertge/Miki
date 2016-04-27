@@ -37,6 +37,7 @@ namespace Miki.Core
         {
             Console.WriteLine("Starting Mikibot v" + Global.VersionNumber);
             config.Initialize();
+            instance = this;
             Start();
         }
 
@@ -45,8 +46,8 @@ namespace Miki.Core
         /// </summary>
         public void Start()
         {
+            Log.Message("Loading Discord Client");
             client = new DiscordClient(Global.ApiKey, true, true);
-            instance = this;
             client.Connected += (sender, e) => { OnConnect(e); };
             client.SocketClosed += (sender, e) => { OnDisconnect(e); };
             client.UserAddedToServer += (sender, e) => { OnUserAdded(e); };
@@ -54,7 +55,11 @@ namespace Miki.Core
             client.MentionReceived += (sender, e) => { OnMentioned(e); };
             client.SendLoginRequest();
             client.Connect();
-            Console.ReadLine();
+            string input = "";
+            while (input != "quit")
+            {
+               input = Console.ReadLine();
+            }
         }
 
         /// <summary>
@@ -102,7 +107,7 @@ namespace Miki.Core
         /// <param name="e"></param>
         public void OnMentioned(DiscordSharp.Events.DiscordMessageEventArgs e)
         {
-         //       cleverbot.GetAsked(e);
+//                cleverbot.GetAsked(e);
         }
 
         /// <summary>
@@ -113,10 +118,10 @@ namespace Miki.Core
         {
             if (!blacklist.isBlacklisted(e.Channel.ID))
             {
-                if (account.GetAccountFromMember(e.Author) == null)
+                if (account.GetAccountFromMember(e.Author.ID) == null)
                 {
                     Account a = new Account();
-                    a.Login(e.Author);
+                    a.Login(e.Author, e.Channel);
                     account.AddAccount(a);
                 }
                 account.GetAccountFromID(e.Author.ID).OnMessageRecieved(e.Channel);
