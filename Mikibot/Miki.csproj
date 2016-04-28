@@ -101,11 +101,12 @@
     <Compile Include="Accounts\Account.cs" />
     <Compile Include="Accounts\AccountManager.cs" />
     <Compile Include="Accounts\Commands\TopProfiles.cs" />
-    <Compile Include="Accounts\Profiles\Achievements\Achievement.cs" />
-    <Compile Include="Accounts\Profiles\Achievements\Level5.cs" />
+    <Compile Include="Accounts\Achievements\Achievement.cs" />
+    <Compile Include="Accounts\Achievements\Informed.cs" />
+    <Compile Include="Accounts\Achievements\Level5.cs" />
     <Compile Include="Accounts\Commands\Profile.cs" />
-    <Compile Include="Accounts\Profiles\AchievementsManager.cs" />
-    <Compile Include="Accounts\Profiles\Achievements\SendOneMessage.cs" />
+    <Compile Include="Accounts\AchievementsManager.cs" />
+    <Compile Include="Accounts\Achievements\SendOneMessage.cs" />
     <Compile Include="Core\Commands\BlacklistServer.cs" />
     <Compile Include="Core\Commands\Changelog.cs" />
     <Compile Include="Core\Commands\CopyPasta.cs" />

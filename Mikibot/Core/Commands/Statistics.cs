@@ -34,18 +34,7 @@ namespace Miki.Core.Commands
 
         string FormatToStats(string text, string variable)
         {
-            return "`" + text + getSpace(text) + "` **" + variable + "**\n";
-        }
-
-        string getSpace(string text)
-        {
-            string output="";
-            for(int i =0; i < 8 - text.Length; i++)
-            {
-                output += " ";
-            }
-            output += ":";
-            return output;
+            return "`" + text + GetSpace(9 - text.Length) + "` **" + variable + "**\n";
         }
     }
 }

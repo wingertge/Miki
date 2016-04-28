@@ -118,7 +118,7 @@ namespace Miki.Core
         {
             if (!blacklist.isBlacklisted(e.Channel.ID))
             {
-                if (account.GetAccountFromMember(e.Author.ID) == null)
+                if (account.GetAccountFromID(e.Author.ID) == null)
                 {
                     Account a = new Account();
                     a.Login(e.Author, e.Channel);

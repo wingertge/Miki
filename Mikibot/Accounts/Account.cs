@@ -29,6 +29,8 @@ namespace Miki.Accounts
             profile = new Profile();
             profile.Initialize(GetMember(memberID).Username, this);
             wordsSpoken = new WordsSpoken();
+            achievements = new AchievementsManager();
+            achievements.Initialize(this);
             wordsSpoken.Initialize();
         }
         public void Create(DiscordMember member, DiscordChannel channel)
@@ -46,6 +48,7 @@ namespace Miki.Accounts
             lastActiveChannel = channel.ID;
             Initialize();
             LoadProfile();
+
             Discord.account.AddAccount(this);
         }
 
@@ -101,6 +104,7 @@ namespace Miki.Accounts
             sw.WriteLine(isDeveloper.ToString());
             sw.Close();
             profile.SaveProfile(memberID);
+            achievements.SaveProfile(memberID);
         }
         public void LoadProfile()
         {
@@ -113,6 +117,7 @@ namespace Miki.Accounts
             timeOfCreation = DateTime.Parse(sr.ReadLine());
             sr.Close();
             profile.LoadProfile(memberID);
+            achievements.LoadProfile(memberID);
         }
     }
 }
