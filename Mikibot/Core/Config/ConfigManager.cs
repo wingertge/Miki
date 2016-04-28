@@ -87,6 +87,7 @@ namespace Miki.Core.Config
             ChannelMessage.commands.Add(new Extensions.Gelbooru.GelBooru_Discord());
             ChannelMessage.commands.Add(new HelpCommand());
             ChannelMessage.commands.Add(new Hug());
+            ChannelMessage.commands.Add(new Smug());
             ChannelMessage.commands.Add(new Extensions.IMDb.IMDbNet_Discord());
             ChannelMessage.commands.Add(new InfoCommand());
             ChannelMessage.commands.Add(new Accounts.Commands.TopProfiles());
