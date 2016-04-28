@@ -37,6 +37,7 @@ namespace Miki.Core
                     }
                 }
             }
+            Discord.account.GetAccountFromID(e.Author.ID).achievements.CheckAllAchievements();
         }
     }
 }

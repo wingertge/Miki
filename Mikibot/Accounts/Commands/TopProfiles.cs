@@ -22,7 +22,7 @@ namespace Miki.Accounts.Commands
         {
             base.PlayCommand(e);
             string output = "";
-            Account[] a = Discord.account.GetAccountLeaderboards();
+            Account[] a = Discord.account.GetAccountLeaderboards(false);
             output += ":crown:: `" + a[0].GetMember(a[0].memberID).Username + "`\n";
             for(int i = 1; i < a.Length; i++)
             {
