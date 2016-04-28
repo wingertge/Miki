@@ -80,6 +80,7 @@ namespace Miki.Core.Config
             ChannelMessage.commands.Add(new Changelog());
             ChannelMessage.commands.Add(new Extensions.SillyCompliments.SillyCompliments_Core());
             ChannelMessage.commands.Add(new Extensions.Danbooru.DanBooru_Discord());
+            ChannelMessage.commands.Add(new Extensions.Safebooru.SafeBooru_Discord());
             ChannelMessage.commands.Add(new ErrorCount());
             ChannelMessage.commands.Add(new FizzbuzzCommand());
             ChannelMessage.commands.Add(new Extensions.Gelbooru.GelBooru_Discord());
