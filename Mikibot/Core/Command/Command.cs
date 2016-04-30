@@ -1,8 +1,7 @@
 ﻿using Miki.Core.Debug;
 using System.Diagnostics;
-using System.Threading;
 
-namespace Miki.Core
+namespace Miki.Core.Command
 {
     public enum ParameterType { YES, NO, BOTH };
 
@@ -16,40 +15,60 @@ namespace Miki.Core
         protected string[] usage;
         protected string description;
 
-
         protected string expandedDescription;
 
         protected string message;
+
+        public Command()
+        {
+        }
+
+        public Command(string id, bool appearInHelp, ParameterType parameterType)
+        {
+            this.id = id;
+            this.appearInHelp = appearInHelp;
+            this.parameterType = parameterType;
+        }
+
+        public Command(string id, bool appearInHelp, bool devOnly, ParameterType parameterType)
+        {
+            this.id = id;
+            this.appearInHelp = appearInHelp;
+            this.devOnly = devOnly;
+            this.parameterType = parameterType;
+        }
 
         /// <summary>
         /// We add our variables here.
         /// (REQUIRED) id (the command that will be ran)
         /// (REQUIRED) appearInHelp
         /// (REQUIRED) description
-        /// (Optional) hasParameters
         /// (Optional) usage
+        /// (Optional) expandedDescription
+        /// (Optional) devOnly
         /// </summary>
-        public virtual void Initialize() {
+        public virtual void Initialize()
+        {
         }
 
         /// <summary>
         /// This function checks if the command has been triggered by the Message Event.
-        /// 
+        ///
         /// You shouldn't have to call this.
         /// </summary>
         /// <param name="e">message recieved from discord</param>
         public virtual void CheckCommand(DiscordSharp.Events.DiscordMessageEventArgs e)
         {
             message = e.MessageText.Trim(new char[] { '>' });
-            if(devOnly)
+            if (devOnly)
             {
-                if(e.Author.ID != "121919449996460033")
+                if (e.Author.ID != "121919449996460033")
                 {
                     return;
                 }
             }
 
-            switch(parameterType)
+            switch (parameterType)
             {
                 case ParameterType.YES:
                     if (message.ToLower().StartsWith(id + " "))
@@ -71,6 +90,7 @@ namespace Miki.Core
                         }
                     }
                     break;
+
                 case ParameterType.NO:
                     if (message.ToLower() == id)
                     {
@@ -91,6 +111,7 @@ namespace Miki.Core
                         }
                     }
                     break;
+
                 case ParameterType.BOTH:
                     if (message.ToLower().StartsWith(id))
                     {
@@ -116,7 +137,7 @@ namespace Miki.Core
 
         /// <summary>
         /// This function will be called whenever the player triggered the command based on it's id.
-        /// 
+        ///
         /// Call your command functionality here.
         /// </summary>
         /// <param name="e">message recieved from discord</param>
@@ -133,7 +154,7 @@ namespace Miki.Core
         {
             if (appearInHelp)
             {
-                return "`>" + id + " " + GetSpace(12-id.Length) + ":` __" + description + "__\n";
+                return "`>" + id + " " + GetSpace(12 - id.Length) + ":` __" + description + "__\n";
             }
             return "";
         }
@@ -141,7 +162,7 @@ namespace Miki.Core
         public string GetSpace(int amount)
         {
             string output = "";
-            for(int i = 0; i < amount; i++)
+            for (int i = 0; i < amount; i++)
             {
                 output += " ";
             }
@@ -151,7 +172,7 @@ namespace Miki.Core
         public string GetAllUsageTags()
         {
             string output = usage[0];
-            for(int i = 1; i < usage.Length; i++)
+            for (int i = 1; i < usage.Length; i++)
             {
                 output += "," + usage[i];
             }

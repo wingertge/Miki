@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DiscordSharp.Events;
+﻿using DiscordSharp.Events;
 
-namespace Miki.Core.Commands
+namespace Miki.Core.Command.Debug
 {
-    class Whoami : Command
+    internal class Whoami : Command
     {
         public override void Initialize()
         {

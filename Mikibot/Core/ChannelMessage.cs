@@ -1,21 +1,11 @@
 ﻿using DiscordSharp.Events;
-using Miki.Core.Debug;
-using Miki.Extensions.IMDb;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-
+using Miki.Core.Command;
 
 namespace Miki.Core
 {
     public class ChannelMessage
     {
-        DiscordMessageEventArgs e;
-        public static List<Command> commands = new List<Command>();
+        private DiscordMessageEventArgs e;
 
         public ChannelMessage(DiscordMessageEventArgs e)
         {
@@ -29,15 +19,15 @@ namespace Miki.Core
         {
             if (e.MessageText.StartsWith(">"))
             {
-                if (!e.Author.IsBot)
+                if (!e.Author.IsBot && e.Author.ID != "174668640065421313")
                 {
-                    for (int i = 0; i < commands.Count; i++)
+                    for (int i = 0; i < CommandManager.commands.Count; i++)
                     {
-                        commands[i].CheckCommand(e);
+                        CommandManager.commands[i].CheckCommand(e);
                     }
                 }
+                Discord.account.GetAccountFromID(e.Author.ID).achievements.CheckAllAchievements();
             }
-            Discord.account.GetAccountFromID(e.Author.ID).achievements.CheckAllAchievements();
         }
     }
 }

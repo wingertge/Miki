@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DiscordSharp.Objects;
-using System.IO;
+﻿using DiscordSharp.Objects;
 using Miki.Accounts.Profiles;
 using Miki.Core;
-using Miki.Core.Debug;
+using System;
+using System.IO;
 
 namespace Miki.Accounts
 {
@@ -22,9 +17,9 @@ namespace Miki.Accounts
         public WordsSpoken wordsSpoken;
         public string lastActiveChannel;
 
-        DateTime lastExpTime;
+        private DateTime lastExpTime;
 
-        void Initialize()
+        private void Initialize()
         {
             profile = new Profile();
             profile.Initialize(GetMember(memberID).Username, this);
@@ -33,6 +28,7 @@ namespace Miki.Accounts
             achievements.Initialize(this);
             wordsSpoken.Initialize();
         }
+
         public void Create(DiscordMember member, DiscordChannel channel)
         {
             this.memberID = member.ID;
@@ -42,6 +38,7 @@ namespace Miki.Accounts
             SaveProfile();
             Discord.account.AddAccount(this);
         }
+
         public void Login(DiscordMember member, DiscordChannel channel)
         {
             memberID = member.ID;
@@ -56,23 +53,28 @@ namespace Miki.Accounts
         {
             profile.AddExp(exp);
         }
+
         public int GetLevel()
         {
             return profile.Level;
         }
+
         public DiscordMember GetMember()
         {
             return Discord.client.GetMemberFromChannel(GetChannel(), memberID);
         }
+
         public DiscordMember GetMember(string ID)
         {
             return Discord.client.GetMemberFromChannel(GetChannel(), ID);
         }
+
         public DiscordChannel GetChannel()
         {
             return Discord.client.GetChannelByID(long.Parse(lastActiveChannel));
         }
-        bool canGetXP()
+
+        private bool canGetXP()
         {
             return (lastExpTime.AddSeconds(15) <= DateTime.Now);
         }
@@ -95,7 +97,7 @@ namespace Miki.Accounts
 
         public void SaveProfile()
         {
-            if(!Directory.Exists(Global.AccountsFolder + memberID))
+            if (!Directory.Exists(Global.AccountsFolder + memberID))
             {
                 Directory.CreateDirectory(Global.AccountsFolder + memberID);
             }
@@ -106,6 +108,7 @@ namespace Miki.Accounts
             profile.SaveProfile(memberID);
             achievements.SaveProfile(memberID);
         }
+
         public void LoadProfile()
         {
             if (!Directory.Exists(Global.AccountsFolder + memberID))

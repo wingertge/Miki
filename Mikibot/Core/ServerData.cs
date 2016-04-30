@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Miki.Core
+﻿namespace Miki.Core
 {
-    class ServerData
+    internal class ServerData
     {
         public ServerData(string k, string c)
         {

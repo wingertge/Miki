@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DiscordSharp.Events;
+﻿using DiscordSharp.Events;
 
-namespace Miki.Core.Debug.Commands
+namespace Miki.Core.Command.Debug
 {
-    class ChangeUsername:Command
+    internal class ChangeUsername : Command
     {
         public override void Initialize()
         {
@@ -24,7 +19,7 @@ namespace Miki.Core.Debug.Commands
 
         protected override void PlayCommand(DiscordMessageEventArgs e)
         {
-            Discord.client.ChangeClientInformation(new DiscordSharp.Objects.DiscordUserInformation() { Username = e.MessageText.Split(' ')[1], Avatar=Discord.client.ClientPrivateInformation.Avatar});
+            Discord.client.ChangeClientInformation(new DiscordSharp.Objects.DiscordUserInformation() { Username = e.MessageText.Split(' ')[1], Avatar = Discord.client.ClientPrivateInformation.Avatar });
             base.PlayCommand(e);
         }
     }

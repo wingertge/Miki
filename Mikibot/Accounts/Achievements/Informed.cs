@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Miki.Accounts.Achievements
+﻿namespace Miki.Accounts.Achievements
 {
-    class Informed:Achievement
+    internal class Informed : Achievement
     {
         public override void Initialize(Account a)
         {

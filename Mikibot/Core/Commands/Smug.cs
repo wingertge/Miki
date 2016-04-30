@@ -1,14 +1,13 @@
 ﻿using DiscordSharp.Events;
-using Miki.Core;
 using System;
 
-namespace Miki.Core.Commands
+namespace Miki.Core.Command.Objects
 {
-    class Smug :Command
+    internal class Smug : Command
     {
-        Random r = new Random();
+        private Random r = new Random();
 
-        String[] smug = new String[]
+        private String[] smug = new String[]
         {
             "http://i.imgur.com/zUwqrhM.png",
             "http://i.imgur.com/TYqPh89.jpg",
@@ -56,6 +55,5 @@ namespace Miki.Core.Commands
             base.PlayCommand(e);
             e.Channel.SendMessage(smug[r.Next(0, smug.Length)]);
         }
-
     }
 }

@@ -1,17 +1,17 @@
 ﻿using DiscordSharp.Events;
-using Newtonsoft.Json;
 using Miki.Extensions.POSTLinux;
+using Newtonsoft.Json;
 
 namespace Miki.Extensions.Cleverbot
 {
     public class Cleverbot
     {
-        POST p = new POST();
+        private POST p = new POST();
 
-        string nick = "";
+        private string nick = "";
 
-        string user = "CAPLr2gXFrzj1IwC";
-        string key = "d9PEW2RqmumO2wH68Vn7gZM1PJ3vDKjx";
+        private string user = "CAPLr2gXFrzj1IwC";
+        private string key = "d9PEW2RqmumO2wH68Vn7gZM1PJ3vDKjx";
 
         public void GetAsked(DiscordMessageEventArgs e)
         {

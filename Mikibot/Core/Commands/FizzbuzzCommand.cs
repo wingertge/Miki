@@ -1,6 +1,6 @@
 ﻿using DiscordSharp.Events;
 
-namespace Miki.Core.Commands
+namespace Miki.Core.Command.Objects
 {
     public class FizzbuzzCommand : Command
     {

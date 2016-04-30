@@ -1,8 +1,6 @@
-﻿using Miki.Core.Commands;
+﻿using Miki.Core.Command;
 using Miki.Core.Debug;
-using Miki.Core.Debug.Commands;
 using Miki.Extensions.RandomCatExtension;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 
@@ -24,8 +22,6 @@ namespace Miki.Core.Config
             }
             Log.Message("Loading Config files");
             LoadConfig();
-            Log.Message("Loading Commands");
-            LoadCommands();
             Log.Message("Loading Blacklist");
             LoadBlacklist();
             if (Directory.Exists(Global.AvatarsFolder))
@@ -48,7 +44,7 @@ namespace Miki.Core.Config
         }
 
         /// <summary>
-        /// Loads data AFTER the bot has been connected to discord. 
+        /// Loads data AFTER the bot has been connected to discord.
         /// </summary>
         public void OnConnectInitialize()
         {
@@ -71,56 +67,12 @@ namespace Miki.Core.Config
         }
 
         /// <summary>
-        /// Loads all the command in the RAM
-        /// </summary>
-        void LoadCommands()
-        {
-            ChannelMessage.commands.Add(new BlacklistServer());
-            ChannelMessage.commands.Add(new RandomCat());
-            ChannelMessage.commands.Add(new Changelog());
-            ChannelMessage.commands.Add(new Extensions.SillyCompliments.SillyCompliments_Core());
-            ChannelMessage.commands.Add(new Extensions.Danbooru.DanBooru_Discord());
-            ChannelMessage.commands.Add(new Extensions.Safebooru.SafeBooru_Discord());
-            ChannelMessage.commands.Add(new Extensions.Cage.Cage_Discord());
-            ChannelMessage.commands.Add(new ErrorCount());
-            ChannelMessage.commands.Add(new FizzbuzzCommand());
-            ChannelMessage.commands.Add(new Extensions.Gelbooru.GelBooru_Discord());
-            ChannelMessage.commands.Add(new HelpCommand());
-            ChannelMessage.commands.Add(new Hug());
-            ChannelMessage.commands.Add(new Smug());
-            ChannelMessage.commands.Add(new Extensions.IMDb.IMDbNet_Discord());
-            ChannelMessage.commands.Add(new InfoCommand());
-            ChannelMessage.commands.Add(new Accounts.Commands.TopProfiles());
-            ChannelMessage.commands.Add(new Copypasta());
-            ChannelMessage.commands.Add(new Pat());
-            ChannelMessage.commands.Add(new Ping());
-            ChannelMessage.commands.Add(new Poke());
-            ChannelMessage.commands.Add(new Accounts.Commands.Profile());
-            ChannelMessage.commands.Add(new ChangeUsername());
-            ChannelMessage.commands.Add(new RequestIdea());
-            ChannelMessage.commands.Add(new Roll());
-            ChannelMessage.commands.Add(new Roulette());
-            ChannelMessage.commands.Add(new ForceSave());
-            ChannelMessage.commands.Add(new Statistics());
-            ChannelMessage.commands.Add(new UpdateAvatar());
-            ChannelMessage.commands.Add(new Uptime());
-            ChannelMessage.commands.Add(new Whoami());
-            ChannelMessage.commands.Add(new Whoisserver());
-
-            for(int i = 0; i < ChannelMessage.commands.Count; i++)
-            {
-                ChannelMessage.commands[i].Initialize();
-            }
-            Log.Done("Loaded " + ChannelMessage.commands.Count + " commands!");
-        }
-
-        /// <summary>
         /// Saves the blacklist to a file.
         /// </summary>
         public void SaveBlacklist()
         {
             StreamWriter s = new StreamWriter(Global.MikiFolder + "blacklist.blk");
-            for(int i = 0; i < Discord.blacklist.blacklist.Count; i++)
+            for (int i = 0; i < Discord.blacklist.blacklist.Count; i++)
             {
                 s.WriteLine(Discord.blacklist.blacklist[i]);
             }
@@ -130,9 +82,9 @@ namespace Miki.Core.Config
         /// <summary>
         /// Loads the blacklist from a file.
         /// </summary>
-        void LoadBlacklist()
+        private void LoadBlacklist()
         {
-            if(!File.Exists(Global.MikiFolder + "blacklist.blk"))
+            if (!File.Exists(Global.MikiFolder + "blacklist.blk"))
             {
                 Log.Warning("No blacklist file found, generating blank one...");
                 SaveBlacklist();

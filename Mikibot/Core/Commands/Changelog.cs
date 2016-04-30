@@ -1,21 +1,16 @@
-﻿using System;
+﻿using DiscordSharp.Events;
+using Miki.Core.Debug;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DiscordSharp.Events;
 using System.Threading;
-using Miki.Core.Debug;
 
-namespace Miki.Core.Commands
+namespace Miki.Core.Command.Objects
 {
-    class Changelog:Command
+    internal class Changelog : Command
     {
         public static string ChangelogFolder = Global.MikiFolder + "Commands/Changelog/";
 
-        Dictionary<string, string> entries;
-
+        private Dictionary<string, string> entries;
 
         public override void Initialize()
         {
@@ -36,7 +31,7 @@ namespace Miki.Core.Commands
             {
                 Log.Message(allEntries[i]);
                 string input = allEntries[i];
-                input= input.Split('/')[input.Split('/').Length - 1];
+                input = input.Split('/')[input.Split('/').Length - 1];
                 LoadEntry(input);
             }
             base.Initialize();
@@ -45,7 +40,7 @@ namespace Miki.Core.Commands
         protected override void PlayCommand(DiscordMessageEventArgs e)
         {
             string[] parameters = message.Split(' ');
-            if(parameters.Length == 1)
+            if (parameters.Length == 1)
             {
                 parameters = new string[] { parameters[0], Global.VersionNumber };
             }
@@ -69,14 +64,14 @@ namespace Miki.Core.Commands
             }
             StreamReader sr = new StreamReader(ChangelogFolder + tag);
             string input = "";
-            while(true)
+            while (true)
             {
                 string newline = sr.ReadLine();
                 input += newline + '\n';
-                if(newline == null)
+                if (newline == null)
                 {
                     break;
-                }      
+                }
             }
             entries.Add(tag, input);
             sr.Close();

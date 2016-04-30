@@ -1,14 +1,15 @@
 ﻿using DiscordSharp.Events;
 using Miki.Core;
+using Miki.Core.Command;
 using System;
 
 namespace Miki.Extensions.SillyCompliments
 {
-    class SillyCompliments_Core:Command
+    internal class SillyCompliments_Core : Command
     {
-        Random r = new Random();
+        private Random r = new Random();
 
-        string[] I_LIKE = new string[]
+        private string[] I_LIKE = new string[]
         {
             "I like ",
             "I love ",
@@ -17,7 +18,7 @@ namespace Miki.Extensions.SillyCompliments
             "For some reason i like ",
         };
 
-        string[] BODY_PART = new string[]
+        private string[] BODY_PART = new string[]
         {
             "the lower part of your lips",
             "the smallest toe on your left foot",
@@ -32,7 +33,7 @@ namespace Miki.Extensions.SillyCompliments
             "the dimples on your cheeks"
         };
 
-        string[] SUFFIX = new string[]
+        private string[] SUFFIX = new string[]
         {
             " alot",
             " a bit",

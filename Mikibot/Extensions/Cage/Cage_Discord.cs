@@ -1,14 +1,15 @@
 ﻿using DiscordSharp.Events;
 using Miki.Core;
+using Miki.Core.Command;
 using System;
 
 namespace Miki.Extensions.Cage
 {
-    class Cage_Discord:Command
+    internal class Cage_Discord : Command
     {
-        Random r = new Random();
+        private Random r = new Random();
 
-        String[] number1 = new String[]
+        private String[] number1 = new String[]
         {
             "100",
             "200",
@@ -26,7 +27,7 @@ namespace Miki.Extensions.Cage
             "1500",
         };
 
-        String[] number2 = new String[]
+        private String[] number2 = new String[]
         {
             "100",
             "200",
@@ -45,7 +46,6 @@ namespace Miki.Extensions.Cage
             "1500",
         };
 
-
         public override void Initialize()
         {
             id = "cage";
@@ -55,7 +55,7 @@ namespace Miki.Extensions.Cage
             base.Initialize();
         }
 
-         protected override void PlayCommand(DiscordMessageEventArgs e)
+        protected override void PlayCommand(DiscordMessageEventArgs e)
         {
             base.PlayCommand(e);
             e.Channel.SendMessage("http://www.placecage.com/c/" + number1[r.Next(0, number1.Length)] + "/" + number2[r.Next(0, number2.Length)]);

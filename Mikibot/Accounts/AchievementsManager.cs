@@ -1,19 +1,15 @@
 ﻿using Miki.Accounts.Achievements;
 using Miki.Core;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Miki.Accounts.Profiles
 {
     public class AchievementsManager
     {
-        Account parent;
+        private Account parent;
 
-        Dictionary<string, Achievement> achievements = new Dictionary<string, Achievement>();
+        private Dictionary<string, Achievement> achievements = new Dictionary<string, Achievement>();
 
         public void Initialize(Account a)
         {
@@ -29,7 +25,7 @@ namespace Miki.Accounts.Profiles
 
         public void CheckAllAchievements()
         {
-            foreach(KeyValuePair<string, Achievement> item in achievements)
+            foreach (KeyValuePair<string, Achievement> item in achievements)
             {
                 item.Value.UpdateProgress();
             }
@@ -40,7 +36,7 @@ namespace Miki.Accounts.Profiles
             string output = "";
             foreach (KeyValuePair<string, Achievement> item in achievements)
             {
-                if(item.Value.hasAchieved)
+                if (item.Value.hasAchieved)
                 {
                     output += item.Value.GetAchievement() + '\n';
                 }
@@ -62,6 +58,7 @@ namespace Miki.Accounts.Profiles
             }
             sw.Close();
         }
+
         public void LoadProfile(string id)
         {
             if (!File.Exists(Global.AccountsFolder + id + "/" + id + ".achievement"))
@@ -74,7 +71,7 @@ namespace Miki.Accounts.Profiles
             while (input != "")
             {
                 input = sr.ReadLine();
-                if(input == null)
+                if (input == null)
                 {
                     break;
                 }

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DiscordSharp.Events;
+﻿using DiscordSharp.Events;
 using DiscordSharp.Objects;
 
-namespace Miki.Core.Debug.Commands
+namespace Miki.Core.Command.Debug
 {
-    class Ping:Command
+    internal class Ping : Command
     {
         public override void Initialize()
         {

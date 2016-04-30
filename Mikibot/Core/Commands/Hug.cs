@@ -1,8 +1,8 @@
 ﻿using DiscordSharp.Events;
 
-namespace Miki.Core.Commands
+namespace Miki.Core.Command.Objects
 {
-    class Hug:Command
+    internal class Hug : Command
     {
         public override void Initialize()
         {

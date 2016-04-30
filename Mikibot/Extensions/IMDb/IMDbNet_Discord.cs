@@ -2,11 +2,12 @@
 using DiscordSharp.Objects;
 using IMDBNet;
 using Miki.Core;
+using Miki.Core.Command;
 using System.Threading;
 
 namespace Miki.Extensions.IMDb
 {
-    class IMDbNet_Discord : Command
+    internal class IMDbNet_Discord : Command
     {
         public string movieTitle;
         public DiscordChannel channel;
@@ -24,13 +25,13 @@ namespace Miki.Extensions.IMDb
         protected override void PlayCommand(DiscordMessageEventArgs e)
         {
             base.PlayCommand(e);
-                IMDbNet_Discord imdb = new IMDbNet_Discord();
-                imdb.channel = e.Channel;
-                string messageTrimmed = message.Substring(5);
-                imdb.movieTitle = messageTrimmed;
-                Thread t = new Thread(new ThreadStart(imdb.GetData), 0);
-                t.Start();
-                return;            
+            IMDbNet_Discord imdb = new IMDbNet_Discord();
+            imdb.channel = e.Channel;
+            string messageTrimmed = message.Substring(5);
+            imdb.movieTitle = messageTrimmed;
+            Thread t = new Thread(new ThreadStart(imdb.GetData), 0);
+            t.Start();
+            return;
         }
 
         public void GetData()

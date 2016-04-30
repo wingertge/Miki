@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
-using DiscordSharp.Events;
-using System.IO;
+﻿using DiscordSharp.Events;
 using Miki.Core.Debug;
+using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 
-namespace Miki.Core.Commands
+namespace Miki.Core.Command.Objects
 {
-    class Copypasta : Command
+    internal class Copypasta : Command
     {
         public static string CopypastaFolder = Global.MikiFolder + "Commands/Copypasta/";
-        Dictionary<string, string> Pasta = new Dictionary<string, string>();
+        private Dictionary<string, string> Pasta = new Dictionary<string, string>();
 
         public override void Initialize()
         {
@@ -20,15 +20,15 @@ namespace Miki.Core.Commands
             parameterType = ParameterType.YES;
             usage = new string[] { "tag or 'add'" };
 
-            if(!Directory.Exists(CopypastaFolder))
+            if (!Directory.Exists(CopypastaFolder))
             {
                 Directory.CreateDirectory(CopypastaFolder);
             }
             string[] allCP = Directory.GetFiles(CopypastaFolder);
-            for(int i = 0; i < allCP.Length; i++)
+            for (int i = 0; i < allCP.Length; i++)
             {
                 string input = allCP[i].Split('.')[0];
-                input = input.Split('/')[input.Split('/').Length -1];
+                input = input.Split('/')[input.Split('/').Length - 1];
                 LoadCopypasta(input);
             }
             Log.Done("total pasta's loaded: " + allCP.Length);
@@ -47,7 +47,7 @@ namespace Miki.Core.Commands
                     return;
                 }
             }
-            else if(parameters[1].ToLower() == "list")
+            else if (parameters[1].ToLower() == "list")
             {
                 string output = "";
                 string[] list = Directory.GetFiles(CopypastaFolder);

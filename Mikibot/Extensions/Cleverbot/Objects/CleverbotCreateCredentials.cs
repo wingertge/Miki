@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Miki.Extensions.Cleverbot
+﻿namespace Miki.Extensions.Cleverbot
 {
-    class CleverbotCreateCredentials
+    internal class CleverbotCreateCredentials
     {
         public string user;
         public string key;

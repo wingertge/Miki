@@ -1,17 +1,15 @@
 ﻿using DiscordSharp.Objects;
+using Miki.Core;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Miki.Accounts
 {
     public class AccountManager
     {
-        List<Account> accounts = new List<Account>();
+        private List<Account> accounts = new List<Account>();
 
         public void AddAccount(Account a)
         {
@@ -21,13 +19,15 @@ namespace Miki.Accounts
                 accounts.Add(a);
             }
         }
+
         public void AddAccount(DiscordMember a, DiscordChannel c)
-        {
+         {
             if (!isLoggedIn(a))
             {
                 CreateAccountFromMember(a, c);
             }
         }
+
         public void RemoveAccount(Account a)
         {
             if (isLoggedIn(a.GetMember()))
@@ -36,6 +36,7 @@ namespace Miki.Accounts
                 accounts.Remove(a);
             }
         }
+
         public void RemoveAccount(DiscordMember a)
         {
             if (isLoggedIn(a))
@@ -45,9 +46,28 @@ namespace Miki.Accounts
             }
         }
 
+        public void LoadAllAccounts()
+        {
+            if (!Directory.Exists(Global.AccountsFolder))
+            {
+                Directory.CreateDirectory(Global.AccountsFolder);
+            }
+            string[] allCP = Directory.GetDirectories(Global.AccountsFolder);
+            for (int i = 0; i < allCP.Length; i++)
+            {
+                string input = allCP[i].Split('.')[0];
+                input = input.Split('/')[input.Split('/').Length - 1];
+                if(!isLoggedIn(input))
+                {
+
+                }
+            }
+            Log.Done("total pasta's loaded: " + allCP.Length);
+        }
+
         public void SaveAllAccounts()
         {
-            lock(accounts)
+            lock (accounts)
             {
                 for (int i = 0; i < accounts.Count; i++)
                 {
@@ -72,9 +92,9 @@ namespace Miki.Accounts
 
         public Account GetAccountFromMember(DiscordMember member)
         {
-            for(int i = 0; i < accounts.Count; i++)
+            for (int i = 0; i < accounts.Count; i++)
             {
-                if(member == accounts[i].GetMember())
+                if (member == accounts[i].GetMember())
                 {
                     return accounts[i];
                 }
@@ -99,27 +119,28 @@ namespace Miki.Accounts
                 }
             }
             return null;
-
         }
 
-        public Account[] GetAccountLeaderboards(bool local)
+        public Account[] GetAccountLeaderboards(bool local, string ID)
         {
             Account[] output = new Account[10];
-            accounts.Sort((a, b) => { return b.profile.Experience.CompareTo(a.profile.Experience); });
-            foreach (Account a in accounts)
+            List<Account> tempaccounts;
+            tempaccounts = accounts;
+            tempaccounts.Sort((a, b) => { return b.profile.Experience.CompareTo(a.profile.Experience); });
+            for (int i = 0; i < tempaccounts.Count; i++)
             {
-                if(a.GetMember().IsBot)
+                if (tempaccounts[i].GetMember().IsBot)
+                {
+                    tempaccounts.Remove(tempaccounts[i]);
+                }
+                if(local)
                 {
 
                 }
             }
-            for (int i = 0; i < ((accounts.Count > 10) ? 10 : accounts.Count); i++)
+            for (int i = 0; i < ((tempaccounts.Count > 10) ? 10 : tempaccounts.Count); i++)
             {
-                if(accounts[i].GetMember().IsBot)
-                {
-                    i--;
-                }
-                output[i] = accounts[i];
+                output[i] = tempaccounts[i];
             }
             return output;
         }
@@ -131,7 +152,7 @@ namespace Miki.Accounts
             {
                 string output = "";
                 output += "**" + a.GetMember().Username + "**\n";
-                output += "**Level**: " + a.profile.Level + " (exp " + a.profile.Experience + "/" + a.profile.MaxExperience + ")\n";
+                output += "**Level**: " + a.profile.Level + " (exp " + a.profile.Experience + "/" + a.profile.MaxExperience + ")\n\n";
                 output += "__**Achievement**__\n";
                 output += a.achievements.PrintAchieved();
                 return output;
@@ -139,17 +160,28 @@ namespace Miki.Accounts
             return "";
         }
 
-        public bool isLoggedIn(DiscordMember a)
+        public bool isLoggedIn(DiscordMember m)
         {
-            for(int i = 0; i < accounts.Count; i++)
+            for (int i = 0; i < accounts.Count; i++)
             {
-                if(accounts[i].GetMember().ID == a.ID)
+                if (accounts[i].GetMember().ID == m.ID)
                 {
                     return true;
                 }
             }
-            return false;   
+            return false;
         }
 
+        public bool isLoggedIn(string ID)
+        {
+            for (int i = 0; i < accounts.Count; i++)
+            {
+                if (accounts[i].GetMember().ID == ID)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

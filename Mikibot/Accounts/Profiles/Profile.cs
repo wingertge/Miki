@@ -1,5 +1,4 @@
-﻿using DiscordSharp.Objects;
-using Miki.Core;
+﻿using Miki.Core;
 using Miki.Core.Debug;
 using System;
 using System.IO;
@@ -8,7 +7,7 @@ namespace Miki.Accounts.Profiles
 {
     public class Profile
     {
-        string name;
+        private string name;
 
         public int Health;
         public int Experience;
@@ -16,7 +15,7 @@ namespace Miki.Accounts.Profiles
         public int Level;
         public int Wins;
 
-        Account parent;
+        private Account parent;
 
         public void Initialize(string name, Account parent)
         {
@@ -61,6 +60,7 @@ namespace Miki.Accounts.Profiles
             sw.WriteLine(Wins);
             sw.Close();
         }
+
         public void LoadProfile(string id)
         {
             if (!Directory.Exists(Global.AccountsFolder + id + "/"))

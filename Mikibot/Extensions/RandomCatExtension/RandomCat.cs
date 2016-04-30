@@ -1,11 +1,12 @@
-﻿using Miki.Core;
-using DiscordSharp.Events;
-using System.Net;
+﻿using DiscordSharp.Events;
+using Miki.Core;
+using Miki.Core.Command;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace Miki.Extensions.RandomCatExtension
 {
-    class RandomCat:Command
+    internal class RandomCat : Command
     {
         public override void Initialize()
         {

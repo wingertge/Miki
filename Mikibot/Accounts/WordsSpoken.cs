@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Miki.Accounts
+﻿namespace Miki.Accounts
 {
     public class WordsSpoken
     {
-        string[] FilterWords;
+        private string[] FilterWords;
         public int MessagesSent;
 
         public void Initialize()
@@ -16,7 +10,7 @@ namespace Miki.Accounts
             FilterWords = GetWordsFromFile();
         }
 
-        string[] GetWordsFromFile()
+        private string[] GetWordsFromFile()
         {
             return null;
         }

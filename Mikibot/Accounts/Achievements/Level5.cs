@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Miki.Accounts.Achievements
+﻿namespace Miki.Accounts.Achievements
 {
-    class Level5 : Achievement
+    internal class Level5 : Achievement
     {
         public override void Initialize(Account a)
         {
@@ -15,7 +9,7 @@ namespace Miki.Accounts.Achievements
 
         public override void UpdateProgress()
         {
-            if(account.GetLevel() >= 5)
+            if (account.GetLevel() >= 5)
             {
                 OnAchievementGet();
             }
@@ -25,6 +19,5 @@ namespace Miki.Accounts.Achievements
         {
             base.OnAchievementGet();
         }
-
     }
 }

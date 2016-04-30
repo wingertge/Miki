@@ -1,10 +1,11 @@
-﻿using Miki.Core;
-using DiscordSharp.Events;
+﻿using DiscordSharp.Events;
 using DiscordSharp.Objects;
+using Miki.Core;
+using Miki.Core.Command;
 
 namespace Miki.Accounts.Commands
 {
-    class Profile : Command
+    internal class Profile : Command
     {
         public override void Initialize()
         {

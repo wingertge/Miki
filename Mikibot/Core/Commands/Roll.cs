@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DiscordSharp.Events;
+﻿using DiscordSharp.Events;
+using System;
 
-namespace Miki.Core.Commands
+namespace Miki.Core.Command.Objects
 {
-    class Roll : Command
+    internal class Roll : Command
     {
-        Random r = new Random();
+        private Random r = new Random();
 
         public override void Initialize()
         {
@@ -61,7 +57,7 @@ namespace Miki.Core.Commands
             return;
         }
 
-        int RollDice(int max)
+        private int RollDice(int max)
         {
             return r.Next(0, max) + 1;
         }

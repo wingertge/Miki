@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Miki.Core.Config
 {
@@ -17,9 +13,9 @@ namespace Miki.Core.Config
         /// <returns>true/false whether it's blacklisted or not.</returns>
         public bool isBlacklisted(string id)
         {
-            for(int i = 0; i < blacklist.Count; i++)
+            for (int i = 0; i < blacklist.Count; i++)
             {
-                if(blacklist[i] == id)
+                if (blacklist[i] == id)
                 {
                     return true;
                 }

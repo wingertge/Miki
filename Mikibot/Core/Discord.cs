@@ -1,16 +1,12 @@
 ﻿using DiscordSharp;
 using Miki.Accounts;
+using Miki.Core.Command;
 using Miki.Core.Config;
 using Miki.Core.Debug;
 using Miki.Extensions.Cleverbot;
 using Miki.Extensions.POSTLinux;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Net;
-using System.Net.Security;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 
 namespace Miki.Core
@@ -27,9 +23,10 @@ namespace Miki.Core
         public static AccountManager account = new AccountManager();
         public static Blacklist blacklist = new Blacklist();
         public static ConfigManager config = new ConfigManager();
+        public static CommandManager command = new CommandManager();
 
-        Thread t = new Thread(account.SaveAllAccounts, 0);
-        Thread s = new Thread(SendServerData, 0);
+        private Thread t = new Thread(account.SaveAllAccounts, 0);
+        private Thread s = new Thread(SendServerData, 0);
 
         public static int errors;
 
@@ -37,6 +34,8 @@ namespace Miki.Core
         {
             Console.WriteLine("Starting Mikibot v" + Global.VersionNumber);
             config.Initialize();
+            Log.Message("Loading Commands");
+            command.LoadCommands();
             instance = this;
             Start();
         }
@@ -58,7 +57,7 @@ namespace Miki.Core
             string input = "";
             while (input != "quit")
             {
-               input = Console.ReadLine();
+                input = Console.ReadLine();
             }
         }
 
@@ -75,7 +74,7 @@ namespace Miki.Core
             s.Start();
         }
 
-        static void SendServerData()
+        private static void SendServerData()
         {
             POST p = new POST();
             p.UploadString(JsonConvert.SerializeObject(new ServerData("veld882b398cd81632bb25", client.GetServersList().Count.ToString())), "https://www.carbonitex.net/discord/data/botdata.php");
@@ -84,7 +83,7 @@ namespace Miki.Core
         }
 
         /// <summary>
-        /// This is an event. It'll run when the BOT either crashes or when the internet gets disconnected.  
+        /// This is an event. It'll run when the BOT either crashes or when the internet gets disconnected.
         /// </summary>
         /// <param name="e">Discord data recieved about error details</param>
         public void OnDisconnect(DiscordSocketClosedEventArgs e)
@@ -99,7 +98,7 @@ namespace Miki.Core
         /// </summary>
         /// <param name="e">Data recieved from the DiscordMember that got added.</param>
         public void OnUserAdded(DiscordSharp.Events.DiscordGuildMemberAddEventArgs e)
-        {        }
+        { }
 
         /// <summary>
         /// Event Listener: Gets called whenever mentioned
@@ -107,7 +106,7 @@ namespace Miki.Core
         /// <param name="e"></param>
         public void OnMentioned(DiscordSharp.Events.DiscordMessageEventArgs e)
         {
-//                cleverbot.GetAsked(e);
+            //                cleverbot.GetAsked(e);
         }
 
         /// <summary>

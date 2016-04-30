@@ -1,7 +1,6 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
-namespace Miki.Core.Commands
+namespace Miki.Core.Command.Objects
 {
     public class Statistics : Command
     {
@@ -32,7 +31,7 @@ namespace Miki.Core.Commands
                 );
         }
 
-        string FormatToStats(string text, string variable)
+        private string FormatToStats(string text, string variable)
         {
             return "`" + text + GetSpace(9 - text.Length) + "` **" + variable + "**\n";
         }

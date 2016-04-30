@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using DiscordSharp.Events;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DiscordSharp.Events;
 
-namespace Miki.Core.Commands
+namespace Miki.Core.Command.Objects
 {
-    class Roulette:Command
+    internal class Roulette : Command
     {
-        Random r = new Random();
+        private Random r = new Random();
 
         public override void Initialize()
         {
@@ -24,7 +21,7 @@ namespace Miki.Core.Commands
 
         protected override void PlayCommand(DiscordMessageEventArgs e)
         {
-            if(e.MessageText.Length == 1)
+            if (e.MessageText.Length == 1)
             {
                 e.Channel.SendMessage("And the winner is: <@" + e.Channel.Parent.Members.ToList()[r.Next(0, e.Channel.Parent.Members.Count)].Value.ID + ">");
             }

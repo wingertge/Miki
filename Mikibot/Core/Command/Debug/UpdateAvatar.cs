@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DiscordSharp.Events;
+﻿using DiscordSharp.Events;
 
-namespace Miki.Core.Commands
+namespace Miki.Core.Command.Debug
 {
-    class UpdateAvatar : Command
+    internal class UpdateAvatar : Command
     {
         public override void Initialize()
         {

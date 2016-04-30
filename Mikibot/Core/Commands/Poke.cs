@@ -1,8 +1,8 @@
 ﻿using DiscordSharp.Events;
 
-namespace Miki.Core.Commands
+namespace Miki.Core.Command.Objects
 {
-    class Poke : Command
+    internal class Poke : Command
     {
         public override void Initialize()
         {

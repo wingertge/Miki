@@ -1,9 +1,9 @@
 ﻿using DiscordSharp.Events;
 using System;
 
-namespace Miki.Core.Commands
+namespace Miki.Core.Command.Objects
 {
-    class Uptime : Command
+    internal class Uptime : Command
     {
         public override void Initialize()
         {

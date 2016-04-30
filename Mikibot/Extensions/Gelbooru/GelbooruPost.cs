@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Miki.Extensions.Gelbooru
+﻿namespace Miki.Extensions.Gelbooru
 {
-    class GelbooruPost
+    internal class GelbooruPost
     {
         public string directory;
         public string hash;

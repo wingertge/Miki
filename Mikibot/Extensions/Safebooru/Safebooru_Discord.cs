@@ -1,22 +1,16 @@
-﻿using Miki.Core;
-using System;
-using System.Xml;
-using System.Xml.Linq;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DiscordSharp.Events;
-using System.Net;
+﻿using DiscordSharp.Events;
+using Miki.Core;
+using Miki.Core.Command;
 using Newtonsoft.Json;
-using System.Drawing;
-using System.IO;
-using Miki.Core.Debug;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Text;
 
 namespace Miki.Extensions.Safebooru
 {
     //082f05ea7d67b14   -   33354c5a255e911f65bf63c3d9b92b9dfc6ac896
-    class SafeBooru_Discord : Command
+    internal class SafeBooru_Discord : Command
     {
         public override void Initialize()
         {
@@ -35,7 +29,6 @@ namespace Miki.Extensions.Safebooru
 
             byte[] b;
             string[] command = e.MessageText.Split(' ');
-
 
             List<string> tags = new List<string>();
             for (int i = 1; i < command.Length; i++)
@@ -65,7 +58,7 @@ namespace Miki.Extensions.Safebooru
             base.PlayCommand(e);
         }
 
-        string getTags(List<string> tags)
+        private string getTags(List<string> tags)
         {
             string output = "";
             for (int i = 0; i < tags.Count; i++)

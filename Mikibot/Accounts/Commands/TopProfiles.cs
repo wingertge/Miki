@@ -1,14 +1,10 @@
-﻿using Miki.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DiscordSharp.Events;
+﻿using DiscordSharp.Events;
+using Miki.Core;
+using Miki.Core.Command;
 
 namespace Miki.Accounts.Commands
 {
-    class TopProfiles:Command
+    internal class TopProfiles : Command
     {
         public override void Initialize()
         {
@@ -22,15 +18,15 @@ namespace Miki.Accounts.Commands
         {
             base.PlayCommand(e);
             string output = "";
-            Account[] a = Discord.account.GetAccountLeaderboards(false);
-            output += ":crown:: `" + a[0].GetMember(a[0].memberID).Username + "`\n";
-            for(int i = 1; i < a.Length; i++)
+            Account[] a = Discord.account.GetAccountLeaderboards(false, e.Channel.Parent);
+            output += ":crown:: `" + a[0].GetMember(a[0].memberID).Username + " (" + a[0].profile.Experience + ")`\n";
+            for (int i = 1; i < a.Length; i++)
             {
                 if (a[i] != null)
                 {
-                    output += i + 1 + ": `" + a[i].GetMember(a[i].memberID).Username + " (" + a[i].profile.Experience + ")`\n";
+                    output += i + 1 + " : `" + a[i].GetMember(a[i].memberID).Username + " (" + a[i].profile.Experience + ")`\n";
                 }
-            }   
+            }
             e.Channel.SendMessage(output);
         }
     }

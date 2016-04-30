@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Miki.Core
+﻿namespace Miki.Core
 {
     /// <summary>
     /// Global data for folder structures and versioning.
@@ -23,7 +16,7 @@ namespace Miki.Core
         public static string RequestChannelID = "171793473156939777";
 
         public static string Status = ">help | " + VersionNumber;
-        public const string VersionNumber = "0.1.531";
+        public const string VersionNumber = "0.1.541";
 
         public static string Username = "Miki";
         public static string ApiKey = "";

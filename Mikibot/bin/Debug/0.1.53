@@ -1,0 +1,17 @@
+__**version 0.1.53**__
+
+:new: >roulette <optional:string>
+:new: >hug <user>
+:new: >poke <user>
+:new: >pet <user>
+:new: >gel <tags[]> - get images from gelbooru now aswell!
+:new: >request check
+ 
+:art: redone >help ui
+:art: redone >stats ui
+:art: added website to track requests
+ 
+:white_check_mark: fixed miki random name changes
+:white_check_mark: fixed >roll max roll offset
+:white_check_mark: fixed >pasta list
+:white_check_mark: fixed random crashes
