@@ -576,6 +576,8 @@
     <Compile Include="Modules\Gambling\Managers\BlackjackManager.cs" />
     <Compile Include="Modules\GeneralModule.cs" />
     <Compile Include="Modules\GuildAccountsModule.cs" />
+    <Compile Include="Modules\Logging\Interpreter\LogQueryInterpreter.cs" />
+    <Compile Include="Modules\Logging\WelcomeMessages.cs" />
     <Compile Include="Modules\MarriageModule.cs" />
     <Compile Include="Modules\NsfwModule.cs" />
     <Compile Include="Modules\OsuModule.cs" />
@@ -598,7 +600,6 @@
     <Compile Include="Modules\ServerCountModule.cs" />
     <Compile Include="Modules\SettingsModule.cs" />
     <Compile Include="Modules\SteamModule.cs" />
-    <Compile Include="Modules\WelcomeMessages.cs" />
     <Compile Include="Notification.cs" />
     <Compile Include="API\Rocket League\Objects\RocketLeagueOptions.cs" />
     <Compile Include="API\Rocket League\Objects\RocketLeaguePlatform.cs" />
@@ -785,6 +786,10 @@
     <ProjectReference Include="..\..\Meru\Meru\Meru.csproj">
       <Project>{e4b74dd1-8ccb-4fcc-9bde-0f79c43211e7}</Project>
       <Name>Meru</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Meru\RestClient\RestClient.csproj">
+      <Project>{48155a63-8e59-4042-8130-7ad40315b8a9}</Project>
+      <Name>RestClient</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

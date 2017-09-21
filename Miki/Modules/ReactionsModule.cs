@@ -1,6 +1,7 @@
 ﻿using IA.Events.Attributes;
 using IA.SDK;
 using IA.SDK.Events;
+using IA.SDK.Interfaces;
 using System.Threading.Tasks;
 
 namespace Miki.Modules
@@ -147,10 +148,8 @@ namespace Miki.Modules
 				"http://i.imgur.com/baiMBP6.png"
 			};
 
-			RuntimeEmbed em = new RuntimeEmbed( new Discord.EmbedBuilder() )
-			{
-				ImageUrl = images[Global.random.Next( 0, images.Length )]
-			};
+			IDiscordEmbed em = Utils.Embed
+				.SetImageUrl(images[Global.random.Next(0, images.Length)]);
 			await em.SendToChannel( e.Channel );
 		}
 
