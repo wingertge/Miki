@@ -1,15 +1,14 @@
 ﻿using IA;
+using IA.SDK.Interfaces;
+using Miki.Accounts.Achievements;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using IA.SDK.Interfaces;
-using Miki.Accounts;
-using System.ComponentModel;
-using Miki.Accounts.Achievements;
 
 namespace Miki.Models
 {
@@ -62,17 +61,17 @@ namespace Miki.Models
         public DateTime LastReputationGiven { get; set; }
         public short ReputationPointsLeft { get; set; }
 
-        // TODO: finish this
-        public async Task AddCurrencyAsync(IDiscordMessageChannel context, User fromUser, int amount)
+        public async Task AddCurrencyAsync(int amount, IDiscordMessageChannel channel = null, User fromUser = null)
         {
             Currency += amount;
-            if (context != null)
+
+            if (channel != null)
             {
-                 await AchievementManager.Instance.CallTransactionMadeEventAsync(context, this, fromUser, Currency);
+                await AchievementManager.Instance.CallTransactionMadeEventAsync(channel, this, fromUser, Currency);
             }
         }
 
-        public static User Create(MikiContext context, IDiscordMessage e)
+        public static async Task<User> CreateAsync(IDiscordMessage e)
         {
             User user = new User()
             {
@@ -90,7 +89,13 @@ namespace Miki.Models
                 Reputation = 0,
                 LastReputationGiven = Utils.MinDbValue
             };
-            context.Users.Add(user);
+
+            using (var context = new MikiContext())
+            {
+                context.Users.Add(user);
+                await context.SaveChangesAsync();
+            }
+
             return user;
         }
 
@@ -100,7 +105,7 @@ namespace Miki.Models
             await context.SaveChangesAsync();
         }
 
-        public int CalculateLevel(int exp)
+        public static int CalculateLevel(int exp)
         {
             int experience = exp;
             int Level = 0;
@@ -112,7 +117,8 @@ namespace Miki.Models
             }
             return Level;
         }
-        public int CalculateMaxExperience(int localExp)
+
+        public static int CalculateMaxExperience(int localExp)
         {
             int experience = localExp;
             int Level = 0;
@@ -124,32 +130,40 @@ namespace Miki.Models
             }
             return output;
         }
-        private int CalculateNextLevelIteration(int output, int level)
+
+        private static int CalculateNextLevelIteration(int output, int level)
         {
             return 10 + (output + (level * 20));
         }
 
-        public int GetGlobalRank()
+        public async Task<int> GetGlobalRankAsync()
         {
+            int x = 0;
             using (var context = new MikiContext())
             {
-                int x = context.Database.SqlQuery<int>("Select COUNT(*) as rank from Users where Users.Total_Experience >= @p0", Total_Experience).First();
-                return x;
+                x = await context.Users
+                    .Where(u => u.Total_Experience > Total_Experience)
+                    .CountAsync();
             }
+            return x + 1;
         }
+
         public async Task<int> GetLocalRank(ulong guildId)
         {
             using (var context = new MikiContext())
             {
                 LocalExperience l = await context.Experience.FindAsync(guildId.ToDbLong(), Id);
 
-                if(l == null)
+                if (l == null)
                 {
                     return -1;
                 }
 
-                int x = context.Database.SqlQuery<int>("Select COUNT(*) as rank from LocalExperience where LocalExperience.ServerId = @p0 AND LocalExperience.Experience >= @p1", guildId.ToDbLong(), l.Experience).First();
-                return x;
+                long gId = guildId.ToDbLong();
+                int x = await context.Experience
+                    .Where(e => e.ServerId == gId && e.Experience > l.Experience)
+                    .CountAsync();
+                return x + 1;
             }
         }
 

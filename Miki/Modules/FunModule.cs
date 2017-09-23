@@ -1,37 +1,38 @@
-﻿using Discord;
 using IA;
-using IA.Events;
 using IA.Events.Attributes;
 using IA.Extension;
 using IA.SDK;
 using IA.SDK.Events;
 using IA.SDK.Interfaces;
-using IMDBNet;
 using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints.Impl;
 using Imgur.API.Models;
-using Miki.Accounts;
 using Miki.Accounts.Achievements;
+using Miki.Accounts.Achievements.Objects;
 using Miki.API;
+using Miki.API.Imageboards;
+using Miki.API.Imageboards.Enums;
+using Miki.API.Imageboards.Interfaces;
 using Miki.Languages;
-using Miki.Models;
-using Miki.Objects;
+using NCalc;
 using Newtonsoft.Json;
-using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using IA.Events;
+using Miki.API.Imageboards.Objects;
 
 namespace Miki.Modules
 {
     [Module(Name = "Fun")]
     public class FunModule
     {
-        string[] puns = new string[]
+        private string[] puns =
         {
                 "miki_module_fun_pun_1",
                 "miki_module_fun_pun_2",
@@ -86,7 +87,7 @@ namespace Miki.Modules
                 "miki_module_fun_pun_51",
                 "miki_module_fun_pun_52",
         };
-        string[] reactions = new string[]
+        private string[] reactions =
         {
                 "miki_module_fun_8ball_answer_negative_1",
                 "miki_module_fun_8ball_answer_negative_2",
@@ -108,7 +109,7 @@ namespace Miki.Modules
                 "miki_module_fun_8ball_answer_positive_8",
                 "miki_module_fun_8ball_answer_positive_9"
         };
-        private string[] lunchposts = new string[]
+        private string[] lunchposts =
 {
             "https://soundcloud.com/ghostcoffee-342990942/woof-woof-whats-for-lunch?in=ghostcoffee-342990942/sets/lunchposting-the-banquet-final-mix",
             "https://soundcloud.com/ghostcoffee-342990942/lunchpost-1969?in=ghostcoffee-342990942/sets/lunchposting-the-banquet-final-mix",
@@ -167,6 +168,24 @@ namespace Miki.Modules
             "https://soundcloud.com/ghostcoffee-342990942/woofline-bling-1"
 };
 
+        public FunModule(RuntimeModule m)
+        {
+            ImageboardProviderPool.AddProvider(new ImageboardProvider<E621Post>(new ImageboardConfigurations
+            {
+               QueryKey = "http://e621.net/post/index.json?limit=1&tags=",
+               ExplicitTag = "rating:e",
+               QuestionableTag = "rating:q",
+               SafeTag = "rating:s",
+               NetUseCredentials = true,
+               NetHeaders = new List<string>() { "User-Agent: Other" }
+            }));
+            ImageboardProviderPool.AddProvider(new ImageboardProvider<GelbooruPost>("http://gelbooru.com/index.php?page=dapi&s=post&q=index&json=1&tags="));
+            ImageboardProviderPool.AddProvider(new ImageboardProvider<SafebooruPost>("https://safebooru.org/index.php?page=dapi&s=post&q=index&json=1&tags="));
+            ImageboardProviderPool.AddProvider(new ImageboardProvider<Rule34Post>("http://rule34.xxx/index.php?page=dapi&s=post&q=index&json=1&tags="));
+            ImageboardProviderPool.AddProvider(new ImageboardProvider<KonachanPost>("https://konachan.com/post.json?tags="));
+            ImageboardProviderPool.AddProvider(new ImageboardProvider<YanderePost>("https://yande.re/post.json?tags="));
+        }
+
         [Command(Name = "8ball")]
         public async Task EightBallAsync(EventContext e)
         {
@@ -179,7 +198,7 @@ namespace Miki.Modules
         [Command(Name = "bird")]
         public async Task BirdAsync(EventContext e)
         {
-            string[] bird = new string[]
+            string[] bird =
             {
                 "http://i.imgur.com/aN948tq.jpg",
                 "http://i.imgur.com/cYPsbR5.jpg",
@@ -220,16 +239,16 @@ namespace Miki.Modules
         [Command(Name = "compliment")]
         public async Task ComplimentAsync(EventContext e)
         {
-            string[] I_LIKE = new string[]
+            string[] I_LIKE =
             {
                 "I like ",
                 "I love ",
                 "I admire ",
                 "I really enjoy ",
-                "For some reason i like "
+                "For some reason I like "
             };
 
-            string[] BODY_PART = new string[]
+            string[] BODY_PART =
             {
                 "that silly fringe of yours",
                 "the lower part of your lips",
@@ -246,17 +265,15 @@ namespace Miki.Modules
                 "your smooth hair"
             };
 
-            string[] SUFFIX = new string[]
+            string[] SUFFIX =
             {
-                " alot",
-                " a bit",
-                " quite a bit",
+                " a lot.",
+                " a bit.",
+                " quite a bit.",
                 " a lot, is that weird?",
-                ""
             };
 
             await e.Channel.SendMessage(I_LIKE[Global.random.Next(0, I_LIKE.Length)] + BODY_PART[Global.random.Next(0, BODY_PART.Length)] + SUFFIX[Global.random.Next(0, SUFFIX.Length)]);
-
         }
 
         [Command(Name = "cage")]
@@ -265,25 +282,10 @@ namespace Miki.Modules
             await e.Channel.SendMessage("http://www.placecage.com/c/" + Global.random.Next(100, 1500) + "/" + Global.random.Next(100, 1500));
         }
 
-        [Command(Name = "ctb")]
-        public async Task SendCatchTheBeatSignatureAsync(EventContext e)
-        {
-            using (WebClient webClient = new WebClient())
-            {
-                byte[] data = webClient.DownloadData("http://lemmmy.pw/osusig/sig.php?colour=pink&uname=" + e.arguments + "&mode=2&countryrank");
-
-
-                using (MemoryStream mem = new MemoryStream(data))
-                {
-                    await e.Channel.SendFileAsync(mem, $"{e.arguments}.png");
-                }
-            }
-        }
-
         [Command(Name = "dog")]
         public async Task DogAsync(EventContext e)
         {
-            string[] dog = new string[]
+            string[] dog =
             {
                 "http://i.imgur.com/KOjUbMQ.jpg",
                 "http://i.imgur.com/owJKr7y.jpg",
@@ -383,34 +385,6 @@ namespace Miki.Modules
             await e.Channel.SendMessage(e.GetResource("lunch_line") + "\n" + lunchposts[Global.random.Next(0, lunchposts.Length)]);
         }
 
-        [Command(Name = "mania")]
-        public async Task SendManiaSignatureAsync(EventContext e)
-        {
-            using (WebClient webClient = new WebClient())
-            {
-                byte[] data = webClient.DownloadData("http://lemmmy.pw/osusig/sig.php?colour=pink&uname=" + e.arguments + "&mode=3&countryrank");
-
-                using (MemoryStream mem = new MemoryStream(data))
-                {
-                    await e.Channel.SendFileAsync(mem, $"sig.png");
-                }
-            }
-        }
-
-        [Command(Name = "osu")]
-        public async Task SendOsuSignatureAsync (EventContext e)
-        {
-            using (WebClient webClient = new WebClient())
-            {
-                byte[] data = webClient.DownloadData("http://lemmmy.pw/osusig/sig.php?colour=pink&uname=" + e.arguments + "&countryrank");
-
-                using (MemoryStream mem = new MemoryStream(data))
-                {
-                    await e.Channel.SendFileAsync(mem, $"sig.png");
-                }
-            }
-        }
-
         [Command(Name = "pick")]
         public async Task PickAsync(EventContext e)
         {
@@ -422,7 +396,7 @@ namespace Miki.Modules
             string[] choices = e.arguments.Split(',');
 
             Locale locale = e.Channel.GetLocale();
-            await e.Channel.SendMessage(locale.GetString(Locale.PickMessage, new object[] { e.Author.Username, choices[MikiRandom.GetRandomNumber(0, choices.Length)] }));
+            await e.Channel.SendMessage(locale.GetString(Locale.PickMessage, new object[] { e.Author.Username, choices[MikiRandom.Next(0, choices.Length)] }));
         }
 
         [Command(Name = "pun")]
@@ -432,96 +406,80 @@ namespace Miki.Modules
         }
 
         [Command(Name = "roll")]
-        public async Task RollAsync(EventContext e)
-        {
-            string rollCalc = "";
-            string amount = "";
-            int rollAmount = 0;
+		public async Task RollAsync( EventContext e )
+		{
+			string rollResult;
 
-            if (e.arguments != "")
-            {
-                amount = e.arguments.Split(' ')[0];
+			if( string.IsNullOrWhiteSpace( e.arguments ) ) // No Arguments.
+			{
+				rollResult = MikiRandom.Next( 100 ).ToString();
+			}
+			else
+			{
+				if( int.TryParse( e.arguments, out int max ) ) // Simple number argument.
+				{
+					rollResult = MikiRandom.Next( max ).ToString();
+				}
+				else // Assume the user has entered an advanced expression.
+				{
+					Regex regex = new Regex( @"(?<dieCount>\d+)d(?<dieSides>\d+)" );
+					string fullExpression = e.arguments;
+					int expressionCount = 0;
 
-                if (amount.Split('d').Length > 1)
-                {
-                    for (int i = 0; i < int.Parse(amount.Split('d')[0]); i++)
-                    {
-                        int num = Mathm.Roll(int.Parse(amount.Split('d')[1]), 0);
-                        rollAmount += num;
-                        rollCalc += num + " + ";
-                    }
-                    rollCalc = rollCalc.Remove(rollCalc.Length - 3);
-                }
-                else
-                {
-                    try
-                    {
-                        rollAmount = Mathm.Roll(int.Parse(amount), 0);
-                    }
-                    catch
-                    {
-                        rollAmount = Mathm.Roll();
+					foreach( Match match in regex.Matches( e.arguments ) )
+					{
+						GroupCollection groupCollection = match.Groups;
+						int dieCount = int.Parse( groupCollection["dieCount"].Value );
+						int dieSides = int.Parse( groupCollection["dieSides"].Value );
+						string partialExpression = "";
 
-                    }
-                }
-            }
-            else
-            {
-                rollAmount = Mathm.Roll();
-            }
+						for( int i = 0; i < dieCount; i++ )
+						{
+							partialExpression += MikiRandom.Next( dieSides ).ToString();
+							if( i + 1 < dieCount )
+								partialExpression += " + ";
+						}
 
-            if (rollAmount == 1)
-            {
-                await AchievementManager.Instance.GetContainerById("badluck").CheckAsync(new Accounts.Achievements.Objects.BasePacket() { discordUser = e.Author, discordChannel = e.Channel });
-            }
+						fullExpression = regex.Replace( fullExpression, $"( {partialExpression} )", 1 );
+						expressionCount++;
+					}
 
+					if( expressionCount > 1 )
+						fullExpression = $"( {fullExpression} )";
 
-            await e.Channel.SendMessage(Locale.GetEntity(e.Guild.Id.ToDbLong()).GetString(Locale.RollResult, new object[] { e.Author.Username, rollAmount }) + (rollCalc != "" ? " (" + rollCalc + ")" : ""));
-        }
+					Expression evaluation = new Expression( fullExpression );
+					rollResult = evaluation.Evaluate().ToString() + $" `{fullExpression}`" ;
+				}
+			}
 
-        [Command(Name = "roulette")]    
-        public async Task RouletteAsync(EventContext e)
-        {
-            IEnumerable<IDiscordUser> users = await e.Channel.GetUsersAsync();
+			if( rollResult == "1" || rollResult.StartsWith( "1 " ) )
+			{
+				await AchievementManager.Instance.GetContainerById( "badluck" ).CheckAsync( new BasePacket()
+				{
+					discordUser = e.Author,
+					discordChannel = e.Channel
+				} );
+			}
 
-            Locale locale = Locale.GetEntity(e.Channel.Id.ToDbLong());
+			rollResult = Regex.Replace( rollResult, @"(\s)\s+", "$1" );
+			rollResult = Regex.Replace( rollResult, @"(\S)([^\d\s])", "$1 $2" );
 
-            if (e.message.Content.Split(' ').Length == 1)
-            {
-                await e.Channel.SendMessage(locale.GetString(Locale.RouletteMessageNoArg, new object[] { "<@" + users.ElementAt(Global.random.Next(0, users.Count())).Id + ">" }));
-            }
-            else
-            {
-                await e.Channel.SendMessage(locale.GetString(Locale.RouletteMessage, new object[] { e.arguments, "<@" + users.ElementAt(Global.random.Next(0, users.Count())).Id + ">" }));
-            }
-        }
+			await e.Channel.SendMessage( e.GetResource( Locale.RollResult, e.Author.Username, rollResult ) );
+		}
+		
+		[Command( Name = "roulette" )]
+		public async Task RouletteAsync( EventContext e )
+		{
+			IEnumerable<IDiscordUser> users = await e.Channel.GetUsersAsync();
+			List<IDiscordUser> realUsers = users.Where( user => !user.IsBot ).ToList();
 
-        [Command(Name = "taiko")]
-        public async Task SendTaikoSignatureAsync(EventContext e)
-        {
-            using (WebClient webClient = new WebClient())
-            {
-                byte[] data = webClient.DownloadData("http://lemmmy.pw/osusig/sig.php?colour=pink&uname=" + e.arguments + "&mode=1&countryrank");
+			string mention = "<@" + realUsers[Global.random.Next( 0, realUsers.Count )].Id + ">";
+			string send = string.IsNullOrEmpty( e.arguments ) ?
+				e.GetResource( Locale.RouletteMessageNoArg, mention) :      
+				e.GetResource( Locale.RouletteMessage, e.arguments, mention );
 
-                using (MemoryStream mem = new MemoryStream(data))
-                {
-                    await e.Channel.SendFileAsync(mem, $"sig.png");
-                }
-            }
-        }
-
-        // TODO: work this in again
-        //[Command(Name = "slots", On = "all")]
-        //public async Task SlotsAllAsync(EventContext e)
-        //{
-        //    Locale locale = Locale.GetEntity(e.Channel.Id.ToDbLong());
-
-        //    using (var context = new MikiContext())
-        //    {
-        //        User u = await context.Users.FindAsync(e.Author.Id.ToDbLong());
-        //        await InternalSlotsAsync(e, e.Author.Id, locale, u.Currency);
-        //    }
-        //}
+			await e.Channel.SendMessage( send );
+		}
 
         [Command(Name = "remind")]
         public async Task DoRemind(EventContext e)
@@ -529,25 +487,23 @@ namespace Miki.Modules
             List<string> arguments = e.arguments.Split(' ').ToList();
             int splitIndex = 0;
 
-            for(int i = 0; i < arguments.Count; i++)
+            for (int i = 0; i < arguments.Count; i++)
             {
-                if(arguments[i].ToLower() == "in")
+                if (arguments[i].ToLower() == "in")
                 {
                     splitIndex = i;
                 }
             }
 
-            if(splitIndex == 0)
+            if (splitIndex == 0)
             {
                 // throw error
                 return;
             }
 
-            string reminderText;
-
             int count = arguments.Count;
             arguments.RemoveRange(splitIndex, count - (splitIndex));
-            reminderText = string.Join(" ", arguments);
+            string reminderText = string.Join(" ", arguments);
 
             if (reminderText.StartsWith("me to "))
             {
@@ -558,7 +514,7 @@ namespace Miki.Modules
 
             await Utils.Embed
                 .SetTitle("👌 OK")
-                .SetDescription($"I'll remind you to **{reminderText}** in **{timeUntilReminder.ToTimeString()}**")
+                .SetDescription($"I'll remind you to **{reminderText}** in **{timeUntilReminder.ToTimeString(e.Channel.GetLocale())}**")
                 .SetColor(IA.SDK.Color.GetColor(IAColor.GREEN))
                 .SendToChannel(e.Channel.Id);
 
@@ -572,7 +528,7 @@ namespace Miki.Modules
         {
             Locale locale = Locale.GetEntity(e.Channel.Id.ToDbLong());
 
-            IPost s = null;
+            ILinkable s = null;
             if (e.arguments.ToLower().StartsWith("use"))
             {
                 string[] a = e.arguments.Split(' ');
@@ -581,24 +537,28 @@ namespace Miki.Modules
                 {
                     case "safebooru":
                         {
-                            s = SafebooruPost.Create(e.arguments, ImageRating.SAFE);
+                            s = ImageboardProviderPool.GetProvider<SafebooruPost>().GetPost(e.arguments, ImageboardRating.SAFE);
                         }
                         break;
+
                     case "gelbooru":
                         {
-                            s = GelbooruPost.Create(e.arguments, ImageRating.SAFE);
+                            s = ImageboardProviderPool.GetProvider<GelbooruPost>().GetPost(e.arguments, ImageboardRating.SAFE);
                         }
                         break;
+
                     case "konachan":
                         {
-                            s = KonachanPost.Create(e.arguments, ImageRating.SAFE);
+                            s = ImageboardProviderPool.GetProvider<KonachanPost>().GetPost(e.arguments, ImageboardRating.SAFE);
                         }
                         break;
+
                     case "e621":
                         {
-                            s = E621Post.Create(e.arguments, ImageRating.SAFE);
+                            s = ImageboardProviderPool.GetProvider<E621Post>().GetPost(e.arguments, ImageboardRating.SAFE);
                         }
                         break;
+
                     default:
                         {
                             await e.Channel.SendMessage("I do not support this image host :(");
@@ -608,7 +568,7 @@ namespace Miki.Modules
             }
             else
             {
-                s = SafebooruPost.Create(e.arguments, ImageRating.SAFE);
+                s = ImageboardProviderPool.GetProvider<SafebooruPost>().GetPost(e.arguments, ImageboardRating.SAFE);
             }
 
             if (s == null)
@@ -617,131 +577,67 @@ namespace Miki.Modules
                 return;
             }
 
-            await e.Channel.SendMessage(s.ImageUrl);
+            await e.Channel.SendMessage(s.Url);
         }
 
-        private async Task InternalSlotsAsync(EventContext e, ulong userid, Locale locale, int amount)
+        [Command( Name = "greentext", Aliases = new string[] { "green", "gt" } )]
+        public async Task GreentextAsync( EventContext e )
         {
-            int moneyBet = 0;
-
-            using (var context = new MikiContext())
+            string[] images = new string[]
             {
-                User u = await context.Users.FindAsync(userid.ToDbLong());
+		"http://i.imgur.com/J2DLbV4.png",
+                "http://i.imgur.com/H0kDub9.jpg",
+                "http://i.imgur.com/pBOG489.jpg",
+                "http://i.imgur.com/dIxeGOe.jpg",
+                "http://i.imgur.com/p7lFyrY.jpg",
+                "http://i.imgur.com/8qPmX5V.jpg",
+                "http://i.imgur.com/u9orsoj.png",
+                "http://i.imgur.com/EQGpV8A.jpg",
+                "http://i.imgur.com/qGv3Xj1.jpg",
+                "http://i.imgur.com/KFArF4B.png",
+		"http://i.imgur.com/6Dv3W8V.png",
+		"http://i.imgur.com/TJPnX57.png",
+		"http://i.imgur.com/jle1rXs.png",
+		"http://i.imgur.com/6V2wcjt.png",
+		"http://i.imgur.com/KW5dBMg.jpg",
+		"http://i.imgur.com/vdrAAuI.png",
+		"http://i.imgur.com/QnRkQ7q.png",
+		"http://i.imgur.com/sjNWj0r.jpg",
+		"http://i.imgur.com/SXj7kg7.jpg",
+		"http://i.imgur.com/eVwqceu.jpg",
+		"http://i.imgur.com/JDOySvx.png",
+		"http://i.imgur.com/fetJh3C.jpg",
+		"http://i.imgur.com/iRKMtHT.png",
+		"http://i.imgur.com/uxLqZXl.jpg",
+		"http://i.imgur.com/6RDjjzP.jpg",
+		"http://i.imgur.com/hNqXdxF.png",
+		"http://i.imgur.com/xADVyFD.jpg",
+		"http://i.imgur.com/JH8WqAg.jpg",
+		"http://i.imgur.com/LvodsHR.jpg",
+		"http://i.imgur.com/4y4wI21.jpg",
+		"http://i.imgur.com/y6REP8l.png",
+		"http://i.imgur.com/8gQdkwx.jpg",
+		"http://i.imgur.com/JVBkdyo.jpg",
+		"http://i.imgur.com/3VCDWyy.jpg",
+		"http://i.imgur.com/5lGh8Vo.jpg",
+		"http://i.imgur.com/ZwZvQYP.jpg",
+		"http://i.imgur.com/USQa4GH.jpg",
+		"http://i.imgur.com/FXHFLCH.jpg",
+		"http://i.imgur.com/vRRK4qd.png",
+		"http://i.imgur.com/0OycISQ.jpg",
+		"http://i.imgur.com/0OycISQ.jpg",
+		"http://i.imgur.com/g2vdQ6i.jpg",
+		"http://i.imgur.com/3vDUWgr.png",
+		"http://i.imgur.com/TN58jEQ.jpg",
+		"http://i.imgur.com/94wckTB.png"
+            };
 
-                int moneyReturned = 0;
-
-                if (moneyBet <= 0)
-                {
-                    return;
-                }
-
-                string[] objects =
-                {
-                    "🍒", "🍒", "🍒", "🍒",
-                    "🍊", "🍊",
-                    "🍓", "🍓",
-                    "🍍","🍍",
-                    "🍇", "🍇",
-                    "⭐", "⭐",
-                    "🍍", "🍍",
-                    "🍓", "🍓",
-                    "🍊", "🍊", "🍊",
-                    "🍒", "🍒", "🍒", "🍒",
-                };
-
-                IDiscordEmbed b = Utils.Embed;
-                b.Title = locale.GetString(Locale.SlotsHeader);
-
-                Random r = new Random();
-
-                string[] objectsChosen =
-                {
-                    objects[r.Next(objects.Length)],
-                    objects[r.Next(objects.Length)],
-                    objects[r.Next(objects.Length)]
-                };
-
-                Dictionary<string, int> score = new Dictionary<string, int>();
-
-                foreach (string o in objectsChosen)
-                {
-                    if (score.ContainsKey(o))
-                    {
-                        score[o]++;
-                        continue;
-                    }
-                    score.Add(o, 1);
-                }
-
-                if (score.ContainsKey("🍒"))
-                {
-                    if (score["🍒"] == 2)
-                    {
-                        moneyReturned = (int)Math.Ceiling(moneyBet * 0.5f);
-                    }
-                    else if (score["🍒"] == 3)
-                    {
-                        moneyReturned = (int)Math.Ceiling(moneyBet * 1f);
-                    }
-                }
-                if (score.ContainsKey("🍊"))
-                {
-                    if (score["🍊"] == 2)
-                    {
-                        moneyReturned = (int)Math.Ceiling(moneyBet * 0.8f);
-                    }
-                    else if (score["🍊"] == 3)
-                    {
-                        moneyReturned = (int)Math.Ceiling(moneyBet * 1.5f);
-                    }
-                }
-                if (score.ContainsKey("🍓"))
-                {
-                    if (score["🍓"] == 2)
-                    {
-                        moneyReturned = (int)Math.Ceiling(moneyBet * 1f);
-                    }
-                    else if (score["🍓"] == 3)
-                    {
-                        moneyReturned = (int)Math.Ceiling(moneyBet * 2f);
-                    }
-                }
-                if (score.ContainsKey("🍍"))
-                {
-                    if (score["🍍"] == 3)
-                    {
-                        moneyReturned = (int)Math.Ceiling(moneyBet * 4f);
-                    }
-                }
-                if (score.ContainsKey("🍇"))
-                {
-                    if (score["🍇"] == 3)
-                    {
-                        moneyReturned = (int)Math.Ceiling(moneyBet * 6f);
-                    }
-                }
-                if (score.ContainsKey("⭐"))
-                {
-                    if (score["⭐"] == 3)
-                    {
-                        moneyReturned = (int)Math.Ceiling(moneyBet * 12f);
-                    }
-                }
-
-                if (moneyReturned == 0)
-                {
-                    moneyReturned = -moneyBet;
-                }
-                else
-                {
-                    b.AddField(locale.GetString(Locale.SlotsWinHeader), locale.GetString(Locale.SlotsWinMessage, moneyReturned));
-                }
-
-                b.Description = string.Join(" ", objectsChosen);
-                u.Currency += moneyReturned;
-                await context.SaveChangesAsync();
-                await b.SendToChannel(e.Channel);
-            }
+            RuntimeEmbed em = new RuntimeEmbed( new Discord.EmbedBuilder() )
+            {
+                ImageUrl = images[Global.random.Next( 0, images.Length )]
+            };
+            await em.SendToChannel( e.Channel );
         }
+
     }
 }

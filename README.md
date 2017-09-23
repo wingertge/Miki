@@ -1,6 +1,6 @@
-<img src="http://miki.rie.one/img/ia_miki_logo.png"/><b>repository</b>
-
 # Welcome to Miki Repository
+[![CodeFactor](https://www.codefactor.io/repository/github/velddev/miki/badge)](https://www.codefactor.io/repository/github/velddev/miki)
+<br>
 Below you will find a basic workflow of how the branches should work. Please follow this to prevent bad merge conflicts on Miki and things constantly breaking.
 
 ## Table of contents

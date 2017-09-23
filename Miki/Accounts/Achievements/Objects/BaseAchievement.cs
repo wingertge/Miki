@@ -1,12 +1,8 @@
 ﻿using IA;
 using IA.SDK.Interfaces;
-using Miki;
 using Miki.Accounts.Achievements.Objects;
 using Miki.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Miki.Accounts.Achievements
@@ -20,14 +16,14 @@ namespace Miki.Accounts.Achievements
 
         public BaseAchievement()
         {
-
         }
+
         public BaseAchievement(Action<BaseAchievement> act)
         {
             act.Invoke(this);
         }
 
-        public virtual async Task<bool> CheckAsync(MikiContext context, BasePacket packet)
+        public virtual async Task<bool> CheckAsync(BasePacket packet)
         {
             await Task.Delay(0);
             return true;
@@ -40,26 +36,31 @@ namespace Miki.Accounts.Achievements
         /// <param name="id">user id</param>
         /// <param name="r">rank set to (optional)</param>
         /// <returns></returns>
-        internal async Task UnlockAsync(MikiContext context, IDiscordMessageChannel channel, IDiscordUser user, int r = 0)
+        internal async Task UnlockAsync(IDiscordMessageChannel channel, IDiscordUser user, int r = 0)
         {
             long userid = user.Id.ToDbLong();
-        
-            Achievement a = await context.Achievements.FindAsync(userid, ParentName);
 
-            if (a != null || r != 0)
+            Achievement a = null;
+
+            using (var context = new MikiContext())
             {
-                if (a.Rank == r - 1)
+                a = await context.Achievements.FindAsync(userid, ParentName);
+
+                if (a != null || r != 0)
                 {
-                    a.Rank += 1;    
-                    await Notification.SendAchievement(this, channel, user);
+                    if (a.Rank == r - 1)
+                    {
+                        a.Rank += 1;
+                    }
                 }
+                else
+                {
+                    context.Achievements.Add(new Achievement() { Id = userid, Name = ParentName, Rank = 0 });
+                }
+                await context.SaveChangesAsync();
             }
-            else
-            {
-                context.Achievements.Add(new Achievement() { Id = userid, Name = ParentName, Rank = 0 });
-                await Notification.SendAchievement(this, channel, user);
-            }
-            await context.SaveChangesAsync();
+
+            await Notification.SendAchievement(this, channel, user);
         }
     }
 }

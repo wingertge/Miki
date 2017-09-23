@@ -1,27 +1,23 @@
-﻿using IA;
-using IA.Events;
-using IA.Events.Attributes;
+﻿using IA.Events.Attributes;
 using IA.SDK.Events;
-using IA.SDK.Interfaces;
 using Miki.Languages;
-using Miki.Objects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Miki.API.Imageboards;
+using Miki.API.Imageboards.Enums;
+using Miki.API.Imageboards.Interfaces;
+using Miki.API.Imageboards.Objects;
 
 namespace Miki.Modules
 {
     [Module(Name = "nsfw", Nsfw = true)]
-    class NsfwModule
+    internal class NsfwModule
     {
-        [Command(Name = "gelbooru", Aliases = new string[] { "gel" })]
+        [Command(Name = "gelbooru", Aliases = new[] { "gel" })]
         public async Task RunGelbooru(EventContext e)
         {
-            IPost s = GelbooruPost.Create(e.arguments, ImageRating.EXPLICIT);
+            ILinkable s = ImageboardProviderPool.GetProvider<GelbooruPost>().GetPost(e.arguments, ImageboardRating.EXPLICIT);
 
-            if(s == null)
+            if (s == null)
             {
                 await Utils.ErrorEmbed(Locale.GetEntity(e.Channel.Id), "Couldn't find anything with these tags!")
                     .SendToChannel(e.Channel);
@@ -29,14 +25,14 @@ namespace Miki.Modules
 
             await Utils.Embed
                 .SetTitle("Gelbooru")
-                .SetImageUrl(s.ImageUrl)
+                .SetImageUrl(s.Url)
                 .SendToChannel(e.Channel.Id);
         }
 
-        [Command(Name = "rule34", Aliases = new string[] { "r34" })]
+        [Command(Name = "rule34", Aliases = new[] { "r34" })]
         public async Task RunRule34(EventContext e)
         {
-            IPost s = Rule34Post.Create(e.arguments, ImageRating.EXPLICIT);
+            ILinkable s = ImageboardProviderPool.GetProvider<Rule34Post>().GetPost(e.arguments, ImageboardRating.EXPLICIT);
 
             if (s == null)
             {
@@ -46,14 +42,14 @@ namespace Miki.Modules
 
             await Utils.Embed
                 .SetTitle("Rule34")
-                .SetImageUrl(s.ImageUrl)
+                .SetImageUrl(s.Url)
                 .SendToChannel(e.Channel.Id);
         }
 
         [Command(Name = "e621")]
         public async Task RunE621(EventContext e)
         {
-            IPost s = E621Post.Create(e.arguments, ImageRating.EXPLICIT);
+            ILinkable s = ImageboardProviderPool.GetProvider<E621Post>().GetPost(e.arguments, ImageboardRating.EXPLICIT);
 
             if (s == null)
             {
@@ -63,7 +59,24 @@ namespace Miki.Modules
 
             await Utils.Embed
                 .SetTitle("E621")
-                .SetImageUrl(s.ImageUrl)
+                .SetImageUrl(s.Url)
+                .SendToChannel(e.Channel.Id);
+        }
+
+        [Command(Name = "yandere")]
+        public async Task RunYandere(EventContext e)
+        {
+            ILinkable s = ImageboardProviderPool.GetProvider<YanderePost>().GetPost(e.arguments, ImageboardRating.EXPLICIT);
+
+            if (s == null)
+            {
+                await Utils.ErrorEmbed(Locale.GetEntity(e.Channel.Id), "Couldn't find anything with these tags!")
+                    .SendToChannel(e.Channel);
+            }
+
+            await Utils.Embed
+                .SetTitle("YANDE.RE")
+                .SetImageUrl(s.Url)
                 .SendToChannel(e.Channel.Id);
         }
     }

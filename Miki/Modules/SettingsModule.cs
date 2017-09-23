@@ -1,5 +1,4 @@
-﻿using Discord;
-using IA;
+﻿using IA;
 using IA.Events;
 using IA.Events.Attributes;
 using IA.SDK;
@@ -7,16 +6,14 @@ using IA.SDK.Events;
 using IA.SDK.Interfaces;
 using Miki.Languages;
 using Miki.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Miki.Modules
 {
     [Module(Name = "settings")]
-    class SettingsModule
+    internal class SettingsModule
     {
         [Command(Name = "toggledm")]
         public async Task ToggleDmAsync(EventContext e)
@@ -96,6 +93,75 @@ namespace Miki.Modules
             }
         }
 
+        [Command(Name = "showmodule")]
+        public async Task ConfigAsync(EventContext e)
+        {
+            IModule module = e.commandHandler.GetModule(e.arguments);
+
+            if (module != null)
+            {
+                IDiscordEmbed embed = Utils.Embed.SetTitle( e.arguments.ToUpper() );
+
+                string content = "";
+
+                foreach (RuntimeCommandEvent ev in module.Events.OrderBy((x) => x.Name))
+                {
+                    content += (await ev.IsEnabled(e.Channel.Id) ? "<:iconenabled:341251534522286080>" : "<:icondisabled:341251533754728458>") + " " + ev.Name + "\n";
+                }
+
+                embed.AddInlineField("Events", content);
+
+                content = "";
+
+                foreach (IService ev in module.Services.OrderBy((x) => x.Name))
+                {
+                    content += (await ev.IsEnabled(e.Channel.Id) ? "<:iconenabled:341251534522286080>" : "<:icondisabled:341251533754728458>") + " " + ev.Name + "\n";
+                }
+
+                if( !string.IsNullOrEmpty( content ) ) embed.AddInlineField("Services", content);
+
+                await embed.SendToChannel(e.Channel);
+            }
+        }
+
+		[Command( Name = "showmodules" )]
+		public async Task ShowModulesAsync( EventContext e )
+		{
+			List<string> modules = new List<string>();
+			CommandHandler commandHandler = Bot.instance.Events.CommandHandler;
+			EventAccessibility userEventAccessibility = commandHandler.GetUserAccessibility( e.message );
+
+			foreach( ICommandEvent ev in commandHandler.Commands.Values )
+			{
+				if( userEventAccessibility >= ev.Accessibility )
+				{
+					if( ev.Module != null && !modules.Contains( ev.Module.Name.ToUpper() ) )
+					{
+						modules.Add( ev.Module.Name.ToUpper() );
+					}
+				}
+			}
+
+			modules.Sort();
+
+			string firstColumn = "", secondColumn = "";
+
+			for(int i = 0; i < modules.Count(); i++)
+			{
+				string output = $"{( await e.commandHandler.GetModule( modules[i] ).IsEnabled( e.Channel.Id ) ? "<:iconenabled:341251534522286080>" : "<:icondisabled:341251533754728458>" )} {modules[i]}\n";
+				if(i < modules.Count() / 2 + 1)
+				{
+					firstColumn += output; 
+				} 
+				else 
+				{
+					secondColumn += output;
+				}
+			}
+
+			await Utils.Embed.SetTitle( $"Module Status for '{e.Channel.Name}'" ).AddInlineField( "Column 1", firstColumn ).AddInlineField( "Column 2", secondColumn ).SendToChannel( e.Channel );
+		}
+
         [Command(Name = "setlocale", Accessibility = EventAccessibility.ADMINONLY)]
         public async Task SetLocale(EventContext e)
         {
@@ -104,9 +170,9 @@ namespace Miki.Modules
                 ChannelLanguage language = await context.Languages.FindAsync(e.Channel.Id.ToDbLong());
                 Locale locale = Locale.GetEntity(e.Channel.Id.ToDbLong());
 
-                if (!Locale.Locales.ContainsKey(e.arguments.ToLower()))
+                if (!Locale.LocaleNames.ContainsKey(e.arguments.ToLower()))
                 {
-                    await Utils.ErrorEmbed(locale, "{0} is not a valid language. use `>help setlocale` to see all of the memes xd").SendToChannel(e.Channel);
+                    await Utils.ErrorEmbed(locale, $"{e.arguments} is not a valid language. use `>listlocale` to check all languages available.").SendToChannel(e.Channel);
                     return;
                 }
 
@@ -115,9 +181,10 @@ namespace Miki.Modules
                     language = context.Languages.Add(new ChannelLanguage() { EntityId = e.Channel.Id.ToDbLong(), Language = e.arguments.ToLower() });
                 }
 
-                language.Language = e.arguments.ToLower();
-                await Utils.SuccessEmbed(locale, "Set locale to `{0}`\n\n**WARNING:** this feature is not fully implemented yet. use at your own risk.").SendToChannel(e.Channel);
+                language.Language = Locale.LocaleNames[e.arguments.ToLower()];
                 await context.SaveChangesAsync();
+
+                await Utils.SuccessEmbed(e.Channel.GetLocale(), $"Set locale to `{e.arguments}`\n\n**WARNING:** this feature is not fully implemented yet. use at your own risk.").SendToChannel(e.Channel);
             }
         }
 
@@ -148,7 +215,7 @@ namespace Miki.Modules
         {
             await Utils.Embed
                 .SetTitle("Available locales")
-                .SetDescription("`" + string.Join("`, `", Locale.Locales.Keys) + "`")
+                .SetDescription("`" + string.Join("`, `", Locale.LocaleNames.Keys) + "`")
                 .SendToChannel(e.Channel.Id);
         }
     }

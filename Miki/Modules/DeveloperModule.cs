@@ -5,16 +5,10 @@ using IA.Events;
 using IA.Events.Attributes;
 using IA.SDK;
 using IA.SDK.Events;
-using IA.SDK.Extensions;
 using IA.SDK.Interfaces;
-using Miki.Accounts;
-using Miki.Accounts.Achievements;
-using Miki.Languages;
 using Miki.Models;
-using Miki.Models.Objects.Guild;
-using System;
+using NLua;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,7 +20,6 @@ namespace Miki.Modules
     {
         public DeveloperModule(RuntimeModule module)
         {
-
         }
 
         [Command(Name = "identifyemoji", Accessibility = EventAccessibility.DEVELOPERONLY)]
@@ -53,7 +46,6 @@ namespace Miki.Modules
         [Command(Name = "sayembed", Accessibility = EventAccessibility.DEVELOPERONLY)]
         public async Task SayEmbedAsync(EventContext e)
         {
-
             await Utils.Embed.AddInlineField("SAY", e.arguments).SendToChannel(e.Channel);
         }
 
@@ -69,7 +61,29 @@ namespace Miki.Modules
             await e.message.Discord.SetGameAsync(e.arguments, "https://www.twitch.tv/velddev");
         }
 
-        [Command(Name ="changeavatar", Accessibility = EventAccessibility.DEVELOPERONLY)]
+        [Command(Name = "ignore", Accessibility = EventAccessibility.DEVELOPERONLY)]
+        public async Task IgnoreIdAsync(EventContext e)
+        {
+            if (ulong.TryParse(e.arguments, out ulong id))
+            {
+                Bot.instance.Events.Ignore(id);
+                await e.Channel.SendMessage(":ok_hand:");
+            }
+        }
+
+        [Command(Name = "dev", Accessibility = EventAccessibility.DEVELOPERONLY)]
+        public async Task ShowCacheAsync(EventContext e)
+        {
+            await e.Channel.SendMessage("Yes, this is Veld, my developer.");
+        }
+
+        [Command(Name = "qembed", Accessibility = EventAccessibility.DEVELOPERONLY)]
+        public async Task QueryEmbedAsync(EventContext e)
+        {
+            await new RuntimeEmbed().Query(e.arguments).SendToChannel(e.Channel);
+        }
+
+        [Command(Name = "changeavatar", Accessibility = EventAccessibility.DEVELOPERONLY)]
         public async Task ChangeAvatarAsync(EventContext e)
         {
             Image s = new Image(new FileStream("./" + e.arguments, FileMode.Open));
@@ -88,7 +102,30 @@ namespace Miki.Modules
 
             foreach (DiscordSocketClient c in Bot.instance.Client.Shards)
             {
-                embed.AddInlineField("Shard " + c.ShardId, "State:  {c.ConnectionState}\nPing:   {c.Latency}\nGuilds: {c.Guilds.Count}");
+                embed.AddInlineField("Shard " + c.ShardId, $"State:  {c.ConnectionState}\nPing:   {c.Latency}\nGuilds: {c.Guilds.Count}");
+            }
+
+            await embed.SendToChannel(context.Channel);
+        }
+
+        [Command(Name = "spellcheck", Accessibility = EventAccessibility.DEVELOPERONLY)]
+        public async Task SpellCheckAsync(EventContext context)
+        {
+            IDiscordEmbed embed = Utils.Embed;
+
+            embed.SetTitle("Spellcheck - top results");
+
+            API.StringComparison.StringComparer sc = new API.StringComparison.StringComparer(context.commandHandler.GetAllEventNames());
+            List<API.StringComparison.StringComparison> best = sc.CompareToAll(context.arguments)
+                                                                 .OrderBy(z => z.score)
+                                                                 .ToList();
+            int x = 1;
+
+            foreach (API.StringComparison.StringComparison c in best)
+            {
+                embed.AddInlineField($"#{x}", c);
+                x++;
+                if (x > 16) break;
             }
 
             await embed.SendToChannel(context.Channel);
@@ -102,12 +139,11 @@ namespace Miki.Modules
                 if (context.message.MentionedUserIds.Count > 0)
                 {
                     Achievement a = await database.Achievements.FindAsync(context.message.MentionedUserIds.First().ToDbLong(), "donator");
-                    if(a == null)
+                    if (a == null)
                     {
                         database.Achievements.Add(new Achievement() { Id = context.message.MentionedUserIds.First().ToDbLong(), Name = "donator", Rank = 0 });
                         await database.SaveChangesAsync();
                     }
-
                 }
                 else
                 {
@@ -134,6 +170,31 @@ namespace Miki.Modules
                 }
                 u.Currency = int.Parse(e.arguments.Split(' ')[1]);
                 await context.SaveChangesAsync();
+                await e.Channel.SendMessage(":ok_hand:");
+            }
+        }
+
+        [Command(Name = "finduserbyid", Accessibility = EventAccessibility.DEVELOPERONLY)]
+        public async Task FindUserById(EventContext e)
+        {
+            IDiscordUser u = new RuntimeUser(Bot.instance.Client.GetUser(ulong.Parse(e.arguments)));
+
+            await e.Channel.SendMessage(u.Username + "#" + u.Discriminator);
+        }
+
+        [Command(Name = "setexp", Accessibility = EventAccessibility.DEVELOPERONLY)]
+        public async Task SetExp(EventContext e)
+        {
+            using (var context = new MikiContext())
+            {
+                LocalExperience u = await context.Experience.FindAsync(e.Guild.Id.ToDbLong(), e.message.MentionedUserIds.First().ToDbLong());
+                if (u == null)
+                {
+                    return;
+                }
+                u.Experience = int.Parse(e.arguments.Split(' ')[1]);
+                await context.SaveChangesAsync();
+                await e.Channel.SendMessage(":ok_hand:");
             }
         }
     }

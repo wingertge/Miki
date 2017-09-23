@@ -6,6 +6,8 @@ using Miki.Languages;
 using Miki.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Miki.Accounts
@@ -19,6 +21,7 @@ namespace Miki.Accounts
 
         public event LevelUpDelegate OnLocalLevelUp;
         public event LevelUpDelegate OnGlobalLevelUp;
+
         public event Func<IDiscordMessage, User, User, int, Task> OnTransactionMade;
 
         private Bot bot;
@@ -31,16 +34,37 @@ namespace Miki.Accounts
 
             OnLocalLevelUp += async (a, e, l) =>
             {
+                long guildId = e.Guild.Id.ToDbLong();
                 Locale locale = Locale.GetEntity(e.Id.ToDbLong());
+                List<LevelRole> rolesObtained = new List<LevelRole>();
 
-                int randomNumber = MikiRandom.GetRandomNumber(0, 10);
+                int randomNumber = MikiRandom.Next(0, 10);
                 int currencyAdded = (l * 10 + randomNumber);
-                    
+
                 using (var context = new MikiContext())
                 {
                     User user = await context.Users.FindAsync(a.Id);
-                    await user.AddCurrencyAsync(e, null, currencyAdded);
-                    await context.SaveChangesAsync();
+
+                    if (user != null)
+                    {
+                        await user.AddCurrencyAsync(currencyAdded, e);
+                        await context.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        Log.Warning("User levelled up was null.");
+                    }
+
+                     rolesObtained = context.LevelRoles.AsNoTracking()
+                        .Where(p => p.GuildId == guildId && p.RequiredLevel == l)
+                        .ToList();
+                }
+
+                List<string> allRolesAdded = new List<string>();
+
+                foreach(IDiscordRole role in rolesObtained)
+                {
+                    allRolesAdded.Add("Role: " + role.Name);
                 }
 
                 IDiscordEmbed embed = new RuntimeEmbed(new EmbedBuilder())
@@ -50,7 +74,7 @@ namespace Miki.Accounts
                     Color = new IA.SDK.Color(1, 0.7f, 0.2f)
                 };
 
-                embed.AddField(locale.GetString("miki_generic_reward"), "🔸" + currencyAdded.ToString());
+                embed.AddField(locale.GetString("miki_generic_reward"), "🔸" + currencyAdded.ToString() + "\n" + string.Join("\n", allRolesAdded));
                 await Notification.SendChannel(e, embed);
             };
 
@@ -70,42 +94,32 @@ namespace Miki.Accounts
 
             if (lastTimeExpGranted[e.Author.Id].AddMinutes(1) < DateTime.Now)
             {
-                using (var context = new MikiContext())
+                int addedExperience = MikiRandom.Next(2, 5);
+
+                await MeruUtils.TryAsync(async () =>
                 {
-                    User a = await context.Users.FindAsync(e.Author.Id.ToDbLong());
+                    User a;
+                    LocalExperience experience;
 
-                    if (a == null)
-                    {
-                        a = User.Create(context, e);
-                    }
+                    long userId = e.Author.Id.ToDbLong();
 
-                    try
+                    int currentGlobalLevel = 0;
+                    int currentLocalLevel = 0;
+
+                    using (var context = new MikiContext())
                     {
-                        LocalExperience experience = await context.Experience.FindAsync(e.Guild.Id.ToDbLong(), a.Id);
+                        a = await context.Users.FindAsync(e.Author.Id.ToDbLong());
+
+                        if (a == null)
+                        {   
+                            a = await User.CreateAsync(e);
+                        }
+
+                        experience = await context.Experience.FindAsync(e.Guild.Id.ToDbLong(), userId);
 
                         if (experience == null)
                         {
-                            experience = context.Experience.Add(new LocalExperience() { server_id = e.Guild.Id.ToDbLong(), user_id = a.Id, Experience = 0, LastExperienceTime = DateTime.Now - new TimeSpan(1) });
-                        }
-
-                        GuildUser guildUser = await context.GuildUsers.FindAsync(e.Guild.Id.ToDbLong());
-
-                        if (guildUser == null)
-                        {
-                            int value = await context.Database.SqlQuery<int>
-                                ("select Sum(Experience) as value from LocalExperience where ServerId = @p0;", e.Guild.Id.ToDbLong())
-                                .FirstAsync();
-
-                            guildUser = context.GuildUsers.Add(new GuildUser()
-                            {
-                                Name = e.Guild.Name,
-                                Id = e.Guild.Id.ToDbLong(),
-                                Experience = value,
-                                UserCount = Bot.instance.Client.GetGuild(e.Guild.Id).Users.Count,
-                                LastRivalRenewed = DateTime.Now.AddYears(-1),
-                                MinimalExperienceToGetRewards = 100,
-                            });
-                            await context.SaveChangesAsync();
+                            experience = await LocalExperience.CreateAsync(context, e.Guild.Id.ToDbLong(), e.Author.Id.ToDbLong());
                         }
 
                         if (experience.LastExperienceTime == null)
@@ -113,41 +127,61 @@ namespace Miki.Accounts
                             experience.LastExperienceTime = DateTime.Now;
                         }
 
-                        int currentLocalLevel = a.CalculateLevel(experience.Experience);
-                        int currentGlobalLevel = a.CalculateLevel(a.Total_Experience);
-                        int addedExperience = MikiRandom.GetRandomNumber(2, 10);
+                        GuildUser guildUser = await context.GuildUsers.FindAsync(e.Guild.Id.ToDbLong());
+                        if (guildUser == null)
+                        {
+                            long guildId = e.Guild.Id.ToDbLong();
+                            int? userCount = Bot.instance.Client.GetGuild(e.Guild.Id).Users.Count;                
+
+                            int? value = await context.Experience
+                                                .Where(x => x.ServerId == guildId)
+                                                .SumAsync(x => x.Experience);
+
+                            guildUser = new GuildUser();
+                            guildUser.Name = e.Guild.Name;
+                            guildUser.Id = guildId;
+                            guildUser.Experience = value ?? 0;
+                            guildUser.UserCount = userCount ?? 0;
+                            guildUser.LastRivalRenewed = Utils.MinDbValue;
+                            guildUser.MinimalExperienceToGetRewards = 100;
+
+                            guildUser = context.GuildUsers.Add(guildUser);
+                        }
+
+                        currentLocalLevel = User.CalculateLevel(experience.Experience);
+                        currentGlobalLevel = User.CalculateLevel(a.Total_Experience);
 
                         experience.Experience += addedExperience;
                         a.Total_Experience += addedExperience;
                         guildUser.Experience += addedExperience;
 
-                        if (currentLocalLevel != a.CalculateLevel(experience.Experience))
-                        {
-                            await LevelUpLocalAsync(e, a, currentLocalLevel + 1);
-                        }
-                        if (currentGlobalLevel != a.CalculateLevel(a.Total_Experience))
-                        {
-                            await LevelUpGlobalAsync(e, a, currentGlobalLevel + 1);
-                        }
-
-                        experience.LastExperienceTime = DateTime.Now;
-                        lastTimeExpGranted[e.Author.Id] = DateTime.Now;
+                        await context.SaveChangesAsync();
                     }
-                    catch (Exception ex)
+
+
+                    if (currentLocalLevel != User.CalculateLevel(experience.Experience))
                     {
-                        Log.ErrorAt("Accounts.Check", ex.Message + ex.StackTrace + ex.Source);
+                        await LevelUpLocalAsync(e, a, currentLocalLevel + 1);
                     }
 
-                    await context.SaveChangesAsync();
-                }
+                    if (currentGlobalLevel != User.CalculateLevel(a.Total_Experience))
+                    {
+                        await LevelUpGlobalAsync(e, a, currentGlobalLevel + 1);
+                    }
+
+                    lastTimeExpGranted[e.Author.Id] = DateTime.Now;
+                });
+
             }
         }
 
         #region Events
+
         public async Task LevelUpLocalAsync(IDiscordMessage e, User a, int l)
         {
             await OnLocalLevelUp.Invoke(a, e.Channel, l);
         }
+
         public async Task LevelUpGlobalAsync(IDiscordMessage e, User a, int l)
         {
             await OnGlobalLevelUp.Invoke(a, e.Channel, l);
@@ -175,6 +209,7 @@ namespace Miki.Accounts
         {
             await UpdateGuildUserCountAsync(arg.Guild.Id);
         }
+
         private async Task Client_UserJoined(Discord.WebSocket.SocketGuildUser arg)
         {
             await UpdateGuildUserCountAsync(arg.Guild.Id);
@@ -186,7 +221,7 @@ namespace Miki.Accounts
             {
                 GuildUser g = await context.GuildUsers.FindAsync(id.ToDbLong());
 
-                if(g == null)
+                if (g == null)
                 {
                     return;
                 }
@@ -195,6 +230,7 @@ namespace Miki.Accounts
                 await context.SaveChangesAsync();
             }
         }
-        #endregion
+
+        #endregion Events
     }
 }

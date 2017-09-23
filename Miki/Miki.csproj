@@ -9,11 +9,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Miki</RootNamespace>
     <AssemblyName>Miki</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -64,32 +65,41 @@
       <HintPath>..\packages\BouncyCastle.1.8.1\lib\BouncyCastle.Crypto.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Discord.Net.Commands, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Discord.Net.Commands.1.0.1\lib\netstandard1.1\Discord.Net.Commands.dll</HintPath>
+    <Reference Include="Discord.Net.Commands, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Discord.Net.Commands.1.0.2\lib\netstandard1.1\Discord.Net.Commands.dll</HintPath>
     </Reference>
-    <Reference Include="Discord.Net.Core, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Discord.Net.Core.1.0.1\lib\net45\Discord.Net.Core.dll</HintPath>
+    <Reference Include="Discord.Net.Core, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Discord.Net.Core.1.0.2\lib\net45\Discord.Net.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Discord.Net.Providers.WS4Net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Discord.Net.Providers.WS4Net.1.0.0-rc3-00746\lib\net45\Discord.Net.Providers.WS4Net.dll</HintPath>
+    <Reference Include="Discord.Net.Rest, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Discord.Net.Rest.1.0.2\lib\net45\Discord.Net.Rest.dll</HintPath>
     </Reference>
-    <Reference Include="Discord.Net.Rest, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Discord.Net.Rest.1.0.1\lib\net45\Discord.Net.Rest.dll</HintPath>
+    <Reference Include="Discord.Net.Rpc, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Discord.Net.Rpc.1.0.2\lib\net45\Discord.Net.Rpc.dll</HintPath>
     </Reference>
-    <Reference Include="Discord.Net.Rpc, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Discord.Net.Rpc.1.0.1\lib\net45\Discord.Net.Rpc.dll</HintPath>
+    <Reference Include="Discord.Net.Webhook, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Discord.Net.Webhook.1.0.2\lib\netstandard1.1\Discord.Net.Webhook.dll</HintPath>
     </Reference>
-    <Reference Include="Discord.Net.Webhook, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Discord.Net.Webhook.1.0.1\lib\netstandard1.1\Discord.Net.Webhook.dll</HintPath>
+    <Reference Include="Discord.Net.WebSocket, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Discord.Net.WebSocket.1.0.2\lib\net45\Discord.Net.WebSocket.dll</HintPath>
     </Reference>
-    <Reference Include="Discord.Net.WebSocket, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Discord.Net.WebSocket.1.0.1\lib\net45\Discord.Net.WebSocket.dll</HintPath>
+    <Reference Include="DogStatsD-CSharp-Client, Version=3.0.0.94, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DogStatsD-CSharp-Client.3.0.0\lib\net451\DogStatsD-CSharp-Client.dll</HintPath>
+    </Reference>
+    <Reference Include="EFCache, Version=1.1.0.0, Culture=neutral, PublicKeyToken=46c4868af4307d2c, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.Cache.1.1.0\lib\net45\EFCache.dll</HintPath>
+    </Reference>
+    <Reference Include="EFCache.RedisCache, Version=1.0.5567.18895, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EFCache.RedisCache.0.0.2\lib\EFCache.RedisCache.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework6.Npgsql, Version=3.1.1.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework6.Npgsql.3.1.1\lib\net45\EntityFramework6.Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="Google.Apis, Version=1.20.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.1.20.0\lib\net45\Google.Apis.dll</HintPath>
@@ -126,6 +136,9 @@
     <Reference Include="Imgur.API, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Imgur.API.5.0.0-beta1\lib\net45\Imgur.API.dll</HintPath>
     </Reference>
+    <Reference Include="KeraLua, Version=1.3.2.0, Culture=neutral, PublicKeyToken=04d04586786c6f34, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLua.1.3.2.1\lib\net45\KeraLua.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -158,12 +171,42 @@
     <Reference Include="MySql.Data.Entity.EF6, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.Entity.6.9.9\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
     </Reference>
+    <Reference Include="NCalc, Version=1.3.8.0, Culture=neutral, PublicKeyToken=973cde3f1cafed03, processorArchitecture=MSIL">
+      <HintPath>..\packages\ncalc.1.3.8\lib\NCalc.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Nito.AsyncEx, Version=4.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nito.AsyncEx.4.0.1\lib\net45\Nito.AsyncEx.dll</HintPath>
+    </Reference>
+    <Reference Include="Nito.AsyncEx.Concurrent, Version=4.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nito.AsyncEx.4.0.1\lib\net45\Nito.AsyncEx.Concurrent.dll</HintPath>
+    </Reference>
+    <Reference Include="Nito.AsyncEx.Enlightenment, Version=4.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nito.AsyncEx.4.0.1\lib\net45\Nito.AsyncEx.Enlightenment.dll</HintPath>
+    </Reference>
+    <Reference Include="NLua, Version=1.3.2.0, Culture=neutral, PublicKeyToken=8df2ab518030ea95, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLua.1.3.2.1\lib\net45\NLua.dll</HintPath>
+    </Reference>
+    <Reference Include="Npgsql, Version=3.2.5.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.3.2.5\lib\net451\Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="protobuf-net, Version=2.0.0.668, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
+      <HintPath>..\packages\protobuf-net.2.0.0.668\lib\net40\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="SharpRaven, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpRaven.2.2.0\lib\net45\SharpRaven.dll</HintPath>
+    </Reference>
+    <Reference Include="StackExchange.Redis, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackExchange.Redis.1.1.603\lib\net46\StackExchange.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="SteamKit2, Version=1.8.3.0, Culture=neutral, PublicKeyToken=ed3ce47ed5aad940, processorArchitecture=MSIL">
+      <HintPath>..\packages\SteamKit2.1.8.3\lib\net45\SteamKit2.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -278,6 +321,9 @@
       <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -311,13 +357,45 @@
     <Compile Include="Accounts\Achievements\Objects\UserUpdateAchievement.cs" />
     <Compile Include="Accounts\EmojiBar.cs" />
     <Compile Include="Accounts\LeaderboardsItem.cs" />
+    <Compile Include="API\Cards\CardManager.cs" />
+    <Compile Include="API\Cards\CardSet.cs" />
+    <Compile Include="API\Cards\Enums\CardType.cs" />
+    <Compile Include="API\Cards\Enums\CardValue.cs" />
+    <Compile Include="API\Cards\Objects\Card.cs" />
+    <Compile Include="API\Cards\Objects\CardHand.cs" />
     <Compile Include="API\Gambling\GamblingApi.cs" />
+    <Compile Include="API\Imageboards\ImageboardConfigurations.cs" />
+    <Compile Include="API\Imageboards\ImageboardPost.cs" />
+    <Compile Include="API\Imageboards\Enums\ImageboardRating.cs" />
+    <Compile Include="API\Imageboards\ImageboardProviderPool.cs" />
+    <Compile Include="API\Imageboards\Interfaces\ILinkable.cs" />
+    <Compile Include="API\Imageboards\Objects\BooruPost.cs" />
+    <Compile Include="API\Imageboards\Objects\CatApiPost.cs" />
+    <Compile Include="API\Imageboards\Objects\E621Post.cs" />
+    <Compile Include="API\Imageboards\Objects\GelbooruPost.cs" />
+    <Compile Include="API\Imageboards\Objects\ImgurPost.cs" />
+    <Compile Include="API\Imageboards\Objects\KonachanPost.cs" />
+    <Compile Include="API\Imageboards\Objects\Rule34Post.cs" />
+    <Compile Include="API\Imageboards\Objects\SafebooruPost.cs" />
+    <Compile Include="API\Imageboards\Objects\YanderePost.cs" />
     <Compile Include="API\Patreon\PatreonApi.cs" />
     <Compile Include="API\Patreon\Objects\PatreonPledge.cs" />
     <Compile Include="API\Reminder\ReminderAPI.cs" />
+    <Compile Include="API\Steam\Objects\SteamGameInfo.cs" />
+    <Compile Include="API\Steam\Objects\SteamUserInfo.cs" />
+    <Compile Include="API\Steam\SteamApi.cs" />
+    <Compile Include="API\StringComparison\StringComparer.cs" />
     <Compile Include="API\Urban Dictionary\UrbanDictionaryApi.cs" />
-    <Compile Include="Languages\ar-AE.Designer.cs" />
-    <Compile Include="Languages\cz-CZ.Designer.cs" />
+    <Compile Include="Languages\ar-AE.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ar-AE.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Languages\cz-CZ.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>cz-CZ.resx</DependentUpon>
+    </Compile>
     <Compile Include="Languages\da-DK.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -333,11 +411,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>es-ES.resx</DependentUpon>
     </Compile>
-    <Compile Include="Languages\fi-FI.Designer.cs" />
+    <Compile Include="Languages\fi-FI.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>fi-FI.resx</DependentUpon>
+    </Compile>
     <Compile Include="Languages\fr-FR.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>fr-FR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Languages\he-HE.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>he-HE.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Languages\hu-HU.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>hu-HU.resx</DependentUpon>
     </Compile>
     <Compile Include="Languages\ja.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -350,15 +442,36 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>nl-NL.resx</DependentUpon>
     </Compile>
-    <Compile Include="Languages\pt-PT.Designer.cs" />
+    <Compile Include="Languages\no-NO.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>no-NO.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Languages\pt-PT.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>pt-PT.resx</DependentUpon>
+    </Compile>
     <Compile Include="Languages\ru-RU.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ru-RU.resx</DependentUpon>
     </Compile>
-    <Compile Include="Languages\sv-SE.Designer.cs" />
-    <Compile Include="Languages\zh-CHS.Designer.cs" />
-    <Compile Include="Languages\zh-CHT.Designer.cs" />
+    <Compile Include="Languages\sv-SE.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sv-SE.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Languages\zh-CHS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>zh-CHS.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Languages\zh-CHT.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>zh-CHT.resx</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201705071816182_Initial.cs" />
     <Compile Include="Migrations\201705071816182_Initial.Designer.cs">
       <DependentUpon>201705071816182_Initial.cs</DependentUpon>
@@ -427,6 +540,14 @@
     <Compile Include="Migrations\201707170136413_add-rep.Designer.cs">
       <DependentUpon>201707170136413_add-rep.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708030141215_sqlserver-to-postgres.cs" />
+    <Compile Include="Migrations\201708030141215_sqlserver-to-postgres.Designer.cs">
+      <DependentUpon>201708030141215_sqlserver-to-postgres.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708030201584_Fix-LocalExp.cs" />
+    <Compile Include="Migrations\201708030201584_Fix-LocalExp.Designer.cs">
+      <DependentUpon>201708030201584_Fix-LocalExp.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Objects\ApiKeysModel.cs" />
     <Compile Include="Models\Objects\Guild\Timer.cs" />
@@ -447,17 +568,40 @@
     <Compile Include="Models\Objects\Global\Setting.cs" />
     <Compile Include="Models\Objects\User\User.cs" />
     <Compile Include="Models\Objects\Global\VoteCount.cs" />
+    <Compile Include="Modules\Accounts\Services\AchievementsService.cs" />
+    <Compile Include="Modules\Accounts\Services\ExperienceTrackerService.cs" />
     <Compile Include="Modules\ActionsModule.cs" />
     <Compile Include="Modules\DonatorModule.cs" />
-    <Compile Include="Modules\GamesModule.cs" />
+    <Compile Include="Modules\Gambling\GamesModule.cs" />
+    <Compile Include="Modules\Gambling\Managers\BlackjackManager.cs" />
+    <Compile Include="Modules\Gambling\Managers\RPS\RPSManager.cs" />
+    <Compile Include="Modules\Gambling\Managers\RPS\Objects\RPSWeapon.cs" />
     <Compile Include="Modules\GeneralModule.cs" />
     <Compile Include="Modules\GuildAccountsModule.cs" />
+    <Compile Include="Modules\Logging\Interpreter\LogQueryInterpreter.cs" />
+    <Compile Include="Modules\Logging\WelcomeMessages.cs" />
+    <Compile Include="Modules\MarriageModule.cs" />
     <Compile Include="Modules\NsfwModule.cs" />
+    <Compile Include="Modules\OsuModule.cs" />
+    <Compile Include="Modules\Overwatch\API\OverwatchApi.cs" />
+    <Compile Include="Modules\Overwatch\Objects\OverwatchAchievements.cs" />
+    <Compile Include="Modules\Overwatch\Objects\OverwatchAverageStats.cs" />
+    <Compile Include="Modules\Overwatch\Objects\OverwatchGameplayStats.cs" />
+    <Compile Include="Modules\Overwatch\Objects\OverwatchHeroes.cs" />
+    <Compile Include="Modules\Overwatch\Objects\OverwatchOverallStats.cs" />
+    <Compile Include="Modules\Overwatch\Objects\OverwatchGamemode.cs" />
+    <Compile Include="Modules\Overwatch\Objects\OverwatchPlaytime.cs" />
+    <Compile Include="Modules\Overwatch\Objects\OverwatchRegion.cs" />
+    <Compile Include="Modules\Overwatch\Objects\OverwatchStats.cs" />
+    <Compile Include="Modules\Overwatch\Objects\OverwatchUserContext.cs" />
+    <Compile Include="Modules\Overwatch\Objects\OverwatchUserResponse.cs" />
+    <Compile Include="Modules\Overwatch\Objects\RequestMetadata.cs" />
+    <Compile Include="Modules\Overwatch\OverwatchModule.cs" />
     <Compile Include="Modules\ReactionsModule.cs" />
     <Compile Include="Modules\RocketLeagueModule.cs" />
     <Compile Include="Modules\ServerCountModule.cs" />
     <Compile Include="Modules\SettingsModule.cs" />
-    <Compile Include="Modules\WelcomeMessages.cs" />
+    <Compile Include="Modules\SteamModule.cs" />
     <Compile Include="Notification.cs" />
     <Compile Include="API\Rocket League\Objects\RocketLeagueOptions.cs" />
     <Compile Include="API\Rocket League\Objects\RocketLeaguePlatform.cs" />
@@ -468,19 +612,12 @@
     <Compile Include="API\Rocket League\Objects\RocketLeagueStats.cs" />
     <Compile Include="API\Rocket League\Objects\RocketLeagueTier.cs" />
     <Compile Include="API\Rocket League\Objects\RocketLeagueUser.cs" />
-    <Compile Include="Objects\OverwatchUserCompetitive.cs" />
-    <Compile Include="Objects\OverwatchUserData.cs" />
-    <Compile Include="Objects\OverwatchUserGames.cs" />
-    <Compile Include="Objects\OverwatchUserPlaytime.cs" />
     <Compile Include="Global.cs" />
-    <Compile Include="Modules\AccountsModule.cs" />
+    <Compile Include="Modules\Accounts\AccountsModule.cs" />
     <Compile Include="Modules\AdminModule.cs" />
     <Compile Include="Modules\DeveloperModule.cs" />
     <Compile Include="Modules\FunModule.cs" />
     <Compile Include="Modules\PastaModule.cs" />
-    <Compile Include="Objects\CatImage.cs" />
-    <Compile Include="Objects\Posts.cs" />
-    <Compile Include="Objects\Imgur\ImgurImage.cs" />
     <Compile Include="API\Rocket League\RocketLeagueApi.cs" />
     <Compile Include="API\Urban Dictionary\Objects\UrbanDictionaryEntryInformation.cs" />
     <Compile Include="API\Urban Dictionary\Objects\UrbanDictionaryInformation.cs" />
@@ -499,24 +636,6 @@
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Meru\Meru.Commands\Meru.Commands.csproj">
-      <Project>{c733b761-b55f-4272-b03a-c4cc49257ef6}</Project>
-      <Name>Meru.Commands</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Meru\Meru.SDK\Meru.SDK.csproj">
-      <Project>{b8ffa60f-2c45-449f-ad4d-cf1c5a3075d4}</Project>
-      <Name>Meru.SDK</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Meru\Meru\Meru.csproj">
-      <Project>{e4b74dd1-8ccb-4fcc-9bde-0f79c43211e7}</Project>
-      <Name>Meru</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Meru\RestClient\RestClient.csproj">
-      <Project>{48155a63-8e59-4042-8130-7ad40315b8a9}</Project>
-      <Name>RestClient</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
@@ -530,8 +649,14 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Languages\ar-AE.resx" />
-    <EmbeddedResource Include="Languages\cz-CZ.resx" />
+    <EmbeddedResource Include="Languages\ar-AE.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ar-AE.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\cz-CZ.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>cz-CZ.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Languages\da-DK.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>da-DK.Designer.cs</LastGenOutput>
@@ -544,10 +669,21 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>es-ES.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Languages\fi-FI.resx" />
+    <EmbeddedResource Include="Languages\fi-FI.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>fi-FI.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Languages\fr-FR.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>fr-FR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\he-HE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>he-HE.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\hu-HU.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>hu-HU.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Languages\ja.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -557,14 +693,30 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>nl-NL.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Languages\pt-PT.resx" />
+    <EmbeddedResource Include="Languages\no-NO.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>no-NO.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\pt-PT.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>pt-PT.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Languages\ru-RU.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ru-RU.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Languages\sv-SE.resx" />
-    <EmbeddedResource Include="Languages\zh-CHS.resx" />
-    <EmbeddedResource Include="Languages\zh-CHT.resx" />
+    <EmbeddedResource Include="Languages\sv-SE.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>sv-SE.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\zh-CHS.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>zh-CHS.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\zh-CHT.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>zh-CHT.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705071816182_Initial.resx">
       <DependentUpon>201705071816182_Initial.cs</DependentUpon>
     </EmbeddedResource>
@@ -580,6 +732,7 @@
     <EmbeddedResource Include="Languages\en-US.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>en-US.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705190455078_Add-Languages.resx">
       <DependentUpon>201705190455078_Add-Languages.cs</DependentUpon>
@@ -620,6 +773,26 @@
     <EmbeddedResource Include="Migrations\201707170136413_add-rep.resx">
       <DependentUpon>201707170136413_add-rep.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708030141215_sqlserver-to-postgres.resx">
+      <DependentUpon>201708030141215_sqlserver-to-postgres.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708030201584_Fix-LocalExp.resx">
+      <DependentUpon>201708030201584_Fix-LocalExp.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Meru\Meru.SDK\Meru.SDK.csproj">
+      <Project>{b8ffa60f-2c45-449f-ad4d-cf1c5a3075d4}</Project>
+      <Name>Meru.SDK</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Meru\Meru\Meru.csproj">
+      <Project>{e4b74dd1-8ccb-4fcc-9bde-0f79c43211e7}</Project>
+      <Name>Meru</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Meru\RestClient\RestClient.csproj">
+      <Project>{48155a63-8e59-4042-8130-7ad40315b8a9}</Project>
+      <Name>RestClient</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
@@ -629,6 +802,10 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

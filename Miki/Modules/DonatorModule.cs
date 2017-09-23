@@ -3,18 +3,15 @@ using IA.Events.Attributes;
 using IA.SDK.Events;
 using IA.SDK.Interfaces;
 using Miki.Models;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Miki.Modules
 {
     [Module(Name = "Donator")]
-    class DonatorModule
+    internal class DonatorModule
     {
         [Command(Name = "truth")]
         public async Task TruthAsync(EventContext e)
@@ -28,7 +25,6 @@ namespace Miki.Modules
                     await SendNotADonatorError(e.Channel);
                     return;
                 }
-
 
                 if (u.IsDonator(context))
                 {
@@ -66,12 +62,12 @@ namespace Miki.Modules
                 {
                     string url = e.Author.AvatarUrl;
 
-                    if(e.message.Attachments.Count > 0)
+                    if (e.message.Attachments.Count > 0)
                     {
                         url = e.message.Attachments.First().Url;
                     }
 
-                    if(e.message.MentionedUserIds.Count > 0)
+                    if (e.message.MentionedUserIds.Count > 0)
                     {
                         url = (await e.Guild.GetUserAsync(e.message.MentionedUserIds.First())).AvatarUrl;
                     }
@@ -99,7 +95,7 @@ namespace Miki.Modules
                 .SetTitle("Sorry!")
                 .SetDescription("... but you haven't donated yet, please support us with a small donation to unlock these commands!")
                 .AddInlineField("Already donated?", "Make sure to join the Miki Support server and claim your donator status!")
-                .AddInlineField("Where Do I donate?", "You can find our patreon at https://patreon.com/mikibot")
+                .AddInlineField("Where do I donate?", "You can find our patreon at https://patreon.com/mikibot")
                 .SendToChannel(channel);
         }
     }
