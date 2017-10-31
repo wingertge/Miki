@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Miki.Models.Objects.Guild;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Threading.Tasks;
@@ -20,6 +21,9 @@ namespace Miki.Models
 
         [Column("LastExperienceTime")]
         public DateTime LastExperienceTime { get; set; }
+
+		[Column("guild")]
+		public Guild Guild { get; set; }
 
         public static async Task<LocalExperience> CreateAsync(MikiContext context, long ServerId, long userId)
         {

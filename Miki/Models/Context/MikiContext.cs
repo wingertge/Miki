@@ -14,6 +14,8 @@ namespace Miki.Models
         public DbSet<CommandUsage> CommandUsages { get; set; }
         public DbSet<EventMessage> EventMessages { get; set; }
         public DbSet<LocalExperience> Experience { get; set; }
+		public DbSet<Guild> Guilds { get; set; }
+		public DbSet<GuildRole> GuildRoles { get; set; }
         public DbSet<GuildUser> GuildUsers { get; set; }
         public DbSet<ChannelLanguage> Languages { get; set; }
         public DbSet<LevelRole> LevelRoles { get; set; }
