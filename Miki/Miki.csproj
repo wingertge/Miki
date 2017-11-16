@@ -365,9 +365,13 @@
     <Compile Include="API\Cards\Objects\CardHand.cs" />
     <Compile Include="API\Gambling\GamblingApi.cs" />
     <Compile Include="API\GameService\GameService.cs" />
+    <Compile Include="API\GameService\Interfaces\IGameResponse.cs" />
+    <Compile Include="API\GameService\Interfaces\IGameService.cs" />
     <Compile Include="API\GameService\Objects\GameInfo\GameInformation.cs" />
     <Compile Include="API\GameService\Objects\GameResponse.cs" />
     <Compile Include="API\GameService\Objects\GameResult.cs" />
+    <Compile Include="API\GameService\Objects\SlotsResponse.cs" />
+    <Compile Include="API\GameService\Objects\SlotsService.cs" />
     <Compile Include="API\Imageboards\ImageboardConfigurations.cs" />
     <Compile Include="API\Imageboards\ImageboardPost.cs" />
     <Compile Include="API\Imageboards\Enums\ImageboardRating.cs" />

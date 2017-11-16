@@ -25,6 +25,8 @@ namespace Miki.Modules.Gambling
 
 		public GamesModuleNew()
 		{
+			gameService.AddService<SlotsService>();
+
 			// TODO: Make it so this is loaded from a config file.
 			gameService.SetBaseUrl("http://localhost:8000/");
 		}
@@ -37,55 +39,62 @@ namespace Miki.Modules.Gambling
 
 		public async Task StartSlots(EventContext e, int bet)
 		{
-			GameService gameService = GameService.Instance;
-			SlotsInformation game;
+			IGameResponse response = gameService.RunService<SlotsService>();
 
-			try
-			{
-				game = await gameService.PlaySlots(bet);
-			}
-			catch(GameResultException exception)
-			{
-				await Utils.ErrorEmbed(e, exception.Message).SendToChannel(e.Channel);
-				return;
-			}
-
-			if(game != null)
-			{
-				IDiscordEmbed embed = Utils.Embed
-				.SetAuthor(e.GetResource(Locale.SlotsHeader) + " | " + e.Author.Username, e.Author.AvatarUrl, "https://patreon.com/mikibot")
-				.SetDescription(string.Join("", game.Picks));
-
-				using(MikiContext context = new MikiContext())
-				{
-					User user = await context.Users.FindAsync(e.Author.Id.ToDbLong());
-
-					if(game.Gain <= 0)
-					{
-						embed.AddField(
-							e.GetResource("miki_module_fun_slots_lose_header"),
-							e.GetResource("miki_module_fun_slots_lose_amount", bet, user.Currency - bet)
-						);
-					}
-					else
-					{
-						embed.AddField(
-							e.GetResource(Locale.SlotsWinHeader),
-							e.GetResource(Locale.SlotsWinMessage, game.Gain, user.Currency + game.Gain)
-						);
-					}
-
-					await user.AddCurrencyAsync(game.Gain, e.Channel);
-					await context.SaveChangesAsync();
-				}
-
-				await embed.SendToChannel(e.Channel);
-			}
-			else
-			{
-				Log.Error("Something went horribly wrong!");
-			}
+			await Utils.SuccessEmbed(e.Channel.GetLocale(), $"Bet: {response.Bet} | Gain: {response.Gain}").SendToChannel(e.Channel);
 		}
+
+		//public async Task StartSlots(EventContext e, int bet)
+		//{
+		//	GameService gameService = GameService.Instance;
+		//	SlotsInformation game;
+
+		//	try
+		//	{
+		//		game = await gameService.PlaySlots(bet);
+		//	}
+		//	catch(GameResultException exception)
+		//	{
+		//		await Utils.ErrorEmbed(e, exception.Message).SendToChannel(e.Channel);
+		//		return;
+		//	}
+
+		//	if(game != null)
+		//	{
+		//		IDiscordEmbed embed = Utils.Embed
+		//		.SetAuthor(e.GetResource(Locale.SlotsHeader) + " | " + e.Author.Username, e.Author.AvatarUrl, "https://patreon.com/mikibot")
+		//		.SetDescription(string.Join("", game.Picks));
+
+		//		using(MikiContext context = new MikiContext())
+		//		{
+		//			User user = await context.Users.FindAsync(e.Author.Id.ToDbLong());
+
+		//			if(game.Gain <= 0)
+		//			{
+		//				embed.AddField(
+		//					e.GetResource("miki_module_fun_slots_lose_header"),
+		//					e.GetResource("miki_module_fun_slots_lose_amount", bet, user.Currency - bet)
+		//				);
+		//			}
+		//			else
+		//			{
+		//				embed.AddField(
+		//					e.GetResource(Locale.SlotsWinHeader),
+		//					e.GetResource(Locale.SlotsWinMessage, game.Gain, user.Currency + game.Gain)
+		//				);
+		//			}
+
+		//			await user.AddCurrencyAsync(game.Gain, e.Channel);
+		//			await context.SaveChangesAsync();
+		//		}
+
+		//		await embed.SendToChannel(e.Channel);
+		//	}
+		//	else
+		//	{
+		//		Log.Error("Something went horribly wrong!");
+		//	}
+		//}
 
 		public async Task ValidateBet(EventContext e, Func<EventContext, int, Task> callback = null, int maxBet = 1000000)
 		{

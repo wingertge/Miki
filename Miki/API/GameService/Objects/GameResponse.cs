@@ -2,11 +2,11 @@
 
 namespace Miki.API.GameService
 {
-	public class GameResponse<T> where T : GameInformation
+	public class IGameResponse<T> where T : GameInformation
 	{
 		public GameResult<T> result;
 
-		public GameResponse(JObject rObject)
+		public IGameResponse(JObject rObject)
 		{
 			result = new GameResult<T>(rObject.GetValue("status"));
 		}
