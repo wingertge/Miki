@@ -30,7 +30,7 @@ namespace Miki.Modules
 
 		public async Task StartRPS(EventContext e, int bet)
 		{
-			float rewardMultiplier = 2f;
+			float rewardMultiplier = 1f;
 			string[] args = e.arguments.Split(' ');
 
 			if (args.Length < 2)
@@ -48,16 +48,6 @@ namespace Miki.Modules
 				{
 					RPSWeapon botWeapon = rps.GetRandomWeapon();
 
-					using (var context = new MikiContext())
-					{
-						user = await context.Users.FindAsync(e.Author.Id.ToDbLong());
-						if (user != null)
-						{
-							await user.RemoveCurrencyAsync(context, null, bet);
-							await context.SaveChangesAsync();
-						}
-					}
-
 					resultMessage.SetDescription($"{playerWeapon.Name.ToUpper()} {playerWeapon.Emoji} vs. {botWeapon.Emoji} {botWeapon.Name.ToUpper()}");
 
 					switch (rps.CalculateVictory(playerWeapon, botWeapon))
@@ -74,27 +64,26 @@ namespace Miki.Modules
 								}
 							}
 							resultMessage.Description += $"\n\nYou won `{(int)(bet * rewardMultiplier - bet)}` mekos! Your new balance is `{user.Currency}`.";
-							break;
-						}
+						} break;
 
 						case RPSManager.VictoryStatus.LOSE:
-						{
-							resultMessage.Description += $"\n\nYou lost `{bet}` mekos ! Your new balance is `{user.Currency}`.";
-						}
-						break;
-
-						case RPSManager.VictoryStatus.DRAW:
 						{
 							using (var context = new MikiContext())
 							{
 								user = await context.Users.FindAsync(e.Author.Id.ToDbLong());
 								if (user != null)
 								{
-									await user.AddCurrencyAsync((bet), e.Channel);
+									await user.RemoveCurrencyAsync(context, null, bet);
 									await context.SaveChangesAsync();
 								}
 							}
-							resultMessage.Description += $"\n\nIt's a draw! your mekos were refunded! Your new balance is `{user.Currency}`.";
+							resultMessage.Description += $"\n\nYou lost `{bet}` mekos ! Your new balance is `{user.Currency}`.";
+						}
+						break;
+
+						case RPSManager.VictoryStatus.DRAW:
+						{
+							resultMessage.Description += $"\n\nIt's a draw! no mekos were lost!.";
 						}
 						break;
 					}
@@ -129,12 +118,14 @@ namespace Miki.Modules
             using (var context = new MikiContext())
             {
                 User user = await context.Users.FindAsync(e.Author.Id.ToDbLong());
-                await user.RemoveCurrencyAsync(context, null, bet);
+				await user.RemoveCurrencyAsync(context, null, bet);
+				await context.SaveChangesAsync();
             }
 
             BlackjackManager bm = new BlackjackManager();
 
-            IDiscordMessage message = await bm.CreateEmbed(e).SendToChannel(e.Channel);
+            IDiscordMessage message = await bm.CreateEmbed(e)
+					.SendToChannel(e.Channel);
 
             CommandHandler c = new CommandHandlerBuilder(Bot.instance.Events)
                 .AddPrefix("")
@@ -586,15 +577,8 @@ namespace Miki.Modules
                             .SetOwner(e.message)
                             .AddCommand(
                                 new RuntimeCommandEvent("yes")
-                                    .Default(async (ec) =>
-                                    {
-                                        await ec.commandHandler.RequestDisposeAsync();
-                                        await ec.message.DeleteAsync();
-                                        if (callback != null)
-                                        {
-                                            await callback(e, bet);
-                                        }
-                                    })).Build();
+                                    .Default((ec) => ValidateGlitch(ec, callback, bet)))
+									.Build();
 
                         Bot.instance.Events.AddPrivateCommandHandler(e.message, confirmCommand);
                     }
@@ -613,5 +597,25 @@ namespace Miki.Modules
                     .SendToChannel(e.Channel);
             }
         }
-    }
+
+		public async Task ValidateGlitch(EventContext e, Func<EventContext, int, Task> callback, int bet)
+		{
+			using (var context = new MikiContext())
+			{
+				User u = await context.Users.FindAsync(e.Author.Id.ToDbLong());
+				await e.commandHandler.RequestDisposeAsync();
+				await e.message.DeleteAsync();
+				if (callback != null)
+				{
+					if (bet > u.Currency)
+					{
+						await e.ErrorEmbed(e.GetResource("miki_mekos_insufficient"))
+							.SendToChannel(e.Channel);
+						return;
+					}
+					await callback(e, bet);
+				}
+			}
+		}
+	}
 }
