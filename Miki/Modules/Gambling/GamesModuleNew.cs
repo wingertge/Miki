@@ -39,7 +39,7 @@ namespace Miki.Modules.Gambling
 
 		public async Task StartSlots(EventContext e, int bet)
 		{
-			IGameResponse response = gameService.RunService<SlotsService>();
+			IGameResponse response = await gameService.PlayGame<SlotsService>( new SlotsArguments { Bet = bet } );
 
 			await Utils.SuccessEmbed(e.Channel.GetLocale(), $"Bet: {response.Bet} | Gain: {response.Gain}").SendToChannel(e.Channel);
 		}

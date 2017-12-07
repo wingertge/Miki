@@ -30,22 +30,22 @@ namespace Miki.API.GameService
 			return false;
 		}
 
-		public IGameResponse RunService<T>()
+		public async Task<IGameResponse> PlayGame<T>(IGameArguments arguments)
 			where T : IGameService
 		{
-			return gameServices[typeof(T).GetHashCode()].Run();
+			return await gameServices[typeof(T).GetHashCode()].Play(arguments);
 		}
 
-		public U RunServiceEx<T, U>()
+		public async Task<U> RunServiceEx<T, U>(IGameArguments arguments)
 			where T : IGameService
 			where U : IGameResponse
 		{
-			return (U)RunService<T>();
+			return (U)await PlayGame<T>(arguments);
 		}
 
 		private string baseUrl = "http://localhost:8000/";
 
-		public void SetBaseUrl( string _baseUrl )
+		public void SetBaseUrl(string _baseUrl)
 		{
 
 			baseUrl = _baseUrl;

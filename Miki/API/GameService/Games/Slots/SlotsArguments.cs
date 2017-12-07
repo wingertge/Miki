@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Miki.API.GameService
+namespace Miki.API.GameService.Games.Slots
 {
-	interface IGameService
+	class SlotsArguments
 	{
-		Task<IGameResponse> Play<T>( T args ) where T : IGameArguments;
+		
 	}
 }

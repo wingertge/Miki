@@ -6,15 +6,8 @@ using System.Threading.Tasks;
 
 namespace Miki.API.GameService
 {
-	class SlotsService : IGameService
+	public interface IGameArguments
 	{
-		public IGameResponse Run()
-		{
-			return new SlotsResponse()
-			{
-				Bet = 100,
-				Gain = 100
-			};
-		} 
+		
 	}
 }
