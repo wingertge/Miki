@@ -610,6 +610,9 @@ namespace Miki.Modules
 					arg = arg.Next();
 					int amount = arg?.AsInt(1) ?? 1;
 
+					if (amount < 1)
+						amount = 1;
+
 					using (var context = new MikiContext())
 					{
 						User u = await User.GetAsync(context, e.Author);
