@@ -224,9 +224,9 @@ namespace Miki
 			request.ContentType = "image/png";
 			request.CannedACL = new S3CannedACL("public-read");
 
-			//using (var client = new Rest.RestClient(user.GetAvatarUrl(ImageFormat.Png)))
+			//using (var chatClient = new Rest.RestClient(user.GetAvatarUrl(ImageFormat.Png)))
 			//{
-			//	request.InputStream = await client.GetStreamAsync("");
+			//	request.InputStream = await chatClient.GetStreamAsync("");
 			//}
 
 			var response = await Global.CdnClient.PutObjectAsync(request);

@@ -81,7 +81,7 @@ namespace Miki.API.Steam
 			//request.AddParameter( "appids", appid );
 			//request.AddParameter( "cc", "UK" );
 
-			//IRestResponse response = await client.GetAsync( request );
+			//IRestResponse response = await chatClient.GetAsync( request );
 
 			//JObject appDetails = JObject.Parse( response.Content );
 

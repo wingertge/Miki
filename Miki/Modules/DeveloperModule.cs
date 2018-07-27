@@ -74,7 +74,7 @@ namespace Miki.Modules
 		[Command(Name = "identifyuser", Accessibility = EventAccessibility.DEVELOPERONLY)]
 		public async Task IdenUserAsync(EventContext e)
 		{
-			var user = await Global.Client.Client._apiClient.GetUserAsync(ulong.Parse(e.Arguments.ToString()));
+			var user = await Global.Client.ChatClient._apiClient.GetUserAsync(ulong.Parse(e.Arguments.ToString()));
 
 			if (user == null)
 			{
@@ -87,7 +87,7 @@ namespace Miki.Modules
 		[Command(Name = "identifyguilduser", Accessibility = EventAccessibility.DEVELOPERONLY)]
 		public async Task IdenGuildUserAsync(EventContext e)
 		{
-			var user = await Global.Client.Client._apiClient.GetGuildUserAsync(ulong.Parse(e.Arguments.ToString()), e.Guild.Id);
+			var user = await Global.Client.ChatClient._apiClient.GetGuildUserAsync(ulong.Parse(e.Arguments.ToString()), e.Guild.Id);
 
 			if (user == null)
 			{
@@ -100,7 +100,7 @@ namespace Miki.Modules
 		[Command(Name = "identifyguildchannel", Accessibility = EventAccessibility.DEVELOPERONLY)]
 		public async Task IdenGuildChannelAsync(EventContext e)
 		{
-			var user = await Global.Client.Client._apiClient.GetChannelAsync(ulong.Parse(e.Arguments.ToString()));
+			var user = await Global.Client.ChatClient._apiClient.GetChannelAsync(ulong.Parse(e.Arguments.ToString()));
 		
 			if (user == null)
 			{
@@ -128,7 +128,7 @@ namespace Miki.Modules
 			if (type == ActivityType.Streaming)
 				url = "https://twitch.tv/velddev";
 
-			//foreach (var x in Bot.Instance.Client.Shards)
+			//foreach (var x in Bot.Instance.ChatClient.Shards)
 			//{
 			//	await x.SetGameAsync(text, url, type);
 			//}
@@ -157,7 +157,7 @@ namespace Miki.Modules
 		//{
 		//	using (Stream s = new FileStream("./" + e.Arguments.ToString(), FileMode.Open))
 		//	{
-		//		await Bot.Instance.Client.GetShardFor(e.Guild).CurrentUser.ModifyAsync(z =>
+		//		await Bot.Instance.ChatClient.GetShardFor(e.Guild).CurrentUser.ModifyAsync(z =>
 		//		{
 		//			z.Avatar = new Image(s);
 		//		});
@@ -170,13 +170,13 @@ namespace Miki.Modules
 		//	EmbedBuilder embed = Utils.Embed;
 		//	embed.Title = "Shards";
 
-		//	for (int i = 0; i < (int)Math.Ceiling((double)Bot.Instance.Client.Shards.Count / 20); i++)
+		//	for (int i = 0; i < (int)Math.Ceiling((double)Bot.Instance.ChatClient.Shards.Count / 20); i++)
 		//	{
 		//		string title = $"{i * 20} - {(i + 1) * 20}";
 		//		string content = "";
-		//		for (int j = i * 20; j < Math.Min(i * 20 + 20, Bot.Instance.Client.Shards.Count); j++)
+		//		for (int j = i * 20; j < Math.Min(i * 20 + 20, Bot.Instance.ChatClient.Shards.Count); j++)
 		//		{
-		//			DiscordSocketClient c = Bot.Instance.Client.Shards.ElementAt(j);
+		//			DiscordSocketClient c = Bot.Instance.ChatClient.Shards.ElementAt(j);
 
 		//			content += $"`Shard {c.ShardId.ToString().PadRight(2)}` | `State: {c.ConnectionState} Ping: {c.Latency} Guilds: {c.Guilds.Count}`\n";
 		//		}
@@ -307,7 +307,7 @@ namespace Miki.Modules
 		[Command(Name = "finduserbyid", Accessibility = EventAccessibility.DEVELOPERONLY)]
 		public async Task FindUserById(EventContext e)
 		{
-			IDiscordUser u = null;// Bot.Instance.Client.GetUser(ulong.Parse(e.Arguments.ToString()));
+			IDiscordUser u = null;// Bot.Instance.ChatClient.GetUser(ulong.Parse(e.Arguments.ToString()));
 
 			e.Channel.QueueMessageAsync(u.Username + "#" + u.Discriminator);
 		}

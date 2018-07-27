@@ -257,7 +257,7 @@ namespace Miki.Modules
 			.AddInlineField("📺 " +  e.GetResource("miki_module_general_guildinfo_channels"), (await e.Guild.GetChannelsAsync()).Count.ToString())
 			.AddInlineField("🔊 " +  e.GetResource("miki_module_general_guildinfo_voicechannels"), (await e.Guild.GetVoiceChannelsAsync()).Count.ToString())
 			.AddInlineField("🙎 " +  e.GetResource("miki_module_general_guildinfo_users"), (await e.Guild.GetUsersAsync()).Count.ToString())
-			//.AddInlineField("🤖 " +  e.GetResource("term_shard"), Bot.Instance.Client.GetShardFor(e.Guild).ShardId)
+			//.AddInlineField("🤖 " +  e.GetResource("term_shard"), Bot.Instance.ChatClient.GetShardFor(e.Guild).ShardId)
 			.AddInlineField("#⃣ " +  e.GetResource("miki_module_general_guildinfo_roles_count"), (await e.Guild.GetRolesAsync()).Count.ToString())
 			.AddField("📜 " +  e.GetResource("miki_module_general_guildinfo_roles"), 
 				string.Join(",", (await e.Guild.GetRolesAsync()).Select(x => $"`{x.Name}`")))
@@ -441,7 +441,7 @@ namespace Miki.Modules
 				Title = "⚙️ Miki stats",
 				Description = e.GetResource("stats_description"),
 				Color = new Color(0.3f, 0.8f, 1),
-			}.AddField($"🖥️ {e.GetResource("discord_servers")}",/* Bot.Instance.Client.Guilds.Count.ToString()*/0)
+			}.AddField($"🖥️ {e.GetResource("discord_servers")}",/* Bot.Instance.ChatClient.Guilds.Count.ToString()*/0)
 			 .AddField("💬 " + e.GetResource("term_commands"), e.EventSystem.GetCommandHandler<SimpleCommandHandler>().Commands.Sum(x => x.TimesUsed))
 			 .AddField("⏰ Uptime", timeSinceStart.ToTimeString(e.Channel.Id))
 			 .AddField("More info", "https://p.datadoghq.com/sb/01d4dd097-08d1558da4")

@@ -91,10 +91,10 @@ namespace Miki.Accounts
 			   embed.ToEmbed().QueueToChannel(e);
 		   };
 
-			//	bot.Client.GuildUpdated += Client_GuildUpdated;
-			//	bot.Client.JoinedGuild   += Client_UserJoined;\
-			//	bot.Client.LeftGuild  += Client_UserLeft;
-			bot.Client.MessageCreate += CheckAsync;
+			//	bot.ChatClient.GuildUpdated += Client_GuildUpdated;
+			//	bot.ChatClient.JoinedGuild   += Client_UserJoined;\
+			//	bot.ChatClient.LeftGuild  += Client_UserLeft;
+			bot.ChatClient.MessageCreate += CheckAsync;
 		}
 
 		public async Task CheckAsync(IDiscordMessage e)

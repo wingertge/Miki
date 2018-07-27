@@ -27,8 +27,8 @@ namespace Miki.Modules
 		{
 			Bot bot = Bot.Instance;
 
-			//DiscordSocketClient client = bot.Client.GetShardFor(g);
-			//await countLib.PostStats(client.ShardId, client.Guilds.Count);
+			//DiscordSocketClient chatClient = bot.ChatClient.GetShardFor(g);
+			//await countLib.PostStats(chatClient.ShardId, chatClient.Guilds.Count);
 		}
 	}
 }

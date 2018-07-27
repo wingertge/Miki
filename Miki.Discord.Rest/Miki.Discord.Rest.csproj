@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Discord rest API</Description>
+    <Company>Velddev</Company>
+    <Product>Miki.Discord.Rest</Product>
+    <Authors>Velddev</Authors>
+    <Version>2.0.2</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Miki.Cache" Version="0.3.0" />
+    <PackageReference Include="Miki.Discord.Common" Version="1.0.3" />
+    <PackageReference Include="Miki.Logging" Version="1.1.2" />
+    <PackageReference Include="Miki.Rest" Version="1.5.1" />
+  </ItemGroup>
+
+</Project>

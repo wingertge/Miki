@@ -55,7 +55,7 @@ namespace Miki.Modules
 					ulong winnerId = ulong.Parse(value);
 					int wonAmount = (int)Math.Round(size * 100 * 0.75);
 
-					IDiscordUser user = null; //Bot.Instance.Client.GetUser(winnerId);
+					IDiscordUser user = null; //Bot.Instance.ChatClient.GetUser(winnerId);
 
 					using (var context = new MikiContext())
 					{
@@ -303,7 +303,7 @@ namespace Miki.Modules
 					return;
 				}
 
-				await Global.Client.Client._apiClient.EditMessageAsync(e.Channel.Id, bm.MessageId, new EditMessageArgs
+				await Global.Client.ChatClient._apiClient.EditMessageAsync(e.Channel.Id, bm.MessageId, new EditMessageArgs
 				{
 					embed = bm.CreateEmbed(e).ToEmbed()
 				});
@@ -376,7 +376,7 @@ namespace Miki.Modules
 				}
 			}
 
-			await Global.Client.Client._apiClient.EditMessageAsync(e.Channel.Id, bm.MessageId, 
+			await Global.Client.ChatClient._apiClient.EditMessageAsync(e.Channel.Id, bm.MessageId, 
 				new EditMessageArgs
 				{
 					embed = bm.CreateEmbed(e)
@@ -402,7 +402,7 @@ namespace Miki.Modules
 			{
 				user = await context.Users.FindAsync(e.Author.Id.ToDbLong());
 			}
-			await Global.Client.Client._apiClient.EditMessageAsync(e.Channel.Id, bm.MessageId,
+			await Global.Client.ChatClient._apiClient.EditMessageAsync(e.Channel.Id, bm.MessageId,
 				new EditMessageArgs
 				{
 					embed = bm.CreateEmbed(e)
@@ -432,7 +432,7 @@ namespace Miki.Modules
 				}
 			}
 
-			await Global.Client.Client._apiClient.EditMessageAsync(e.Channel.Id, bm.MessageId, new EditMessageArgs
+			await Global.Client.ChatClient._apiClient.EditMessageAsync(e.Channel.Id, bm.MessageId, new EditMessageArgs
 			{
 				embed = bm.CreateEmbed(e)
 					.SetAuthor(e.GetResource("miki_blackjack_win_title") + " | " + e.Author.Username, e.Author.GetAvatarUrl(), "https://patreon.com/mikibot")

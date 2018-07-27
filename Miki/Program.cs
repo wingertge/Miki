@@ -154,11 +154,11 @@ namespace Miki
 				Log.Message($"{cmd.Name} processed in {time}ms");
 			};
 
-			Global.Client.Client.MessageCreate += Bot_MessageReceived;;
+			Global.Client.ChatClient.MessageCreate += Bot_MessageReceived;;
 
-			Global.Client.Client.GuildJoin += Client_JoinedGuild;
-			Global.Client.Client.GuildLeave += Client_LeftGuild;
-			Global.Client.Client.UserUpdate += Client_UserUpdated;
+			Global.Client.ChatClient.GuildJoin += Client_JoinedGuild;
+			Global.Client.ChatClient.GuildLeave += Client_LeftGuild;
+			Global.Client.ChatClient.UserUpdate += Client_UserUpdated;
 		}
 
 		private void InitLogging()
@@ -237,22 +237,22 @@ namespace Miki
 			//}
 
 			DogStatsd.Increment("guilds.joined");
-		//	DogStatsd.Set("guilds", Bot.Instance.Client.Guilds.Count, Bot.Instance.Client.Guilds.Count);
+		//	DogStatsd.Set("guilds", Bot.Instance.ChatClient.Guilds.Count, Bot.Instance.ChatClient.Guilds.Count);
 		}
 
-		//private async Task Bot_OnShardConnect(DiscordSocketClient client)
+		//private async Task Bot_OnShardConnect(DiscordSocketClient chatClient)
 		//{
-		//	Log.Message($"shard {client.ShardId} has connected as {client.CurrentUser.ToString()}!");
-		//	DogStatsd.Event("shard.connect", $"shard {client.ShardId} has connected!");
-		//	DogStatsd.ServiceCheck($"shard.up", Status.OK, null, $"miki.shard.{client.ShardId}");
+		//	Log.Message($"shard {chatClient.ShardId} has connected as {chatClient.CurrentUser.ToString()}!");
+		//	DogStatsd.Event("shard.connect", $"shard {chatClient.ShardId} has connected!");
+		//	DogStatsd.ServiceCheck($"shard.up", Status.OK, null, $"miki.shard.{chatClient.ShardId}");
 		//	await Task.Yield();
 		//}
 
-		//private async Task Bot_OnShardDisconnect(Exception e, DiscordSocketClient client)
+		//private async Task Bot_OnShardDisconnect(Exception e, DiscordSocketClient chatClient)
 		//{
-		//	Log.Error($"Shard {client.ShardId} has disconnected!");
-		//	DogStatsd.Event("shard.disconnect", $"shard {client.ShardId} has disconnected!\n" + e.ToString());
-		//	DogStatsd.ServiceCheck($"shard.up", Status.CRITICAL, null, $"miki.shard.{client.ShardId}", null, e.Message);
+		//	Log.Error($"Shard {chatClient.ShardId} has disconnected!");
+		//	DogStatsd.Event("shard.disconnect", $"shard {chatClient.ShardId} has disconnected!\n" + e.ToString());
+		//	DogStatsd.ServiceCheck($"shard.up", Status.CRITICAL, null, $"miki.shard.{chatClient.ShardId}", null, e.Message);
 		//	await Task.Yield();
 		//}
 	}

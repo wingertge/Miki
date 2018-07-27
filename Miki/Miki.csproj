@@ -13,15 +13,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.0.1" />
-    <PackageReference Include="Miki.Anilist" Version="0.5.1" />
-    <PackageReference Include="Miki.Cache" Version="0.3.0" />
-    <PackageReference Include="Miki.Cache.Serializer.Protobuf" Version="1.0.2" />
-    <PackageReference Include="Miki.Cache.StackExchange.Redis" Version="1.2.0" />
-    <PackageReference Include="Miki.Configuration" Version="1.0.0" />
-    <PackageReference Include="Miki.Dsl" Version="1.0.0" />
-    <PackageReference Include="Miki.Logging" Version="1.1.2" />
-    <PackageReference Include="Miki.Patreon" Version="0.1.0" />
-    <PackageReference Include="Miki.Rest" Version="1.5.1" />
     <PackageReference Include="NCalc.NetCore" Version="1.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Npgsql" Version="3.2.7" />
@@ -35,9 +26,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Miki.Cache\Miki.Cache.StackExchange.Redis\Miki.Cache.StackExchange.Redis.csproj" />
-    <ProjectReference Include="..\..\Miki.Framework\Miki.Framework\Miki.Framework.csproj" />
+    <ProjectReference Include="..\Miki.Anilist\Miki.Anilist.csproj" />
     <ProjectReference Include="..\Miki.Api\Miki.Api.csproj" />
+    <ProjectReference Include="..\Miki.Cache.Serializer.Protobuf\Miki.Cache.Serializer.Protobuf.csproj" />
+    <ProjectReference Include="..\Miki.Cache.StackExchange.Redis\Miki.Cache.StackExchange.Redis.csproj" />
+    <ProjectReference Include="..\Miki.Cache\Miki.Cache.csproj" />
+    <ProjectReference Include="..\Miki.Configuration\Miki.Configuration.csproj" />
+    <ProjectReference Include="..\Miki.Dsl\Miki.Dsl.csproj" />
+    <ProjectReference Include="..\Miki.Framework\Miki.Framework.csproj" />
+    <ProjectReference Include="..\Miki.Logging\Miki.Logging.csproj" />
+    <ProjectReference Include="..\Miki.Patreon\Miki.Patreon.csproj" />
+    <ProjectReference Include="..\Miki.Rest\Miki.Rest.csproj" />
   </ItemGroup>
 
   <ItemGroup>

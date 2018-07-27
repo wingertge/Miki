@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Miki.Common</AssemblyName>
+    <RootNamespace>Miki.Common</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Miki's type library</Description>
+    <Version>1.2.0</Version>
+    <PackageReleaseNotes>Remove a ton of things.</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Miki.Framework\Miki.Framework.csproj" />
+  </ItemGroup>
+
+</Project>

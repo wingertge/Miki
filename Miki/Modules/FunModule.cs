@@ -40,7 +40,7 @@ namespace Miki.Modules
 		public string ImgurKey { get; set; } = "";
 
 		/// <summary>
-		/// IMGUR Client ID (RapidAPI)
+		/// IMGUR ChatClient ID (RapidAPI)
 		/// </summary>
 		[Configurable]
 		public string ImgurClientId { get; set; } = "";

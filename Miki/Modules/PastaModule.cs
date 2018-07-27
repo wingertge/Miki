@@ -344,7 +344,7 @@ namespace Miki.Modules
 		//		.SetDescription($"Reported pasta `{pastaId}`.```{reason}```")
 		//		.SetColor(255, 0 , 0)
 		//		.SetFooter(DateTime.Now.ToString(), "")
-		//		.ToEmbed().QueueToChannel(Bot.Instance.Client.GetChannel(PastaReportsChannelId) as IMessageChannel);
+		//		.ToEmbed().QueueToChannel(Bot.Instance.ChatClient.GetChannel(PastaReportsChannelId) as IMessageChannel);
 		//}
 
 		public async Task FavouritePastaList(EventContext e, bool lovedPastas = true)

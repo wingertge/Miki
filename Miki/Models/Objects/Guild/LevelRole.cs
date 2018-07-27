@@ -20,7 +20,7 @@ namespace Miki.Models
 		public int Price { get; set; }
 
 		[NotMapped]
-		public IDiscordRole Role => Bot.Instance.Client.GetRoleAsync((ulong)GuildId, (ulong)RoleId).Result;
+		public IDiscordRole Role => Bot.Instance.ChatClient.GetRoleAsync((ulong)GuildId, (ulong)RoleId).Result;
 		public static async Task<LevelRole> CreateAsync(long guildId, long roleId)
 		{
 			using (MikiContext context = new MikiContext())

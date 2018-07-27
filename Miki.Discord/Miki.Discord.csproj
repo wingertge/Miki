@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Miki.Discord</AssemblyName>
+    <RootNamespace>Miki.Discord</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>2.0.3</Version>
+    <Authors>Velddev</Authors>
+    <Company>Velddev</Company>
+    <Description>Miki Rest-only Discord client</Description>
+    <PackageTags>discord, api</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove=".gitignore" />
+    <None Remove="LICENSE" />
+    <None Remove="README.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Miki.Cache" Version="0.3.0" />
+    <PackageReference Include="Miki.Discord.Common" Version="1.0.3" />
+    <PackageReference Include="Miki.Discord.Messaging" Version="1.0.7" />
+    <PackageReference Include="Miki.Discord.Rest" Version="2.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+
+</Project>

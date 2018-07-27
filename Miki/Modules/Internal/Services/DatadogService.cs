@@ -29,7 +29,7 @@ namespace Miki.Modules.Internal.Services
 			base.Install(m, b);
 
 			var eventSystem = b.GetAttachedObject<EventSystem>();
-			var restClient = b.Client._apiClient;
+			var restClient = b.ChatClient._apiClient;
 
 			restClient.RestClient.OnRequestComplete += (method, uri) =>
 			{

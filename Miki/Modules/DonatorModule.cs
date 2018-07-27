@@ -75,7 +75,7 @@ namespace Miki.Modules
 
 			//			if (voteObject.Type == "upvote")
 			//			{
-			//				IUser user = Bot.Instance.Client.GetUser(voteObject.UserId);
+			//				IUser user = Bot.Instance.ChatClient.GetUser(voteObject.UserId);
 
 			//				if (user == null)
 			//					throw new RabbitException();
@@ -133,7 +133,7 @@ namespace Miki.Modules
 
 			//		if (ulong.TryParse(kofi.Message.Split(' ').Last(), out ulong uid))
 			//		{
-			//			IUser user = Bot.Instance.Client.GetUser(uid);
+			//			IUser user = Bot.Instance.ChatClient.GetUser(uid);
 
 			//			List<string> allKeys = new List<string>();
 
@@ -158,7 +158,7 @@ namespace Miki.Modules
 
 			//		foreach (PatreonPledgeObject pledge in pledgeObjects)
 			//		{
-			//			IUser user = Bot.Instance.Client.GetUser(pledge.UserId);
+			//			IUser user = Bot.Instance.ChatClient.GetUser(pledge.UserId);
 
 			//			EmbedBuilder embed = new EmbedBuilder()
 			//			{
@@ -194,7 +194,7 @@ namespace Miki.Modules
 			//			{
 			//				Title = "Sad to see you leave!",
 			//				Description = "However, I won't hold it against you, thank you for your timely support and I hope you'll happily continue using Miki"
-			//			}.Build().QueueToUser(Bot.Instance.Client.GetUser(s));
+			//			}.Build().QueueToUser(Bot.Instance.ChatClient.GetUser(s));
 			//		}
 			//		else
 			//		{
@@ -211,7 +211,7 @@ namespace Miki.Modules
 			//			{
 			//				Title = "Welcome to the family",
 			//				Description = ("In maximal 24 hours you will receive another DM with key(s) depending on your patron amount. (5$/key). Thank you for your support!")
-			//			}.Build().QueueToUser(Bot.Instance.Client.GetUser(s));
+			//			}.Build().QueueToUser(Bot.Instance.ChatClient.GetUser(s));
 			//		}
 			//		else
 			//		{
